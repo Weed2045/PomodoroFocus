@@ -1,0 +1,97 @@
+name: CD — TestFlight
+
+on:
+  push:
+    branches: [ main ]
+    tags:
+      - 'v*.*.*'
+  workflow_dispatch:
+    inputs:
+      note:
+        description: 'Release note for TestFlight'
+        required: false
+        default: 'New build from CI/CD'
+
+concurrency:
+  group: cd-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  deploy:
+    name: Archive & Upload to TestFlight
+    runs-on: macos-15
+    environment: production
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Select Xcode
+        run: sudo xcode-select -s /Applications/Xcode_16.3.app
+
+      # ── Code-signing setup ─────────────────────────────────────────────
+      - name: Import Distribution Certificate
+        uses: apple-actions/import-codesign-certs@v3
+        with:
+          p12-file-base64: ${{ secrets.DISTRIBUTION_CERTIFICATE_P12_BASE64 }}
+          p12-password: ${{ secrets.DISTRIBUTION_CERTIFICATE_PASSWORD }}
+          keychain-password: ${{ secrets.KEYCHAIN_PASSWORD }}
+
+      - name: Install Provisioning Profile
+        run: |
+          PP_DIR=~/Library/MobileDevice/Provisioning\ Profiles
+          mkdir -p "$PP_DIR"
+          echo "${{ secrets.PROVISIONING_PROFILE_BASE64 }}" | base64 --decode > "$PP_DIR/PomodoroFocus_AppStore.mobileprovision"
+          echo "${{ secrets.EXTENSION_PROVISIONING_PROFILE_BASE64 }}" | base64 --decode > "$PP_DIR/PomodoroActivityExtension_AppStore.mobileprovision"
+
+      # ── Bump build number ──────────────────────────────────────────────
+      - name: Set build number to run number
+        run: |
+          xcrun agvtool new-version -all ${{ github.run_number }}
+
+      # ── Archive ────────────────────────────────────────────────────────
+      - name: Archive
+        run: |
+          xcodebuild archive \
+            -project PomodoroFocus.xcodeproj \
+            -scheme PomodoroFocus \
+            -destination 'generic/platform=iOS' \
+            -archivePath build/PomodoroFocus.xcarchive \
+            -configuration Release \
+            DEVELOPMENT_TEAM=C4WGPU4Q5X \
+            | xcpretty --color
+
+      # ── Export IPA ─────────────────────────────────────────────────────
+      - name: Export IPA
+        run: |
+          xcodebuild -exportArchive \
+            -archivePath build/PomodoroFocus.xcarchive \
+            -exportPath build/export \
+            -exportOptionsPlist fastlane/ExportOptions.plist \
+            | xcpretty --color
+
+      # ── Upload to TestFlight ───────────────────────────────────────────
+      - name: Upload to TestFlight
+        env:
+          APP_STORE_CONNECT_API_KEY_ID:     ${{ secrets.ASC_KEY_ID }}
+          APP_STORE_CONNECT_API_ISSUER_ID:  ${{ secrets.ASC_ISSUER_ID }}
+          APP_STORE_CONNECT_API_KEY_CONTENT: ${{ secrets.ASC_KEY_CONTENT }}
+        run: |
+          mkdir -p ~/.appstoreconnect/private_keys
+          echo "$APP_STORE_CONNECT_API_KEY_CONTENT" > \
+            ~/.appstoreconnect/private_keys/AuthKey_${APP_STORE_CONNECT_API_KEY_ID}.p8
+
+          xcrun altool --upload-app \
+            --type ios \
+            --file "build/export/PomodoroFocus.ipa" \
+            --apiKey  "$APP_STORE_CONNECT_API_KEY_ID" \
+            --apiIssuer "$APP_STORE_CONNECT_API_ISSUER_ID" \
+            --verbose
+
+      - name: Upload archive artifact
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: xcarchive-${{ github.run_number }}
+          path: build/PomodoroFocus.xcarchive
+          retention-days: 14

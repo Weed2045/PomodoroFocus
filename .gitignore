@@ -49,3 +49,6 @@ AuthKey_*.p8
 # Backup
 *.orig
 *.bak
+
+# Claude Code local settings
+.claude/
