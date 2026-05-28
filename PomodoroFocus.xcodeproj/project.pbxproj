@@ -364,6 +364,7 @@
 			children = (
 				B00000000000000000000000 /* PomodoroFocus.app */,
 				B00000000000000000000059 /* PomodoroActivityExtension.appex */,
+				TE000000000000000000002 /* PomodoroFocusTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -699,7 +700,6 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		TE000000000000000000002 /* PomodoroFocusTests.xctest */,
 		E00000000000000000000001 /* PomodoroFocus */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = F00000000000000000000004 /* Build configuration list for PBXNativeTarget "PomodoroFocus" */;
