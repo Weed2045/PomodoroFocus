@@ -119,6 +119,16 @@
 		A0000000000000000000006C /* FocusDimmingModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0000000000000000000006C /* FocusDimmingModifier.swift */; };
 		A0000000000000000000006D /* Focus/PomodoroFocusFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0000000000000000000006D /* Focus/PomodoroFocusFilter.swift */; };
 		CC02CC02CC02CC02CC02CC02 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CC01CC01CC01CC01CC01CC01 /* Assets.xcassets */; };
+		CD0000000000000000000020 /* CoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD0000000000000000000010 /* CoreDataStack.swift */; };
+		CD0000000000000000000021 /* CDPomodoroTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD0000000000000000000011 /* CDPomodoroTask.swift */; };
+		CD0000000000000000000022 /* CDScheduledTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD0000000000000000000012 /* CDScheduledTask.swift */; };
+		CD0000000000000000000023 /* CDFocusSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD0000000000000000000013 /* CDFocusSession.swift */; };
+		CD0000000000000000000024 /* CDDailyStats.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD0000000000000000000014 /* CDDailyStats.swift */; };
+		CD0000000000000000000025 /* CoreDataPomodoroTaskRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD0000000000000000000015 /* CoreDataPomodoroTaskRepository.swift */; };
+		CD0000000000000000000026 /* CoreDataScheduledTaskRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD0000000000000000000016 /* CoreDataScheduledTaskRepository.swift */; };
+		CD0000000000000000000027 /* CoreDataDailyStatsRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD0000000000000000000017 /* CoreDataDailyStatsRepository.swift */; };
+		CD0000000000000000000028 /* CoreDataAnalyticsRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD0000000000000000000018 /* CoreDataAnalyticsRepository.swift */; };
+		CD0000000000000000000029 /* LegacyMigrationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD0000000000000000000019 /* LegacyMigrationService.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -257,6 +267,16 @@
 		B0000000000000000000006C /* FocusDimmingModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FocusDimmingModifier.swift; sourceTree = "<group>"; };
 		B0000000000000000000006D /* Focus/PomodoroFocusFilter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Focus/PomodoroFocusFilter.swift; sourceTree = "<group>"; };
 		CC01CC01CC01CC01CC01CC01 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		CD0000000000000000000010 /* CoreDataStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataStack.swift; sourceTree = "<group>"; };
+		CD0000000000000000000011 /* CDPomodoroTask.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CDPomodoroTask.swift; sourceTree = "<group>"; };
+		CD0000000000000000000012 /* CDScheduledTask.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CDScheduledTask.swift; sourceTree = "<group>"; };
+		CD0000000000000000000013 /* CDFocusSession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CDFocusSession.swift; sourceTree = "<group>"; };
+		CD0000000000000000000014 /* CDDailyStats.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CDDailyStats.swift; sourceTree = "<group>"; };
+		CD0000000000000000000015 /* CoreDataPomodoroTaskRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataPomodoroTaskRepository.swift; sourceTree = "<group>"; };
+		CD0000000000000000000016 /* CoreDataScheduledTaskRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataScheduledTaskRepository.swift; sourceTree = "<group>"; };
+		CD0000000000000000000017 /* CoreDataDailyStatsRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataDailyStatsRepository.swift; sourceTree = "<group>"; };
+		CD0000000000000000000018 /* CoreDataAnalyticsRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataAnalyticsRepository.swift; sourceTree = "<group>"; };
+		CD0000000000000000000019 /* LegacyMigrationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LegacyMigrationService.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -433,6 +453,7 @@
 		G00000000000000000000008 /* Data */ = {
 			isa = PBXGroup;
 			children = (
+				CD0000000000000000000001 /* CoreData */,
 				G00000000000000000000009 /* Storage */,
 				G0000000000000000000000A /* Repositories */,
 				G00000000000000000000012 /* Services */,
@@ -445,6 +466,7 @@
 			children = (
 				B0000000000000000000000E /* UserDefaultsCoding.swift */,
 				B0000000000000000000000F /* UserDefaultsFirstLaunchStore.swift */,
+				CD0000000000000000000019 /* LegacyMigrationService.swift */,
 			);
 			path = Storage;
 			sourceTree = "<group>";
@@ -455,6 +477,7 @@
 				B00000000000000000000010 /* UserDefaultsAppStateRepository.swift */,
 				B00000000000000000000011 /* UserDefaultsPomodoroSettingsRepository.swift */,
 				B00000000000000000000024 /* UserDefaultsDailyStatsRepository.swift */,
+				CD0000000000000000000003 /* CoreData */,
 				B0000000000000000000002A /* UserDefaultsPomodoroTaskRepository.swift */,
 				B0000000000000000000002E /* UserDefaultsScheduledTaskRepository.swift */,
 				B00000000000000000000034 /* FileManagerScannedDocumentRepository.swift */,
@@ -591,6 +614,37 @@
 				B0000000000000000000006C /* FocusDimmingModifier.swift */,
 			);
 			path = Sound;
+			sourceTree = "<group>";
+		};
+		CD0000000000000000000002 /* ManagedObjects */ = {
+			isa = PBXGroup;
+			children = (
+				CD0000000000000000000011 /* CDPomodoroTask.swift */,
+				CD0000000000000000000012 /* CDScheduledTask.swift */,
+				CD0000000000000000000013 /* CDFocusSession.swift */,
+				CD0000000000000000000014 /* CDDailyStats.swift */,
+			);
+			path = ManagedObjects;
+			sourceTree = "<group>";
+		};
+		CD0000000000000000000001 /* CoreData */ = {
+			isa = PBXGroup;
+			children = (
+				CD0000000000000000000010 /* CoreDataStack.swift */,
+				CD0000000000000000000002 /* ManagedObjects */,
+			);
+			path = CoreData;
+			sourceTree = "<group>";
+		};
+		CD0000000000000000000003 /* CoreData */ = {
+			isa = PBXGroup;
+			children = (
+				CD0000000000000000000015 /* CoreDataPomodoroTaskRepository.swift */,
+				CD0000000000000000000016 /* CoreDataScheduledTaskRepository.swift */,
+				CD0000000000000000000017 /* CoreDataDailyStatsRepository.swift */,
+				CD0000000000000000000018 /* CoreDataAnalyticsRepository.swift */,
+			);
+			path = CoreData;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -809,6 +863,17 @@
 				A0000000000000000000004E /* LiveActivity/AppGroupBridge.swift in Sources */,
 				A0000000000000000000004F /* LiveActivity/ToggleTimerIntent.swift in Sources */,
 				A0000000000000000000006D /* Focus/PomodoroFocusFilter.swift in Sources */,
+				CD0000000000000000000020 /* CoreDataStack.swift in Sources */,
+				CD0000000000000000000021 /* CDPomodoroTask.swift in Sources */,
+				CD0000000000000000000022 /* CDScheduledTask.swift in Sources */,
+				CD0000000000000000000023 /* CDFocusSession.swift in Sources */,
+				CD0000000000000000000024 /* CDDailyStats.swift in Sources */,
+				CD0000000000000000000025 /* CoreDataPomodoroTaskRepository.swift in Sources */,
+				CD0000000000000000000026 /* CoreDataScheduledTaskRepository.swift in Sources */,
+				CD0000000000000000000027 /* CoreDataDailyStatsRepository.swift in Sources */,
+				CD0000000000000000000028 /* CoreDataAnalyticsRepository.swift in Sources */,
+				CD0000000000000000000029 /* LegacyMigrationService.swift in Sources */,
+
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

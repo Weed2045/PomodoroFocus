@@ -39,16 +39,29 @@ final class AppDIContainer {
 
     init() {
         let defaults = UserDefaults.standard
+
+        // ── CoreData repositories (replaces UserDefaults for growing collections) ──
+        let coreDataStack = CoreDataStack.shared
+        self.taskRepository          = CoreDataPomodoroTaskRepository(stack: coreDataStack)
+        self.scheduledTaskRepository = CoreDataScheduledTaskRepository(stack: coreDataStack)
+        self.dailyStatsRepository    = CoreDataDailyStatsRepository(stack: coreDataStack)
+        self.analyticsRepository     = CoreDataAnalyticsRepository(stack: coreDataStack)
+
+        // ── UserDefaults repositories (small, single-value settings) ──
         self.appStateRepository         = UserDefaultsAppStateRepository(defaults: defaults)
         self.settingsRepository         = UserDefaultsPomodoroSettingsRepository(defaults: defaults)
-        self.dailyStatsRepository       = UserDefaultsDailyStatsRepository(defaults: defaults)
-        self.taskRepository             = UserDefaultsPomodoroTaskRepository(defaults: defaults)
-        self.scheduledTaskRepository    = UserDefaultsScheduledTaskRepository(defaults: defaults)
         self.scannedDocumentRepository  = FileManagerScannedDocumentRepository(defaults: defaults)
-        self.analyticsRepository        = AnalyticsRepositoryImpl(defaults: defaults)
         self.ocrRepository              = OCRRepositoryImpl(defaults: defaults)
         self.documentTaskLinkRepository = DocumentTaskLinkRepositoryImpl(defaults: defaults)
         self.firstLaunchStore           = UserDefaultsFirstLaunchStore(defaults: defaults)
+
+        // ── One-time UserDefaults → CoreData migration ──
+        LegacyMigrationService(defaults: defaults).migrateIfNeeded(
+            taskRepo:          taskRepository,
+            scheduledTaskRepo: scheduledTaskRepository,
+            dailyStatsRepo:    dailyStatsRepository,
+            analyticsRepo:     analyticsRepository
+        )
         self.notificationService        = NotificationManager.shared
         self.settingsManager            = SettingsManager(repository: settingsRepository)
         self.statsManager               = StatsManager(repository: dailyStatsRepository)
