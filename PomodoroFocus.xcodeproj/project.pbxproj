@@ -1,0 +1,1113 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 56;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		955F76512FC3842F00FAEC03 /* L10n.swift in Sources */ = {isa = PBXBuildFile; fileRef = 955F764C2FC3842F00FAEC03 /* L10n.swift */; };
+		955F76522FC3842F00FAEC03 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 955F764F2FC3842F00FAEC03 /* Localizable.strings */; };
+		955F76532FC3842F00FAEC03 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 955F764F2FC3842F00FAEC03 /* Localizable.strings */; };
+		955F76542FC3842F00FAEC03 /* L10n.swift in Sources */ = {isa = PBXBuildFile; fileRef = 955F764C2FC3842F00FAEC03 /* L10n.swift */; };
+		A00000000000000000000001 /* PomodoroFocusApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = B00000000000000000000001 /* PomodoroFocusApp.swift */; };
+		A00000000000000000000002 /* AppDIContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = B00000000000000000000002 /* AppDIContainer.swift */; };
+		A00000000000000000000003 /* LocalNotificationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B00000000000000000000003 /* LocalNotificationService.swift */; };
+		A00000000000000000000004 /* PomodoroService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B00000000000000000000004 /* PomodoroService.swift */; };
+		A00000000000000000000005 /* PomodoroSessionType.swift in Sources */ = {isa = PBXBuildFile; fileRef = B00000000000000000000005 /* PomodoroSessionType.swift */; };
+		A00000000000000000000006 /* PomodoroSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = B00000000000000000000006 /* PomodoroSession.swift */; };
+		A00000000000000000000007 /* PomodoroSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = B00000000000000000000007 /* PomodoroSettings.swift */; };
+		A00000000000000000000008 /* AppState.swift in Sources */ = {isa = PBXBuildFile; fileRef = B00000000000000000000008 /* AppState.swift */; };
+		A00000000000000000000009 /* AppStateRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = B00000000000000000000009 /* AppStateRepository.swift */; };
+		A0000000000000000000000A /* PomodoroSettingsRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0000000000000000000000A /* PomodoroSettingsRepository.swift */; };
+		A0000000000000000000000B /* FirstLaunchStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0000000000000000000000B /* FirstLaunchStore.swift */; };
+		A0000000000000000000000C /* GetAppStateUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0000000000000000000000C /* GetAppStateUseCase.swift */; };
+		A0000000000000000000000D /* GetPomodoroSettingsUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0000000000000000000000D /* GetPomodoroSettingsUseCase.swift */; };
+		A0000000000000000000000E /* UserDefaultsCoding.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0000000000000000000000E /* UserDefaultsCoding.swift */; };
+		A0000000000000000000000F /* UserDefaultsFirstLaunchStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0000000000000000000000F /* UserDefaultsFirstLaunchStore.swift */; };
+		A00000000000000000000010 /* UserDefaultsAppStateRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = B00000000000000000000010 /* UserDefaultsAppStateRepository.swift */; };
+		A00000000000000000000011 /* UserDefaultsPomodoroSettingsRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = B00000000000000000000011 /* UserDefaultsPomodoroSettingsRepository.swift */; };
+		A00000000000000000000012 /* RootView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B00000000000000000000012 /* RootView.swift */; };
+		A00000000000000000000013 /* SplashViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B00000000000000000000013 /* SplashViewModel.swift */; };
+		A00000000000000000000014 /* SplashView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B00000000000000000000014 /* SplashView.swift */; };
+		A00000000000000000000015 /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B00000000000000000000015 /* HomeViewModel.swift */; };
+		A00000000000000000000016 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B00000000000000000000016 /* HomeView.swift */; };
+		A00000000000000000000017 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B00000000000000000000017 /* SettingsView.swift */; };
+		A00000000000000000000018 /* TimeFormatting.swift in Sources */ = {isa = PBXBuildFile; fileRef = B00000000000000000000018 /* TimeFormatting.swift */; };
+		A00000000000000000000019 /* ButtonStyles.swift in Sources */ = {isa = PBXBuildFile; fileRef = B00000000000000000000019 /* ButtonStyles.swift */; };
+		A0000000000000000000001A /* MetricTile.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0000000000000000000001A /* MetricTile.swift */; };
+		A0000000000000000000001B /* TimerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0000000000000000000001B /* TimerViewModel.swift */; };
+		A0000000000000000000001C /* CircularProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0000000000000000000001C /* CircularProgressView.swift */; };
+		A0000000000000000000001D /* TimerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0000000000000000000001D /* TimerView.swift */; };
+		A0000000000000000000001E /* TimerManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0000000000000000000001E /* TimerManager.swift */; };
+		A0000000000000000000001F /* SettingsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0000000000000000000001F /* SettingsManager.swift */; };
+		A00000000000000000000020 /* StatsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B00000000000000000000020 /* StatsManager.swift */; };
+		A00000000000000000000021 /* SettingsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B00000000000000000000021 /* SettingsViewModel.swift */; };
+		A00000000000000000000022 /* DailyStats.swift in Sources */ = {isa = PBXBuildFile; fileRef = B00000000000000000000022 /* DailyStats.swift */; };
+		A00000000000000000000023 /* DailyStatsRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = B00000000000000000000023 /* DailyStatsRepository.swift */; };
+		A00000000000000000000024 /* UserDefaultsDailyStatsRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = B00000000000000000000024 /* UserDefaultsDailyStatsRepository.swift */; };
+		A00000000000000000000025 /* TaskManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B00000000000000000000025 /* TaskManager.swift */; };
+		A00000000000000000000026 /* GamificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B00000000000000000000026 /* GamificationManager.swift */; };
+		A00000000000000000000027 /* PomodoroTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = B00000000000000000000027 /* PomodoroTask.swift */; };
+		A00000000000000000000028 /* GamificationSummary.swift in Sources */ = {isa = PBXBuildFile; fileRef = B00000000000000000000028 /* GamificationSummary.swift */; };
+		A00000000000000000000029 /* PomodoroTaskRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = B00000000000000000000029 /* PomodoroTaskRepository.swift */; };
+		A0000000000000000000002A /* UserDefaultsPomodoroTaskRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0000000000000000000002A /* UserDefaultsPomodoroTaskRepository.swift */; };
+		A0000000000000000000002B /* AppTheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0000000000000000000002B /* AppTheme.swift */; };
+		A0000000000000000000002C /* ScheduledTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0000000000000000000002C /* ScheduledTask.swift */; };
+		A0000000000000000000002D /* ScheduledTaskRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0000000000000000000002D /* ScheduledTaskRepository.swift */; };
+		A0000000000000000000002E /* UserDefaultsScheduledTaskRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0000000000000000000002E /* UserDefaultsScheduledTaskRepository.swift */; };
+		A0000000000000000000002F /* EventKitService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0000000000000000000002F /* EventKitService.swift */; };
+		A00000000000000000000030 /* CalendarViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B00000000000000000000030 /* CalendarViewModel.swift */; };
+		A00000000000000000000031 /* CalendarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B00000000000000000000031 /* CalendarView.swift */; };
+		A00000000000000000000032 /* ScannedDocument.swift in Sources */ = {isa = PBXBuildFile; fileRef = B00000000000000000000032 /* ScannedDocument.swift */; };
+		A00000000000000000000033 /* ScannedDocumentRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = B00000000000000000000033 /* ScannedDocumentRepository.swift */; };
+		A00000000000000000000034 /* FileManagerScannedDocumentRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = B00000000000000000000034 /* FileManagerScannedDocumentRepository.swift */; };
+		A00000000000000000000035 /* ImageProcessingService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B00000000000000000000035 /* ImageProcessingService.swift */; };
+		A00000000000000000000036 /* PDFExportService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B00000000000000000000036 /* PDFExportService.swift */; };
+		A00000000000000000000037 /* DocumentCameraView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B00000000000000000000037 /* DocumentCameraView.swift */; };
+		A00000000000000000000038 /* DocumentListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B00000000000000000000038 /* DocumentListViewModel.swift */; };
+		A00000000000000000000039 /* DocumentListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B00000000000000000000039 /* DocumentListView.swift */; };
+		A0000000000000000000003A /* ScanPreviewViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0000000000000000000003A /* ScanPreviewViewModel.swift */; };
+		A0000000000000000000003B /* ScanPreviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0000000000000000000003B /* ScanPreviewView.swift */; };
+		A0000000000000000000003C /* EditScanViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0000000000000000000003C /* EditScanViewModel.swift */; };
+		A0000000000000000000003D /* EditScanView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0000000000000000000003D /* EditScanView.swift */; };
+		A0000000000000000000003E /* PomodoroSessionType+UI.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0000000000000000000003E /* PomodoroSessionType+UI.swift */; };
+		A0000000000000000000003F /* PDFCompressionLevel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0000000000000000000003F /* PDFCompressionLevel.swift */; };
+		A00000000000000000000040 /* PDFCompressionService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B00000000000000000000040 /* PDFCompressionService.swift */; };
+		A00000000000000000000041 /* PDFCompressionLevel+UI.swift in Sources */ = {isa = PBXBuildFile; fileRef = B00000000000000000000041 /* PDFCompressionLevel+UI.swift */; };
+		A00000000000000000000042 /* AppLogger.swift in Sources */ = {isa = PBXBuildFile; fileRef = B00000000000000000000042 /* AppLogger.swift */; };
+		A00000000000000000000043 /* AnalyticsModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = B00000000000000000000043 /* AnalyticsModels.swift */; };
+		A00000000000000000000044 /* AnalyticsRepositoryProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = B00000000000000000000044 /* AnalyticsRepositoryProtocol.swift */; };
+		A00000000000000000000045 /* AnalyticsUseCases.swift in Sources */ = {isa = PBXBuildFile; fileRef = B00000000000000000000045 /* AnalyticsUseCases.swift */; };
+		A00000000000000000000046 /* AnalyticsRepositoryImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = B00000000000000000000046 /* AnalyticsRepositoryImpl.swift */; };
+		A00000000000000000000047 /* AnalyticsServices.swift in Sources */ = {isa = PBXBuildFile; fileRef = B00000000000000000000047 /* AnalyticsServices.swift */; };
+		A00000000000000000000048 /* AnalyticsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B00000000000000000000048 /* AnalyticsViewModel.swift */; };
+		A00000000000000000000049 /* AnalyticsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B00000000000000000000049 /* AnalyticsView.swift */; };
+		A0000000000000000000004B /* LiveActivityService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0000000000000000000004B /* LiveActivityService.swift */; };
+		A0000000000000000000004C /* LiveActivity/PomodoroActivityAttributes.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0000000000000000000004C /* LiveActivity/PomodoroActivityAttributes.swift */; };
+		A0000000000000000000004D /* Extensions/Color+Hex.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0000000000000000000004D /* Extensions/Color+Hex.swift */; };
+		A0000000000000000000004E /* LiveActivity/AppGroupBridge.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0000000000000000000004E /* LiveActivity/AppGroupBridge.swift */; };
+		A0000000000000000000004F /* LiveActivity/ToggleTimerIntent.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0000000000000000000004F /* LiveActivity/ToggleTimerIntent.swift */; };
+			A00000000000000000000050 /* PomodoroActivityExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B00000000000000000000050 /* PomodoroActivityExtension.swift */; };
+			A00000000000000000000051 /* PomodoroLiveActivityWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = B00000000000000000000051 /* PomodoroLiveActivityWidget.swift */; };
+			A0000000000000000000006E /* PomodoroFocusWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0000000000000000000006E /* PomodoroFocusWidget.swift */; };
+			A00000000000000000000052 /* Views/LockScreenLiveActivityView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B00000000000000000000052 /* Views/LockScreenLiveActivityView.swift */; };
+		A00000000000000000000053 /* Views/DynamicIslandExpandedViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = B00000000000000000000053 /* Views/DynamicIslandExpandedViews.swift */; };
+		A00000000000000000000054 /* LiveActivity/PomodoroActivityAttributes.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0000000000000000000004C /* LiveActivity/PomodoroActivityAttributes.swift */; };
+		A00000000000000000000055 /* Extensions/Color+Hex.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0000000000000000000004D /* Extensions/Color+Hex.swift */; };
+		A00000000000000000000056 /* LiveActivity/AppGroupBridge.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0000000000000000000004E /* LiveActivity/AppGroupBridge.swift */; };
+		A00000000000000000000057 /* LiveActivity/ToggleTimerIntent.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0000000000000000000004F /* LiveActivity/ToggleTimerIntent.swift */; };
+		A00000000000000000000058 /* PomodoroActivityExtension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = B00000000000000000000059 /* PomodoroActivityExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		A0000000000000000000005B /* OCRModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0000000000000000000005B /* OCRModels.swift */; };
+		A0000000000000000000005C /* OCRRepositoryProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0000000000000000000005C /* OCRRepositoryProtocol.swift */; };
+		A0000000000000000000005D /* OCRUseCases.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0000000000000000000005D /* OCRUseCases.swift */; };
+		A0000000000000000000005E /* OCRRepositoryImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0000000000000000000005E /* OCRRepositoryImpl.swift */; };
+		A0000000000000000000005F /* OCRServices.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0000000000000000000005F /* OCRServices.swift */; };
+		A00000000000000000000060 /* OCRTaskViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B00000000000000000000060 /* OCRTaskViewModel.swift */; };
+		A00000000000000000000061 /* OCRTaskViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = B00000000000000000000061 /* OCRTaskViews.swift */; };
+		A00000000000000000000062 /* AmbientModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = B00000000000000000000062 /* AmbientModels.swift */; };
+		A00000000000000000000063 /* AmbientSoundRepositoryProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = B00000000000000000000063 /* AmbientSoundRepositoryProtocol.swift */; };
+		A00000000000000000000064 /* AmbientFocusUseCases.swift in Sources */ = {isa = PBXBuildFile; fileRef = B00000000000000000000064 /* AmbientFocusUseCases.swift */; };
+		A00000000000000000000065 /* AmbientSoundRepositoryImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = B00000000000000000000065 /* AmbientSoundRepositoryImpl.swift */; };
+		A00000000000000000000066 /* Audio/AmbientAudioEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = B00000000000000000000066 /* Audio/AmbientAudioEngine.swift */; };
+		A00000000000000000000067 /* Audio/AudioInterruptionHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = B00000000000000000000067 /* Audio/AudioInterruptionHandler.swift */; };
+		A00000000000000000000068 /* FocusMode/FocusFilterService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B00000000000000000000068 /* FocusMode/FocusFilterService.swift */; };
+		A00000000000000000000069 /* FocusMode/FocusModeCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = B00000000000000000000069 /* FocusMode/FocusModeCoordinator.swift */; };
+		A0000000000000000000006A /* AmbientSoundViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0000000000000000000006A /* AmbientSoundViewModel.swift */; };
+		A0000000000000000000006B /* AmbientSoundViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0000000000000000000006B /* AmbientSoundViews.swift */; };
+		A0000000000000000000006C /* FocusDimmingModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0000000000000000000006C /* FocusDimmingModifier.swift */; };
+		A0000000000000000000006D /* Focus/PomodoroFocusFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0000000000000000000006D /* Focus/PomodoroFocusFilter.swift */; };
+		CC02CC02CC02CC02CC02CC02 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CC01CC01CC01CC01CC01CC01 /* Assets.xcassets */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		H00000000000000000000001 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = E00000000000000000000002 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = E00000000000000000000003;
+			remoteInfo = PomodoroActivityExtension;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		C00000000000000000000004 /* Embed App Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				A00000000000000000000058 /* PomodoroActivityExtension.appex in Embed App Extensions */,
+			);
+			name = "Embed App Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		955F764C2FC3842F00FAEC03 /* L10n.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = L10n.swift; sourceTree = "<group>"; };
+		955F764D2FC3842F00FAEC03 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		955F764E2FC3842F00FAEC03 /* vi */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = vi; path = vi.lproj/Localizable.strings; sourceTree = "<group>"; };
+		B00000000000000000000000 /* PomodoroFocus.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PomodoroFocus.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		B00000000000000000000001 /* PomodoroFocusApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PomodoroFocusApp.swift; sourceTree = "<group>"; };
+		B00000000000000000000002 /* AppDIContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDIContainer.swift; sourceTree = "<group>"; };
+		B00000000000000000000003 /* LocalNotificationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalNotificationService.swift; sourceTree = "<group>"; };
+		B00000000000000000000004 /* PomodoroService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PomodoroService.swift; sourceTree = "<group>"; };
+		B00000000000000000000005 /* PomodoroSessionType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PomodoroSessionType.swift; sourceTree = "<group>"; };
+		B00000000000000000000006 /* PomodoroSession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PomodoroSession.swift; sourceTree = "<group>"; };
+		B00000000000000000000007 /* PomodoroSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PomodoroSettings.swift; sourceTree = "<group>"; };
+		B00000000000000000000008 /* AppState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppState.swift; sourceTree = "<group>"; };
+		B00000000000000000000009 /* AppStateRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppStateRepository.swift; sourceTree = "<group>"; };
+		B0000000000000000000000A /* PomodoroSettingsRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PomodoroSettingsRepository.swift; sourceTree = "<group>"; };
+		B0000000000000000000000B /* FirstLaunchStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstLaunchStore.swift; sourceTree = "<group>"; };
+		B0000000000000000000000C /* GetAppStateUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetAppStateUseCase.swift; sourceTree = "<group>"; };
+		B0000000000000000000000D /* GetPomodoroSettingsUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetPomodoroSettingsUseCase.swift; sourceTree = "<group>"; };
+		B0000000000000000000000E /* UserDefaultsCoding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsCoding.swift; sourceTree = "<group>"; };
+		B0000000000000000000000F /* UserDefaultsFirstLaunchStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsFirstLaunchStore.swift; sourceTree = "<group>"; };
+		B00000000000000000000010 /* UserDefaultsAppStateRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsAppStateRepository.swift; sourceTree = "<group>"; };
+		B00000000000000000000011 /* UserDefaultsPomodoroSettingsRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsPomodoroSettingsRepository.swift; sourceTree = "<group>"; };
+		B00000000000000000000012 /* RootView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootView.swift; sourceTree = "<group>"; };
+		B00000000000000000000013 /* SplashViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashViewModel.swift; sourceTree = "<group>"; };
+		B00000000000000000000014 /* SplashView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashView.swift; sourceTree = "<group>"; };
+		B00000000000000000000015 /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
+		B00000000000000000000016 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
+		B00000000000000000000017 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
+		B00000000000000000000018 /* TimeFormatting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeFormatting.swift; sourceTree = "<group>"; };
+		B00000000000000000000019 /* ButtonStyles.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonStyles.swift; sourceTree = "<group>"; };
+		B0000000000000000000001A /* MetricTile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MetricTile.swift; sourceTree = "<group>"; };
+		B0000000000000000000001B /* TimerViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerViewModel.swift; sourceTree = "<group>"; };
+		B0000000000000000000001C /* CircularProgressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircularProgressView.swift; sourceTree = "<group>"; };
+		B0000000000000000000001D /* TimerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerView.swift; sourceTree = "<group>"; };
+		B0000000000000000000001E /* TimerManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerManager.swift; sourceTree = "<group>"; };
+		B0000000000000000000001F /* SettingsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsManager.swift; sourceTree = "<group>"; };
+		B00000000000000000000020 /* StatsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatsManager.swift; sourceTree = "<group>"; };
+		B00000000000000000000021 /* SettingsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewModel.swift; sourceTree = "<group>"; };
+		B00000000000000000000022 /* DailyStats.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyStats.swift; sourceTree = "<group>"; };
+		B00000000000000000000023 /* DailyStatsRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyStatsRepository.swift; sourceTree = "<group>"; };
+		B00000000000000000000024 /* UserDefaultsDailyStatsRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsDailyStatsRepository.swift; sourceTree = "<group>"; };
+		B00000000000000000000025 /* TaskManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskManager.swift; sourceTree = "<group>"; };
+		B00000000000000000000026 /* GamificationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GamificationManager.swift; sourceTree = "<group>"; };
+		B00000000000000000000027 /* PomodoroTask.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PomodoroTask.swift; sourceTree = "<group>"; };
+		B00000000000000000000028 /* GamificationSummary.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GamificationSummary.swift; sourceTree = "<group>"; };
+		B00000000000000000000029 /* PomodoroTaskRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PomodoroTaskRepository.swift; sourceTree = "<group>"; };
+		B0000000000000000000002A /* UserDefaultsPomodoroTaskRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsPomodoroTaskRepository.swift; sourceTree = "<group>"; };
+		B0000000000000000000002B /* AppTheme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppTheme.swift; sourceTree = "<group>"; };
+		B0000000000000000000002C /* ScheduledTask.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduledTask.swift; sourceTree = "<group>"; };
+		B0000000000000000000002D /* ScheduledTaskRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduledTaskRepository.swift; sourceTree = "<group>"; };
+		B0000000000000000000002E /* UserDefaultsScheduledTaskRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsScheduledTaskRepository.swift; sourceTree = "<group>"; };
+		B0000000000000000000002F /* EventKitService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventKitService.swift; sourceTree = "<group>"; };
+		B00000000000000000000030 /* CalendarViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarViewModel.swift; sourceTree = "<group>"; };
+		B00000000000000000000031 /* CalendarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarView.swift; sourceTree = "<group>"; };
+		B00000000000000000000032 /* ScannedDocument.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScannedDocument.swift; sourceTree = "<group>"; };
+		B00000000000000000000033 /* ScannedDocumentRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScannedDocumentRepository.swift; sourceTree = "<group>"; };
+		B00000000000000000000034 /* FileManagerScannedDocumentRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileManagerScannedDocumentRepository.swift; sourceTree = "<group>"; };
+		B00000000000000000000035 /* ImageProcessingService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageProcessingService.swift; sourceTree = "<group>"; };
+		B00000000000000000000036 /* PDFExportService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PDFExportService.swift; sourceTree = "<group>"; };
+		B00000000000000000000037 /* DocumentCameraView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DocumentCameraView.swift; sourceTree = "<group>"; };
+		B00000000000000000000038 /* DocumentListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DocumentListViewModel.swift; sourceTree = "<group>"; };
+		B00000000000000000000039 /* DocumentListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DocumentListView.swift; sourceTree = "<group>"; };
+		B0000000000000000000003A /* ScanPreviewViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScanPreviewViewModel.swift; sourceTree = "<group>"; };
+		B0000000000000000000003B /* ScanPreviewView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScanPreviewView.swift; sourceTree = "<group>"; };
+		B0000000000000000000003C /* EditScanViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditScanViewModel.swift; sourceTree = "<group>"; };
+		B0000000000000000000003D /* EditScanView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditScanView.swift; sourceTree = "<group>"; };
+		B0000000000000000000003E /* PomodoroSessionType+UI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PomodoroSessionType+UI.swift"; sourceTree = "<group>"; };
+		B0000000000000000000003F /* PDFCompressionLevel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PDFCompressionLevel.swift; sourceTree = "<group>"; };
+		B00000000000000000000040 /* PDFCompressionService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PDFCompressionService.swift; sourceTree = "<group>"; };
+		B00000000000000000000041 /* PDFCompressionLevel+UI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PDFCompressionLevel+UI.swift"; sourceTree = "<group>"; };
+		B00000000000000000000042 /* AppLogger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppLogger.swift; sourceTree = "<group>"; };
+		B00000000000000000000043 /* AnalyticsModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalyticsModels.swift; sourceTree = "<group>"; };
+		B00000000000000000000044 /* AnalyticsRepositoryProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalyticsRepositoryProtocol.swift; sourceTree = "<group>"; };
+		B00000000000000000000045 /* AnalyticsUseCases.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalyticsUseCases.swift; sourceTree = "<group>"; };
+		B00000000000000000000046 /* AnalyticsRepositoryImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalyticsRepositoryImpl.swift; sourceTree = "<group>"; };
+		B00000000000000000000047 /* AnalyticsServices.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalyticsServices.swift; sourceTree = "<group>"; };
+		B00000000000000000000048 /* AnalyticsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalyticsViewModel.swift; sourceTree = "<group>"; };
+		B00000000000000000000049 /* AnalyticsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalyticsView.swift; sourceTree = "<group>"; };
+		B0000000000000000000004A /* PomodoroFocus.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = PomodoroFocus.entitlements; sourceTree = "<group>"; };
+		B0000000000000000000004B /* LiveActivityService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LiveActivityService.swift; sourceTree = "<group>"; };
+		B0000000000000000000004C /* LiveActivity/PomodoroActivityAttributes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LiveActivity/PomodoroActivityAttributes.swift; sourceTree = "<group>"; };
+		B0000000000000000000004D /* Extensions/Color+Hex.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extensions/Color+Hex.swift"; sourceTree = "<group>"; };
+		B0000000000000000000004E /* LiveActivity/AppGroupBridge.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LiveActivity/AppGroupBridge.swift; sourceTree = "<group>"; };
+		B0000000000000000000004F /* LiveActivity/ToggleTimerIntent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LiveActivity/ToggleTimerIntent.swift; sourceTree = "<group>"; };
+			B00000000000000000000050 /* PomodoroActivityExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PomodoroActivityExtension.swift; sourceTree = "<group>"; };
+			B00000000000000000000051 /* PomodoroLiveActivityWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PomodoroLiveActivityWidget.swift; sourceTree = "<group>"; };
+			B0000000000000000000006E /* PomodoroFocusWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PomodoroFocusWidget.swift; sourceTree = "<group>"; };
+			B00000000000000000000052 /* Views/LockScreenLiveActivityView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Views/LockScreenLiveActivityView.swift; sourceTree = "<group>"; };
+		B00000000000000000000053 /* Views/DynamicIslandExpandedViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Views/DynamicIslandExpandedViews.swift; sourceTree = "<group>"; };
+		B00000000000000000000058 /* PomodoroActivityExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = PomodoroActivityExtension.entitlements; sourceTree = "<group>"; };
+		B00000000000000000000059 /* PomodoroActivityExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = PomodoroActivityExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		B0000000000000000000005A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		B0000000000000000000005B /* OCRModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OCRModels.swift; sourceTree = "<group>"; };
+		B0000000000000000000005C /* OCRRepositoryProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OCRRepositoryProtocol.swift; sourceTree = "<group>"; };
+		B0000000000000000000005D /* OCRUseCases.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OCRUseCases.swift; sourceTree = "<group>"; };
+		B0000000000000000000005E /* OCRRepositoryImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OCRRepositoryImpl.swift; sourceTree = "<group>"; };
+		B0000000000000000000005F /* OCRServices.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OCRServices.swift; sourceTree = "<group>"; };
+		B00000000000000000000060 /* OCRTaskViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OCRTaskViewModel.swift; sourceTree = "<group>"; };
+		B00000000000000000000061 /* OCRTaskViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OCRTaskViews.swift; sourceTree = "<group>"; };
+		B00000000000000000000062 /* AmbientModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AmbientModels.swift; sourceTree = "<group>"; };
+		B00000000000000000000063 /* AmbientSoundRepositoryProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AmbientSoundRepositoryProtocol.swift; sourceTree = "<group>"; };
+		B00000000000000000000064 /* AmbientFocusUseCases.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AmbientFocusUseCases.swift; sourceTree = "<group>"; };
+		B00000000000000000000065 /* AmbientSoundRepositoryImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AmbientSoundRepositoryImpl.swift; sourceTree = "<group>"; };
+		B00000000000000000000066 /* Audio/AmbientAudioEngine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Audio/AmbientAudioEngine.swift; sourceTree = "<group>"; };
+		B00000000000000000000067 /* Audio/AudioInterruptionHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Audio/AudioInterruptionHandler.swift; sourceTree = "<group>"; };
+		B00000000000000000000068 /* FocusMode/FocusFilterService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FocusMode/FocusFilterService.swift; sourceTree = "<group>"; };
+		B00000000000000000000069 /* FocusMode/FocusModeCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FocusMode/FocusModeCoordinator.swift; sourceTree = "<group>"; };
+		B0000000000000000000006A /* AmbientSoundViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AmbientSoundViewModel.swift; sourceTree = "<group>"; };
+		B0000000000000000000006B /* AmbientSoundViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AmbientSoundViews.swift; sourceTree = "<group>"; };
+		B0000000000000000000006C /* FocusDimmingModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FocusDimmingModifier.swift; sourceTree = "<group>"; };
+		B0000000000000000000006D /* Focus/PomodoroFocusFilter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Focus/PomodoroFocusFilter.swift; sourceTree = "<group>"; };
+		CC01CC01CC01CC01CC01CC01 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		C00000000000000000000001 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		C00000000000000000000005 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		955F76502FC3842F00FAEC03 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				955F764C2FC3842F00FAEC03 /* L10n.swift */,
+				955F764F2FC3842F00FAEC03 /* Localizable.strings */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		D00000000000000000000001 = {
+			isa = PBXGroup;
+			children = (
+				D00000000000000000000002 /* PomodoroFocus */,
+				D00000000000000000000004 /* PomodoroActivityExtension */,
+				D00000000000000000000003 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		D00000000000000000000002 /* PomodoroFocus */ = {
+			isa = PBXGroup;
+			children = (
+				CC01CC01CC01CC01CC01CC01 /* Assets.xcassets */,
+			B00000000000000000000001 /* PomodoroFocusApp.swift */,
+				G00000000000000000000001 /* Core */,
+				G00000000000000000000004 /* Domain */,
+				G00000000000000000000008 /* Data */,
+				G0000000000000000000000B /* Presentation */,
+				G00000000000000000000014 /* Shared */,
+				955F76502FC3842F00FAEC03 /* Resources */,
+				B0000000000000000000004A /* PomodoroFocus.entitlements */,
+			);
+			path = PomodoroFocus;
+			sourceTree = "<group>";
+		};
+		D00000000000000000000003 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				B00000000000000000000000 /* PomodoroFocus.app */,
+				B00000000000000000000059 /* PomodoroActivityExtension.appex */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		D00000000000000000000004 /* PomodoroActivityExtension */ = {
+			isa = PBXGroup;
+				children = (
+					B00000000000000000000050 /* PomodoroActivityExtension.swift */,
+					B00000000000000000000051 /* PomodoroLiveActivityWidget.swift */,
+					B0000000000000000000006E /* PomodoroFocusWidget.swift */,
+					B00000000000000000000052 /* Views/LockScreenLiveActivityView.swift */,
+				B00000000000000000000053 /* Views/DynamicIslandExpandedViews.swift */,
+				B00000000000000000000058 /* PomodoroActivityExtension.entitlements */,
+				B0000000000000000000005A /* Info.plist */,
+			);
+			path = PomodoroActivityExtension;
+			sourceTree = "<group>";
+		};
+		G00000000000000000000001 /* Core */ = {
+			isa = PBXGroup;
+			children = (
+				G00000000000000000000002 /* DI */,
+				G00000000000000000000003 /* Services */,
+			);
+			path = Core;
+			sourceTree = "<group>";
+		};
+		G00000000000000000000002 /* DI */ = {
+			isa = PBXGroup;
+			children = (
+				B00000000000000000000002 /* AppDIContainer.swift */,
+			);
+			path = DI;
+			sourceTree = "<group>";
+		};
+		G00000000000000000000003 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				B00000000000000000000003 /* LocalNotificationService.swift */,
+				B00000000000000000000004 /* PomodoroService.swift */,
+				B0000000000000000000001E /* TimerManager.swift */,
+				B0000000000000000000001F /* SettingsManager.swift */,
+				B00000000000000000000020 /* StatsManager.swift */,
+				B00000000000000000000025 /* TaskManager.swift */,
+				B00000000000000000000026 /* GamificationManager.swift */,
+				B0000000000000000000002F /* EventKitService.swift */,
+				B00000000000000000000035 /* ImageProcessingService.swift */,
+				B00000000000000000000036 /* PDFExportService.swift */,
+				B00000000000000000000040 /* PDFCompressionService.swift */,
+				B00000000000000000000042 /* AppLogger.swift */,
+				B0000000000000000000004B /* LiveActivityService.swift */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
+		G00000000000000000000004 /* Domain */ = {
+			isa = PBXGroup;
+			children = (
+				G00000000000000000000005 /* Entities */,
+				G00000000000000000000006 /* Repositories */,
+				G00000000000000000000007 /* UseCases */,
+			);
+			path = Domain;
+			sourceTree = "<group>";
+		};
+		G00000000000000000000005 /* Entities */ = {
+			isa = PBXGroup;
+			children = (
+				B00000000000000000000005 /* PomodoroSessionType.swift */,
+				B00000000000000000000006 /* PomodoroSession.swift */,
+				B00000000000000000000007 /* PomodoroSettings.swift */,
+				B00000000000000000000008 /* AppState.swift */,
+				B00000000000000000000022 /* DailyStats.swift */,
+				B00000000000000000000027 /* PomodoroTask.swift */,
+				B00000000000000000000028 /* GamificationSummary.swift */,
+				B00000000000000000000043 /* AnalyticsModels.swift */,
+				B00000000000000000000062 /* AmbientModels.swift */,
+				B0000000000000000000005B /* OCRModels.swift */,
+				B0000000000000000000002C /* ScheduledTask.swift */,
+				B00000000000000000000032 /* ScannedDocument.swift */,
+				B0000000000000000000003F /* PDFCompressionLevel.swift */,
+			);
+			path = Entities;
+			sourceTree = "<group>";
+		};
+		G00000000000000000000006 /* Repositories */ = {
+			isa = PBXGroup;
+			children = (
+				B00000000000000000000009 /* AppStateRepository.swift */,
+				B0000000000000000000000A /* PomodoroSettingsRepository.swift */,
+				B0000000000000000000000B /* FirstLaunchStore.swift */,
+				B00000000000000000000023 /* DailyStatsRepository.swift */,
+				B00000000000000000000029 /* PomodoroTaskRepository.swift */,
+				B0000000000000000000002D /* ScheduledTaskRepository.swift */,
+				B00000000000000000000033 /* ScannedDocumentRepository.swift */,
+				B00000000000000000000044 /* AnalyticsRepositoryProtocol.swift */,
+				B00000000000000000000063 /* AmbientSoundRepositoryProtocol.swift */,
+				B0000000000000000000005C /* OCRRepositoryProtocol.swift */,
+			);
+			path = Repositories;
+			sourceTree = "<group>";
+		};
+		G00000000000000000000007 /* UseCases */ = {
+			isa = PBXGroup;
+			children = (
+				B0000000000000000000000C /* GetAppStateUseCase.swift */,
+				B0000000000000000000000D /* GetPomodoroSettingsUseCase.swift */,
+				B00000000000000000000045 /* AnalyticsUseCases.swift */,
+				B00000000000000000000064 /* AmbientFocusUseCases.swift */,
+				B0000000000000000000005D /* OCRUseCases.swift */,
+			);
+			path = UseCases;
+			sourceTree = "<group>";
+		};
+		G00000000000000000000008 /* Data */ = {
+			isa = PBXGroup;
+			children = (
+				G00000000000000000000009 /* Storage */,
+				G0000000000000000000000A /* Repositories */,
+				G00000000000000000000012 /* Services */,
+			);
+			path = Data;
+			sourceTree = "<group>";
+		};
+		G00000000000000000000009 /* Storage */ = {
+			isa = PBXGroup;
+			children = (
+				B0000000000000000000000E /* UserDefaultsCoding.swift */,
+				B0000000000000000000000F /* UserDefaultsFirstLaunchStore.swift */,
+			);
+			path = Storage;
+			sourceTree = "<group>";
+		};
+		G0000000000000000000000A /* Repositories */ = {
+			isa = PBXGroup;
+			children = (
+				B00000000000000000000010 /* UserDefaultsAppStateRepository.swift */,
+				B00000000000000000000011 /* UserDefaultsPomodoroSettingsRepository.swift */,
+				B00000000000000000000024 /* UserDefaultsDailyStatsRepository.swift */,
+				B0000000000000000000002A /* UserDefaultsPomodoroTaskRepository.swift */,
+				B0000000000000000000002E /* UserDefaultsScheduledTaskRepository.swift */,
+				B00000000000000000000034 /* FileManagerScannedDocumentRepository.swift */,
+				B00000000000000000000046 /* AnalyticsRepositoryImpl.swift */,
+				B00000000000000000000065 /* AmbientSoundRepositoryImpl.swift */,
+				B0000000000000000000005E /* OCRRepositoryImpl.swift */,
+			);
+			path = Repositories;
+			sourceTree = "<group>";
+		};
+		G0000000000000000000000B /* Presentation */ = {
+			isa = PBXGroup;
+			children = (
+				G0000000000000000000000C /* Shared */,
+				G0000000000000000000000D /* Splash */,
+				G0000000000000000000000E /* Home */,
+				G0000000000000000000000F /* Timer */,
+				G00000000000000000000010 /* Calendar */,
+				G00000000000000000000013 /* Analytics */,
+				G00000000000000000000011 /* Scanner */,
+				G00000000000000000000015 /* Sound */,
+			);
+			path = Presentation;
+			sourceTree = "<group>";
+		};
+		G0000000000000000000000C /* Shared */ = {
+			isa = PBXGroup;
+			children = (
+				B00000000000000000000012 /* RootView.swift */,
+				B00000000000000000000018 /* TimeFormatting.swift */,
+				B00000000000000000000019 /* ButtonStyles.swift */,
+				B0000000000000000000001A /* MetricTile.swift */,
+				B0000000000000000000002B /* AppTheme.swift */,
+				B0000000000000000000003E /* PomodoroSessionType+UI.swift */,
+				B00000000000000000000041 /* PDFCompressionLevel+UI.swift */,
+			);
+			path = Shared;
+			sourceTree = "<group>";
+		};
+		G0000000000000000000000D /* Splash */ = {
+			isa = PBXGroup;
+			children = (
+				B00000000000000000000013 /* SplashViewModel.swift */,
+				B00000000000000000000014 /* SplashView.swift */,
+			);
+			path = Splash;
+			sourceTree = "<group>";
+		};
+		G0000000000000000000000E /* Home */ = {
+			isa = PBXGroup;
+			children = (
+				B00000000000000000000015 /* HomeViewModel.swift */,
+				B00000000000000000000016 /* HomeView.swift */,
+				B00000000000000000000017 /* SettingsView.swift */,
+				B00000000000000000000021 /* SettingsViewModel.swift */,
+			);
+			path = Home;
+			sourceTree = "<group>";
+		};
+		G0000000000000000000000F /* Timer */ = {
+			isa = PBXGroup;
+			children = (
+				B0000000000000000000001B /* TimerViewModel.swift */,
+				B0000000000000000000001C /* CircularProgressView.swift */,
+				B0000000000000000000001D /* TimerView.swift */,
+			);
+			path = Timer;
+			sourceTree = "<group>";
+		};
+		G00000000000000000000010 /* Calendar */ = {
+			isa = PBXGroup;
+			children = (
+				B00000000000000000000030 /* CalendarViewModel.swift */,
+				B00000000000000000000031 /* CalendarView.swift */,
+			);
+			path = Calendar;
+			sourceTree = "<group>";
+		};
+		G00000000000000000000011 /* Scanner */ = {
+			isa = PBXGroup;
+			children = (
+				B00000000000000000000037 /* DocumentCameraView.swift */,
+				B00000000000000000000038 /* DocumentListViewModel.swift */,
+				B00000000000000000000039 /* DocumentListView.swift */,
+				B0000000000000000000003A /* ScanPreviewViewModel.swift */,
+				B0000000000000000000003B /* ScanPreviewView.swift */,
+				B0000000000000000000003C /* EditScanViewModel.swift */,
+				B0000000000000000000003D /* EditScanView.swift */,
+				B00000000000000000000060 /* OCRTaskViewModel.swift */,
+				B00000000000000000000061 /* OCRTaskViews.swift */,
+			);
+			path = Scanner;
+			sourceTree = "<group>";
+		};
+		G00000000000000000000012 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				B00000000000000000000047 /* AnalyticsServices.swift */,
+				B0000000000000000000005F /* OCRServices.swift */,
+				B00000000000000000000066 /* Audio/AmbientAudioEngine.swift */,
+				B00000000000000000000067 /* Audio/AudioInterruptionHandler.swift */,
+				B00000000000000000000068 /* FocusMode/FocusFilterService.swift */,
+				B00000000000000000000069 /* FocusMode/FocusModeCoordinator.swift */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
+		G00000000000000000000013 /* Analytics */ = {
+			isa = PBXGroup;
+			children = (
+				B00000000000000000000048 /* AnalyticsViewModel.swift */,
+				B00000000000000000000049 /* AnalyticsView.swift */,
+			);
+			path = Analytics;
+			sourceTree = "<group>";
+		};
+		G00000000000000000000014 /* Shared */ = {
+			isa = PBXGroup;
+			children = (
+				B0000000000000000000004C /* LiveActivity/PomodoroActivityAttributes.swift */,
+				B0000000000000000000004D /* Extensions/Color+Hex.swift */,
+				B0000000000000000000004E /* LiveActivity/AppGroupBridge.swift */,
+				B0000000000000000000004F /* LiveActivity/ToggleTimerIntent.swift */,
+				B0000000000000000000006D /* Focus/PomodoroFocusFilter.swift */,
+			);
+			path = Shared;
+			sourceTree = "<group>";
+		};
+		G00000000000000000000015 /* Sound */ = {
+			isa = PBXGroup;
+			children = (
+				B0000000000000000000006A /* AmbientSoundViewModel.swift */,
+				B0000000000000000000006B /* AmbientSoundViews.swift */,
+				B0000000000000000000006C /* FocusDimmingModifier.swift */,
+			);
+			path = Sound;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		E00000000000000000000001 /* PomodoroFocus */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = F00000000000000000000004 /* Build configuration list for PBXNativeTarget "PomodoroFocus" */;
+			buildPhases = (
+				C00000000000000000000002 /* Sources */,
+				C00000000000000000000001 /* Frameworks */,
+				C00000000000000000000003 /* Resources */,
+				C00000000000000000000004 /* Embed App Extensions */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				J00000000000000000000001 /* PBXTargetDependency */,
+			);
+			name = PomodoroFocus;
+			productName = PomodoroFocus;
+			productReference = B00000000000000000000000 /* PomodoroFocus.app */;
+			productType = "com.apple.product-type.application";
+		};
+		E00000000000000000000003 /* PomodoroActivityExtension */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = F00000000000000000000007 /* Build configuration list for PBXNativeTarget "PomodoroActivityExtension" */;
+			buildPhases = (
+				C00000000000000000000006 /* Sources */,
+				C00000000000000000000005 /* Frameworks */,
+				C00000000000000000000007 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = PomodoroActivityExtension;
+			productName = PomodoroActivityExtension;
+			productReference = B00000000000000000000059 /* PomodoroActivityExtension.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		E00000000000000000000002 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 1620;
+				LastUpgradeCheck = 1620;
+				TargetAttributes = {
+					E00000000000000000000001 = {
+						CreatedOnToolsVersion = 16.2;
+						SystemCapabilities = {
+							com.apple.ApplicationGroups.iOS = {
+								enabled = 1;
+							};
+							com.apple.HealthKit = {
+								enabled = 1;
+							};
+							com.apple.Push = {
+								enabled = 1;
+							};
+						};
+					};
+					E00000000000000000000003 = {
+						CreatedOnToolsVersion = 16.2;
+						SystemCapabilities = {
+							com.apple.ApplicationGroups.iOS = {
+								enabled = 1;
+							};
+						};
+					};
+				};
+			};
+			buildConfigurationList = F00000000000000000000001 /* Build configuration list for PBXProject "PomodoroFocus" */;
+			compatibilityVersion = "Xcode 14.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+				vi,
+			);
+			mainGroup = D00000000000000000000001;
+			productRefGroup = D00000000000000000000003 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				E00000000000000000000001 /* PomodoroFocus */,
+				E00000000000000000000003 /* PomodoroActivityExtension */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		C00000000000000000000003 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CC02CC02CC02CC02CC02CC02 /* Assets.xcassets in Resources */,
+				955F76522FC3842F00FAEC03 /* Localizable.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		C00000000000000000000007 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				955F76532FC3842F00FAEC03 /* Localizable.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		C00000000000000000000002 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A00000000000000000000001 /* PomodoroFocusApp.swift in Sources */,
+				A00000000000000000000002 /* AppDIContainer.swift in Sources */,
+				A00000000000000000000003 /* LocalNotificationService.swift in Sources */,
+				A00000000000000000000004 /* PomodoroService.swift in Sources */,
+				A0000000000000000000001E /* TimerManager.swift in Sources */,
+				A0000000000000000000001F /* SettingsManager.swift in Sources */,
+				A00000000000000000000020 /* StatsManager.swift in Sources */,
+				A00000000000000000000025 /* TaskManager.swift in Sources */,
+				A00000000000000000000026 /* GamificationManager.swift in Sources */,
+				A00000000000000000000005 /* PomodoroSessionType.swift in Sources */,
+				A00000000000000000000006 /* PomodoroSession.swift in Sources */,
+				A00000000000000000000007 /* PomodoroSettings.swift in Sources */,
+				A00000000000000000000008 /* AppState.swift in Sources */,
+				A00000000000000000000022 /* DailyStats.swift in Sources */,
+				A00000000000000000000027 /* PomodoroTask.swift in Sources */,
+				A00000000000000000000028 /* GamificationSummary.swift in Sources */,
+				A00000000000000000000009 /* AppStateRepository.swift in Sources */,
+				A0000000000000000000000A /* PomodoroSettingsRepository.swift in Sources */,
+				A0000000000000000000000B /* FirstLaunchStore.swift in Sources */,
+				A00000000000000000000023 /* DailyStatsRepository.swift in Sources */,
+				A00000000000000000000029 /* PomodoroTaskRepository.swift in Sources */,
+				A0000000000000000000000C /* GetAppStateUseCase.swift in Sources */,
+				A0000000000000000000000D /* GetPomodoroSettingsUseCase.swift in Sources */,
+				A0000000000000000000000E /* UserDefaultsCoding.swift in Sources */,
+				A0000000000000000000000F /* UserDefaultsFirstLaunchStore.swift in Sources */,
+				A00000000000000000000010 /* UserDefaultsAppStateRepository.swift in Sources */,
+				A00000000000000000000011 /* UserDefaultsPomodoroSettingsRepository.swift in Sources */,
+				A00000000000000000000024 /* UserDefaultsDailyStatsRepository.swift in Sources */,
+				A0000000000000000000002A /* UserDefaultsPomodoroTaskRepository.swift in Sources */,
+				A00000000000000000000012 /* RootView.swift in Sources */,
+				A00000000000000000000013 /* SplashViewModel.swift in Sources */,
+				A00000000000000000000014 /* SplashView.swift in Sources */,
+				A00000000000000000000015 /* HomeViewModel.swift in Sources */,
+				A00000000000000000000016 /* HomeView.swift in Sources */,
+				A00000000000000000000017 /* SettingsView.swift in Sources */,
+				A00000000000000000000021 /* SettingsViewModel.swift in Sources */,
+				A00000000000000000000018 /* TimeFormatting.swift in Sources */,
+				A00000000000000000000019 /* ButtonStyles.swift in Sources */,
+				A0000000000000000000001A /* MetricTile.swift in Sources */,
+				A0000000000000000000002B /* AppTheme.swift in Sources */,
+				A0000000000000000000001B /* TimerViewModel.swift in Sources */,
+				A0000000000000000000001C /* CircularProgressView.swift in Sources */,
+				A0000000000000000000001D /* TimerView.swift in Sources */,
+				A0000000000000000000002C /* ScheduledTask.swift in Sources */,
+				A0000000000000000000002D /* ScheduledTaskRepository.swift in Sources */,
+				A0000000000000000000002E /* UserDefaultsScheduledTaskRepository.swift in Sources */,
+				A0000000000000000000002F /* EventKitService.swift in Sources */,
+				A00000000000000000000030 /* CalendarViewModel.swift in Sources */,
+				A00000000000000000000031 /* CalendarView.swift in Sources */,
+				A00000000000000000000032 /* ScannedDocument.swift in Sources */,
+				A00000000000000000000033 /* ScannedDocumentRepository.swift in Sources */,
+				A00000000000000000000034 /* FileManagerScannedDocumentRepository.swift in Sources */,
+				A00000000000000000000035 /* ImageProcessingService.swift in Sources */,
+				A00000000000000000000036 /* PDFExportService.swift in Sources */,
+				A00000000000000000000037 /* DocumentCameraView.swift in Sources */,
+				A00000000000000000000038 /* DocumentListViewModel.swift in Sources */,
+				A00000000000000000000039 /* DocumentListView.swift in Sources */,
+				A0000000000000000000003A /* ScanPreviewViewModel.swift in Sources */,
+				A0000000000000000000003B /* ScanPreviewView.swift in Sources */,
+				A0000000000000000000003C /* EditScanViewModel.swift in Sources */,
+				A0000000000000000000003D /* EditScanView.swift in Sources */,
+				A0000000000000000000003E /* PomodoroSessionType+UI.swift in Sources */,
+				A0000000000000000000003F /* PDFCompressionLevel.swift in Sources */,
+				A00000000000000000000040 /* PDFCompressionService.swift in Sources */,
+				A00000000000000000000041 /* PDFCompressionLevel+UI.swift in Sources */,
+				A00000000000000000000042 /* AppLogger.swift in Sources */,
+				A00000000000000000000043 /* AnalyticsModels.swift in Sources */,
+				A00000000000000000000062 /* AmbientModels.swift in Sources */,
+				A00000000000000000000044 /* AnalyticsRepositoryProtocol.swift in Sources */,
+				A00000000000000000000063 /* AmbientSoundRepositoryProtocol.swift in Sources */,
+				A00000000000000000000045 /* AnalyticsUseCases.swift in Sources */,
+				A00000000000000000000064 /* AmbientFocusUseCases.swift in Sources */,
+				A00000000000000000000046 /* AnalyticsRepositoryImpl.swift in Sources */,
+				A00000000000000000000065 /* AmbientSoundRepositoryImpl.swift in Sources */,
+				A00000000000000000000047 /* AnalyticsServices.swift in Sources */,
+				A00000000000000000000066 /* Audio/AmbientAudioEngine.swift in Sources */,
+				A00000000000000000000067 /* Audio/AudioInterruptionHandler.swift in Sources */,
+				A00000000000000000000068 /* FocusMode/FocusFilterService.swift in Sources */,
+				A00000000000000000000069 /* FocusMode/FocusModeCoordinator.swift in Sources */,
+				A00000000000000000000048 /* AnalyticsViewModel.swift in Sources */,
+				A00000000000000000000049 /* AnalyticsView.swift in Sources */,
+				A0000000000000000000006A /* AmbientSoundViewModel.swift in Sources */,
+				A0000000000000000000006B /* AmbientSoundViews.swift in Sources */,
+				A0000000000000000000006C /* FocusDimmingModifier.swift in Sources */,
+				A0000000000000000000004B /* LiveActivityService.swift in Sources */,
+				A0000000000000000000005B /* OCRModels.swift in Sources */,
+				A0000000000000000000005C /* OCRRepositoryProtocol.swift in Sources */,
+				A0000000000000000000005D /* OCRUseCases.swift in Sources */,
+				955F76512FC3842F00FAEC03 /* L10n.swift in Sources */,
+				A0000000000000000000005E /* OCRRepositoryImpl.swift in Sources */,
+				A0000000000000000000005F /* OCRServices.swift in Sources */,
+				A00000000000000000000060 /* OCRTaskViewModel.swift in Sources */,
+				A00000000000000000000061 /* OCRTaskViews.swift in Sources */,
+				A0000000000000000000004C /* LiveActivity/PomodoroActivityAttributes.swift in Sources */,
+				A0000000000000000000004D /* Extensions/Color+Hex.swift in Sources */,
+				A0000000000000000000004E /* LiveActivity/AppGroupBridge.swift in Sources */,
+				A0000000000000000000004F /* LiveActivity/ToggleTimerIntent.swift in Sources */,
+				A0000000000000000000006D /* Focus/PomodoroFocusFilter.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		C00000000000000000000006 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+					A00000000000000000000050 /* PomodoroActivityExtension.swift in Sources */,
+					A00000000000000000000051 /* PomodoroLiveActivityWidget.swift in Sources */,
+					A0000000000000000000006E /* PomodoroFocusWidget.swift in Sources */,
+					955F76542FC3842F00FAEC03 /* L10n.swift in Sources */,
+				A00000000000000000000052 /* Views/LockScreenLiveActivityView.swift in Sources */,
+				A00000000000000000000053 /* Views/DynamicIslandExpandedViews.swift in Sources */,
+				A00000000000000000000054 /* LiveActivity/PomodoroActivityAttributes.swift in Sources */,
+				A00000000000000000000055 /* Extensions/Color+Hex.swift in Sources */,
+				A00000000000000000000056 /* LiveActivity/AppGroupBridge.swift in Sources */,
+				A00000000000000000000057 /* LiveActivity/ToggleTimerIntent.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		J00000000000000000000001 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = E00000000000000000000003 /* PomodoroActivityExtension */;
+			targetProxy = H00000000000000000000001 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		955F764F2FC3842F00FAEC03 /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				955F764D2FC3842F00FAEC03 /* en */,
+				955F764E2FC3842F00FAEC03 /* vi */,
+			);
+			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		F00000000000000000000002 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		F00000000000000000000003 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		F00000000000000000000005 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = PomodoroFocus/PomodoroFocus.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "";
+				DEVELOPMENT_TEAM = C4WGPU4Q5X;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = NO;
+				INFOPLIST_FILE = PomodoroFocus/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.codex.PomodoroFocus;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		F00000000000000000000006 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = PomodoroFocus/PomodoroFocus.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "";
+				DEVELOPMENT_TEAM = C4WGPU4Q5X;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = NO;
+				INFOPLIST_FILE = PomodoroFocus/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.codex.PomodoroFocus;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		F00000000000000000000008 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				APPLICATION_EXTENSION_API_ONLY = YES;
+				CODE_SIGN_ENTITLEMENTS = PomodoroActivityExtension/PomodoroActivityExtension.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = C4WGPU4Q5X;
+				GENERATE_INFOPLIST_FILE = NO;
+				INFOPLIST_FILE = PomodoroActivityExtension/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.2;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.codex.PomodoroFocus.PomodoroActivityExtension;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		F00000000000000000000009 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				APPLICATION_EXTENSION_API_ONLY = YES;
+				CODE_SIGN_ENTITLEMENTS = PomodoroActivityExtension/PomodoroActivityExtension.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = C4WGPU4Q5X;
+				GENERATE_INFOPLIST_FILE = NO;
+				INFOPLIST_FILE = PomodoroActivityExtension/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.2;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.codex.PomodoroFocus.PomodoroActivityExtension;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		F00000000000000000000001 /* Build configuration list for PBXProject "PomodoroFocus" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				F00000000000000000000002 /* Debug */,
+				F00000000000000000000003 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		F00000000000000000000004 /* Build configuration list for PBXNativeTarget "PomodoroFocus" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				F00000000000000000000005 /* Debug */,
+				F00000000000000000000006 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		F00000000000000000000007 /* Build configuration list for PBXNativeTarget "PomodoroActivityExtension" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				F00000000000000000000008 /* Debug */,
+				F00000000000000000000009 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = E00000000000000000000002 /* Project object */;
+}

@@ -1,0 +1,312 @@
+/* =========================================================
+   Localizable.strings – Vietnamese (vi)
+   ========================================================= */
+
+// MARK: - Common
+"common.ok"                     = "OK";
+"common.cancel"                 = "Hủy";
+"common.delete"                 = "Xóa";
+"common.edit"                   = "Sửa";
+"common.save"                   = "Lưu";
+"common.done"                   = "Xong";
+"common.new"                    = "Mới";
+"common.error"                  = "Lỗi";
+"common.settings"               = "Cài đặt";
+"common.today"                  = "Hôm nay";
+"common.notes.placeholder"      = "Ghi chú, liên kết, ngữ cảnh…";
+
+// MARK: - Tabs
+"tab.focus"                     = "Tập trung";
+"tab.calendar"                  = "Lịch";
+"tab.analytics"                 = "Thống kê";
+"tab.scanner"                   = "Quét";
+
+// MARK: - Splash
+"splash.tagline"                = "Tập trung bình yên, mỗi ngày.";
+
+// MARK: - Home
+"home.header.title"             = "Sẵn sàng tập trung?";
+"home.header.subtitle"          = "Bắt đầu phiên tập trung yên tĩnh, không xao lãng.";
+"home.header.current_session"   = "Đang: %@";
+"home.section.settings"         = "Cài đặt";
+"home.section.today"            = "Hôm nay";
+"home.section.tasks"            = "Nhiệm vụ";
+"home.section.progress"         = "Tiến độ";
+"home.settings.focus"           = "Tập trung";
+"home.settings.break"           = "Nghỉ";
+"home.settings.long"            = "Dài";
+"home.settings.long_break_every"= "Nghỉ dài mỗi";
+"home.settings.sessions_count"  = "%d phiên";
+"home.today.sessions_completed" = "phiên tập trung hoàn thành";
+"home.today.total_time"         = "tổng thời gian tập trung";
+"home.task.empty.title"         = "Chưa có nhiệm vụ";
+"home.task.empty.subtitle"      = "Nhấn **Mới** để thêm nhiệm vụ đầu tiên.";
+"home.task.status.done"         = "Xong";
+"home.task.progress"            = "%dm / %dm · %d phiên";
+"home.task.progress.plural"     = "%dm / %dm · %d phiên";
+"home.gamification.streak"      = "Chuỗi";
+"home.gamification.badges"      = "Huy hiệu";
+"home.action.start_pomodoro"    = "Bắt đầu Pomodoro";
+"home.action.settings"          = "Cài đặt";
+
+// MARK: - Task Form (Add / Edit)
+"task.form.add.title"               = "Nhiệm vụ mới";
+"task.form.add.subtitle"            = "Đặt mục tiêu tập trung và bắt đầu theo dõi.";
+"task.form.edit.title"              = "Sửa nhiệm vụ";
+"task.form.edit.subtitle"           = "Điều chỉnh mục tiêu tập trung.";
+"task.form.edit.completed_subtitle" = "Nhiệm vụ này đã hoàn thành.";
+"task.form.field.title"             = "Tiêu đề";
+"task.form.field.title.placeholder" = "Tên nhiệm vụ";
+"task.form.field.duration"          = "Thời gian tập trung";
+"task.form.field.notes"             = "Ghi chú";
+"task.form.field.notes.placeholder" = "Ghi chú, liên kết, ngữ cảnh…";
+"task.form.duration.minutes"        = "phút";
+"task.form.button.add"              = "Thêm nhiệm vụ";
+"task.form.button.save"             = "Lưu";
+"task.form.button.cancel"           = "Hủy";
+"task.form.progress.completed"      = "Đã hoàn thành";
+"task.form.progress.title"          = "Tiến độ";
+"task.form.progress.focused"        = "đã tập trung";
+"task.form.progress.goal"           = "mục tiêu";
+"task.form.progress.session"        = "phiên";
+"task.form.progress.sessions"       = "phiên";
+
+// MARK: - Timer
+"timer.nav.title"               = "Đồng hồ";
+"timer.session.stay"            = "Tập trung vào một việc.";
+"timer.session.rest"            = "Nghỉ ngơi và nạp lại năng lượng.";
+"timer.active_task.label"       = "Nhiệm vụ hiện tại";
+"timer.active_task.none"        = "Không có nhiệm vụ";
+"timer.active_task.none_selected"= "Chưa chọn nhiệm vụ";
+"timer.status.ready"            = "Sẵn sàng";
+"timer.status.running"          = "Đang chạy";
+"timer.status.paused"           = "Tạm dừng";
+"timer.status.complete"         = "Hoàn thành";
+"timer.completed_today"         = "%d phiên hoàn thành hôm nay";
+"timer.action.start"            = "Bắt đầu";
+"timer.action.pause"            = "Tạm dừng";
+"timer.action.resume"           = "Tiếp tục";
+"timer.action.start_break"      = "Bắt đầu nghỉ";
+"timer.action.start_focus"      = "Bắt đầu tập trung";
+"timer.action.reset"            = "Đặt lại";
+
+// MARK: - Session Types
+"session.focus"                     = "Tập trung";
+"session.short_break"               = "Nghỉ ngắn";
+"session.long_break"                = "Nghỉ dài";
+"session.focus.completion_title"    = "Phiên tập trung xong";
+"session.focus.completion_message"  = "Làm tốt lắm! Đến lúc nghỉ ngơi rồi.";
+"session.break.completion_title"    = "Thời gian nghỉ xong";
+"session.break.completion_message"  = "Hết giờ nghỉ. Sẵn sàng cho phiên tập trung tiếp theo?";
+
+// MARK: - Settings
+"settings.nav.title"            = "Cài đặt";
+"settings.section.durations"    = "Thời lượng";
+"settings.section.cycle"        = "Chu kỳ";
+"settings.focus"                = "Tập trung";
+"settings.short_break"          = "Nghỉ ngắn";
+"settings.long_break"           = "Nghỉ dài";
+"settings.long_break_after"     = "Nghỉ dài sau";
+"settings.sessions_count"       = "%d phiên";
+"settings.restore_defaults"     = "Khôi phục mặc định";
+"settings.button.save"          = "Lưu";
+
+// MARK: - Calendar
+"calendar.nav.title"                        = "Lịch";
+"calendar.add_task_accessibility"           = "Thêm nhiệm vụ đã lên lịch";
+"calendar.button.today"                     = "Hôm nay";
+"calendar.events.empty"                     = "Không có sự kiện trong ngày này.";
+"calendar.section.iphone_calendar"          = "Lịch iPhone";
+"calendar.section.planned_tasks"            = "Nhiệm vụ đã lên lịch";
+"calendar.tasks.empty"                      = "Không có nhiệm vụ trong ngày này.\nNhấn Mới để thêm.";
+"calendar.event.all_day"                    = "Cả ngày";
+"calendar.permission.denied.title"          = "Bị từ chối truy cập Lịch";
+"calendar.permission.needed.title"          = "Cần quyền truy cập Lịch";
+"calendar.permission.denied.message"        = "Mở Cài đặt và cho phép truy cập lịch để xem sự kiện của bạn.";
+"calendar.permission.needed.message"        = "Cho phép truy cập để hiển thị sự kiện iPhone cùng với nhiệm vụ tập trung.";
+"calendar.permission.button.settings"       = "Mở Cài đặt";
+"calendar.permission.button.grant"          = "Cấp quyền";
+"calendar.schedule.header.title"            = "Nhiệm vụ mới";
+"calendar.schedule.header.subtitle"         = "Lên lịch cho %@";
+"calendar.schedule.field.title"             = "Tiêu đề";
+"calendar.schedule.field.title.placeholder" = "Tên nhiệm vụ";
+"calendar.schedule.field.duration"          = "Thời gian tập trung";
+"calendar.schedule.field.start_time"        = "Giờ bắt đầu";
+"calendar.schedule.field.start_time.toggle" = "Đặt giờ cụ thể";
+"calendar.schedule.field.notes"             = "Ghi chú";
+"calendar.schedule.field.notes.placeholder" = "Ghi chú tuỳ chọn…";
+"calendar.schedule.button.add"              = "Thêm nhiệm vụ";
+"calendar.schedule.button.cancel"           = "Hủy";
+
+// MARK: - Scanner / Documents
+"scanner.nav.title"                 = "Tài liệu";
+"scanner.empty.title"               = "Chưa có tài liệu";
+"scanner.empty.subtitle"            = "Nhấn nút bên dưới để quét\ntài liệu đầu tiên.";
+"scanner.button.new_scan"           = "Quét mới";
+"scanner.action.delete"             = "Xóa";
+"scanner.delete.alert.title"        = "Xóa tài liệu?";
+"scanner.delete.alert.message"      = "Thao tác này sẽ xóa vĩnh viễn tất cả trang. Không thể hoàn tác.";
+"scanner.delete.button.confirm"     = "Xóa";
+"scanner.delete.button.cancel"      = "Hủy";
+"scanner.error.title"               = "Lỗi";
+"scanner.page.count"                = "%d trang";
+
+// MARK: - Scan Preview
+"scan_preview.toolbar.extract_tasks"    = "Trích xuất Task";
+"scan_preview.section.pages"           = "Trang — %d";
+"scan_preview.pages.empty"             = "Tất cả trang đã bị xóa.";
+"scan_preview.context.edit_page"       = "Sửa trang";
+"scan_preview.context.delete_page"     = "Xóa trang";
+"scan_preview.button.export_pdf"       = "Xuất PDF";
+"scan_preview.button.extract_ocr"      = "Trích xuất Task từ OCR";
+"scan_preview.button.compress"         = "Nén & Xuất";
+"scan_preview.exporting"               = "Đang tạo PDF…";
+"scan_preview.export_error"            = "Lỗi xuất file";
+"scan_preview.ocr_error"               = "Lỗi OCR";
+
+// MARK: - Compression Sheet
+"compression.header.title"          = "Nén PDF";
+"compression.header.subtitle"       = "Giảm kích thước trước khi chia sẻ";
+"compression.field.quality"         = "Chất lượng";
+"compression.button.compress"       = "Nén & Chia sẻ";
+"compression.button.cancel"         = "Hủy";
+"compression.progress"              = "Đang nén %d trang…";
+"compression.error.title"           = "Nén thất bại";
+
+// MARK: - PDF Compression Levels
+"pdf.quality.low.label"     = "Chất lượng thấp";
+"pdf.quality.low.detail"    = "File nhỏ nhất – chữ có thể hơi mờ";
+"pdf.quality.low.hint"      = "≈70–80% nhỏ hơn";
+"pdf.quality.medium.label"  = "Chất lượng trung bình";
+"pdf.quality.medium.detail" = "Cân bằng kích thước và độ rõ nét";
+"pdf.quality.medium.hint"   = "≈45–60% nhỏ hơn";
+"pdf.quality.high.label"    = "Chất lượng cao";
+"pdf.quality.high.detail"   = "Chữ sắc nét với kích thước vừa phải";
+"pdf.quality.high.hint"     = "≈20–35% nhỏ hơn";
+
+// MARK: - Edit Scan
+"edit_scan.nav.title"           = "Sửa trang";
+"edit_scan.button.cancel"       = "Hủy";
+"edit_scan.button.apply"        = "Áp dụng";
+"edit_scan.control.filter"      = "Bộ lọc";
+"edit_scan.control.brightness"  = "Độ sáng";
+"edit_scan.control.contrast"    = "Độ tương phản";
+"edit_scan.control.rotate"      = "Xoay";
+"edit_scan.control.rotate_left" = "Xoay trái";
+"edit_scan.control.rotate_right"= "Xoay phải";
+"edit_scan.button.reset"        = "Đặt lại về bản gốc";
+
+// MARK: - OCR
+"ocr.processing.title"              = "Đang nhận diện văn bản…";
+"ocr.processing.stage.reading"      = "Đang đọc tài liệu…";
+"ocr.processing.stage.recognizing"  = "Đang nhận diện ký tự…";
+"ocr.processing.stage.analyzing"    = "Đang phân tích nhiệm vụ…";
+"ocr.processing.stage.finishing"    = "Sắp xong…";
+"ocr.processing.button.cancel"      = "Hủy";
+"ocr.review.nav.title"              = "Xem lại Nhiệm vụ";
+"ocr.review.toolbar.select_all"     = "Chọn tất cả";
+"ocr.review.header.found"           = "Tìm thấy %d nhiệm vụ tiềm năng";
+"ocr.review.header.selected"        = "Đã chọn %d để tạo";
+"ocr.review.row.placeholder"        = "Tên nhiệm vụ";
+"ocr.review.row.from"               = "Từ: %@";
+"ocr.review.deadline.nav.title"     = "Hạn chót";
+"ocr.review.deadline.remove"        = "Xóa";
+"ocr.review.deadline.done"          = "Xong";
+"ocr.review.action.cancel"          = "Hủy";
+"ocr.review.action.creating"        = "Đang tạo…";
+"ocr.review.action.create"          = "Tạo %d nhiệm vụ";
+"ocr.review.empty"                  = "Không tìm thấy nhiệm vụ";
+"ocr.cell.button.extract"           = "Trích xuất";
+"ocr.confidence.low"                = "Có thể";
+"ocr.confidence.medium"             = "Khả năng cao";
+"ocr.confidence.high"               = "Chắc chắn";
+"ocr.duration.format"               = "%d phút";
+
+// MARK: - Analytics
+"analytics.nav.title"                   = "Thống kê";
+"analytics.export_csv.accessibility"    = "Xuất CSV";
+"analytics.error.title"                 = "Lỗi";
+"analytics.metric.streak"              = "Chuỗi hiện tại";
+"analytics.metric.streak.unit"         = "%d ngày";
+"analytics.metric.total_time"          = "Tổng thời gian";
+"analytics.metric.daily_avg"           = "Trung bình/ngày";
+"analytics.metric.daily_avg.value"     = "%dp";
+"analytics.metric.total_sessions"      = "Tổng phiên";
+"analytics.best_day.label"             = "Ngày tốt nhất";
+"analytics.best_day.hour"              = "• Giờ đỉnh %dh";
+"analytics.chart.focus_minutes.title"  = "Phút tập trung";
+"analytics.chart.focus_minutes.subtitle" = "7 ngày gần nhất";
+"analytics.chart.sessions.title"       = "Số phiên hoàn thành";
+"analytics.chart.sessions.subtitle"    = "30 ngày gần nhất";
+"analytics.heatmap.title"              = "Bản đồ nhiệt";
+"analytics.heatmap.subtitle"           = "Phút tập trung theo giờ trong tuần";
+"analytics.heatmap.legend.low"         = "Ít";
+"analytics.heatmap.legend.high"        = "Nhiều (%dm)";
+"analytics.heatmap.weekday.0"          = "CN";
+"analytics.heatmap.weekday.1"          = "T2";
+"analytics.heatmap.weekday.2"          = "T3";
+"analytics.heatmap.weekday.3"          = "T4";
+"analytics.heatmap.weekday.4"          = "T5";
+"analytics.heatmap.weekday.5"          = "T6";
+"analytics.heatmap.weekday.6"          = "T7";
+"analytics.healthkit.connect.title"    = "Kết nối Apple Health";
+"analytics.healthkit.connect.subtitle" = "Tự động lưu Mindful Minutes sau mỗi phiên tập trung";
+"analytics.healthkit.connect.button"   = "Kết nối";
+"analytics.healthkit.connected"        = "Apple Health đã kết nối";
+"analytics.healthkit.denied.label"     = "Apple Health chưa được cấp quyền";
+"analytics.healthkit.denied.settings"  = "Cài đặt";
+"analytics.empty.title"                = "Chưa có dữ liệu";
+"analytics.empty.subtitle"             = "Hoàn thành phiên tập trung đầu tiên để xem bản đồ nhiệt, biểu đồ và thống kê.";
+"analytics.range.week"                 = "7 ngày";
+"analytics.range.month"                = "30 ngày";
+"analytics.range.three_months"         = "3 tháng";
+"analytics.range.year"                 = "1 năm";
+"analytics.range.all_time"             = "Tất cả";
+"analytics.minutes.hours_minutes"      = "%dg %dp";
+"analytics.minutes.minutes_only"       = "%dp";
+
+// MARK: - Live Activity
+"live_activity.session.focus"       = "Tập trung";
+"live_activity.session.short_break" = "Nghỉ ngắn";
+"live_activity.session.long_break"  = "Nghỉ dài";
+"live_activity.transition.body"     = "Còn %d phút";
+"live_activity.paused"              = "TẠM DỪNG";
+
+// MARK: - Sound & Focus Panel
+"sound.nav.title"                           = "Âm thanh & Tập trung";
+"sound.section.ambient"                     = "Âm thanh môi trường";
+"sound.section.tracks"                      = "Chọn âm thanh";
+"sound.playing"                             = "Đang phát";
+"sound.stopped"                             = "Đã tắt";
+"sound.focus_mode.section"                  = "Focus Mode";
+"sound.focus_mode.title"                    = "Chế độ tập trung";
+"sound.focus_mode.subtitle.auto"            = "Tự động bật khi timer chạy";
+"sound.focus_mode.subtitle.manual"          = "Bật thủ công";
+"sound.focus_mode.auto_play"                = "Tự động phát cùng timer";
+"sound.focus_mode.settings_button"          = "Cài đặt Focus Mode chi tiết";
+"sound.focus_mode.active_badge"             = "Focus Mode đang bật";
+"sound.focus_settings.nav.title"            = "Focus Mode";
+"sound.focus_settings.section.automation"   = "Tự động hoá";
+"sound.focus_settings.toggle.auto_activate" = "Bật khi timer chạy";
+"sound.focus_settings.toggle.focus_filter"  = "Chặn thông báo bên ngoài";
+"sound.focus_settings.toggle.pause_music"   = "Dừng nhạc khi phát ambient";
+"sound.focus_settings.section.interface"    = "Giao diện";
+"sound.focus_settings.dim_label"            = "Độ mờ màn hình";
+"sound.focus_settings.dim_description"      = "Làm mờ UI để giảm phân tâm trong phiên tập trung.";
+"sound.focus_settings.section.system"       = "Tích hợp hệ thống";
+"sound.focus_settings.filter_title"         = "Focus Filter (iOS 16+)";
+"sound.focus_settings.filter_description"   = "Vào Cài đặt → Focus → chọn Focus mode → Add Filter → PomodoroFocus để hệ thống báo cho app khi Focus bật.";
+"sound.focus_settings.open_settings"        = "Mở Cài đặt Focus";
+"sound.focus_settings.button.save"          = "Lưu";
+"sound.focus_settings.button.cancel"        = "Huỷ";
+
+// MARK: - Sound Tracks
+"sound.track.rain"        = "Mưa rơi";
+"sound.track.cafe"        = "Quán cà phê";
+"sound.track.forest"      = "Rừng cây";
+"sound.track.white_noise" = "White Noise";
+
+// MARK: - Misc (shared small labels)
+"home.task.from_scan"       = "Từ tài liệu";
+"scanner.task_created"      = "Đã tạo 1 nhiệm vụ";
+"scanner.tasks_created"     = "Đã tạo %d nhiệm vụ";

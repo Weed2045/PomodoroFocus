@@ -1,0 +1,312 @@
+/* =========================================================
+   Localizable.strings – English (en)
+   ========================================================= */
+
+// MARK: - Common
+"common.ok"                     = "OK";
+"common.cancel"                 = "Cancel";
+"common.delete"                 = "Delete";
+"common.edit"                   = "Edit";
+"common.save"                   = "Save";
+"common.done"                   = "Done";
+"common.new"                    = "New";
+"common.error"                  = "Error";
+"common.settings"               = "Settings";
+"common.today"                  = "Today";
+"common.notes.placeholder"      = "Optional notes, links, context…";
+
+// MARK: - Tabs
+"tab.focus"                     = "Focus";
+"tab.calendar"                  = "Calendar";
+"tab.analytics"                 = "Analytics";
+"tab.scanner"                   = "Scanner";
+
+// MARK: - Splash
+"splash.tagline"                = "Calm focus, every day.";
+
+// MARK: - Home
+"home.header.title"             = "Ready to focus?";
+"home.header.subtitle"          = "Start a calm, distraction-free session.";
+"home.header.current_session"   = "Current: %@";
+"home.section.settings"         = "Settings";
+"home.section.today"            = "Today";
+"home.section.tasks"            = "Tasks";
+"home.section.progress"         = "Progress";
+"home.settings.focus"           = "Focus";
+"home.settings.break"           = "Break";
+"home.settings.long"            = "Long";
+"home.settings.long_break_every"= "Long break every";
+"home.settings.sessions_count"  = "%d sessions";
+"home.today.sessions_completed" = "focus sessions completed";
+"home.today.total_time"         = "total focus time";
+"home.task.empty.title"         = "No tasks yet";
+"home.task.empty.subtitle"      = "Tap **New** to add your first task.";
+"home.task.status.done"         = "Done";
+"home.task.progress"            = "%dm / %dm · %d session";
+"home.task.progress.plural"     = "%dm / %dm · %d sessions";
+"home.gamification.streak"      = "Streak";
+"home.gamification.badges"      = "Badges";
+"home.action.start_pomodoro"    = "Start Pomodoro";
+"home.action.settings"          = "Settings";
+
+// MARK: - Task Form (Add / Edit)
+"task.form.add.title"               = "New Task";
+"task.form.add.subtitle"            = "Set a focus goal and start tracking.";
+"task.form.edit.title"              = "Edit Task";
+"task.form.edit.subtitle"           = "Adjust your focus goal.";
+"task.form.edit.completed_subtitle" = "This task is already completed.";
+"task.form.field.title"             = "Title";
+"task.form.field.title.placeholder" = "Task title";
+"task.form.field.duration"          = "Focus Duration";
+"task.form.field.notes"             = "Notes";
+"task.form.field.notes.placeholder" = "Optional notes, links, context…";
+"task.form.duration.minutes"        = "minutes";
+"task.form.button.add"              = "Add Task";
+"task.form.button.save"             = "Save";
+"task.form.button.cancel"           = "Cancel";
+"task.form.progress.completed"      = "Completed";
+"task.form.progress.title"          = "Progress";
+"task.form.progress.focused"        = "focused";
+"task.form.progress.goal"           = "goal";
+"task.form.progress.session"        = "session";
+"task.form.progress.sessions"       = "sessions";
+
+// MARK: - Timer
+"timer.nav.title"               = "Timer";
+"timer.session.stay"            = "Stay with one task.";
+"timer.session.rest"            = "Step away and reset.";
+"timer.active_task.label"       = "Active Task";
+"timer.active_task.none"        = "No task";
+"timer.active_task.none_selected"= "No task selected";
+"timer.status.ready"            = "Ready";
+"timer.status.running"          = "Running";
+"timer.status.paused"           = "Paused";
+"timer.status.complete"         = "Complete";
+"timer.completed_today"         = "%d completed today";
+"timer.action.start"            = "Start";
+"timer.action.pause"            = "Pause";
+"timer.action.resume"           = "Resume";
+"timer.action.start_break"      = "Start Break";
+"timer.action.start_focus"      = "Start Focus";
+"timer.action.reset"            = "Reset";
+
+// MARK: - Session Types
+"session.focus"                     = "Focus";
+"session.short_break"               = "Short Break";
+"session.long_break"                = "Long Break";
+"session.focus.completion_title"    = "Focus complete";
+"session.focus.completion_message"  = "Nice work. Time to take a break.";
+"session.break.completion_title"    = "Break complete";
+"session.break.completion_message"  = "Break is over. Ready for the next focus session?";
+
+// MARK: - Settings
+"settings.nav.title"            = "Settings";
+"settings.section.durations"    = "Durations";
+"settings.section.cycle"        = "Cycle";
+"settings.focus"                = "Focus";
+"settings.short_break"          = "Short Break";
+"settings.long_break"           = "Long Break";
+"settings.long_break_after"     = "Long Break After";
+"settings.sessions_count"       = "%d sessions";
+"settings.restore_defaults"     = "Restore Defaults";
+"settings.button.save"          = "Save";
+
+// MARK: - Calendar
+"calendar.nav.title"                        = "Calendar";
+"calendar.add_task_accessibility"           = "Add scheduled task";
+"calendar.button.today"                     = "Today";
+"calendar.events.empty"                     = "No calendar events on this day.";
+"calendar.section.iphone_calendar"          = "iPhone Calendar";
+"calendar.section.planned_tasks"            = "Planned Tasks";
+"calendar.tasks.empty"                      = "No tasks planned for this day.\nTap New to add one.";
+"calendar.event.all_day"                    = "All day";
+"calendar.permission.denied.title"          = "Calendar Access Denied";
+"calendar.permission.needed.title"          = "Calendar Access Needed";
+"calendar.permission.denied.message"        = "Open Settings and allow calendar access for this app to see your events.";
+"calendar.permission.needed.message"        = "Allow access to show your iPhone calendar events alongside your focus tasks.";
+"calendar.permission.button.settings"       = "Open Settings";
+"calendar.permission.button.grant"          = "Grant Access";
+"calendar.schedule.header.title"            = "New Task";
+"calendar.schedule.header.subtitle"         = "Scheduled for %@";
+"calendar.schedule.field.title"             = "Title";
+"calendar.schedule.field.title.placeholder" = "Task title";
+"calendar.schedule.field.duration"          = "Focus Duration";
+"calendar.schedule.field.start_time"        = "Start Time";
+"calendar.schedule.field.start_time.toggle" = "Set specific time";
+"calendar.schedule.field.notes"             = "Notes";
+"calendar.schedule.field.notes.placeholder" = "Optional notes…";
+"calendar.schedule.button.add"              = "Add Task";
+"calendar.schedule.button.cancel"           = "Cancel";
+
+// MARK: - Scanner / Documents
+"scanner.nav.title"                 = "Documents";
+"scanner.empty.title"               = "No Scans Yet";
+"scanner.empty.subtitle"            = "Tap the button below to scan\nyour first document.";
+"scanner.button.new_scan"           = "New Scan";
+"scanner.action.delete"             = "Delete";
+"scanner.delete.alert.title"        = "Delete Document?";
+"scanner.delete.alert.message"      = "This will permanently remove all pages. This action cannot be undone.";
+"scanner.delete.button.confirm"     = "Delete";
+"scanner.delete.button.cancel"      = "Cancel";
+"scanner.error.title"               = "Error";
+"scanner.page.count"                = "%d page(s)";
+
+// MARK: - Scan Preview
+"scan_preview.toolbar.extract_tasks"    = "Extract Tasks";
+"scan_preview.section.pages"           = "Pages — %d";
+"scan_preview.pages.empty"             = "All pages deleted.";
+"scan_preview.context.edit_page"       = "Edit Page";
+"scan_preview.context.delete_page"     = "Delete Page";
+"scan_preview.button.export_pdf"       = "Export as PDF";
+"scan_preview.button.extract_ocr"      = "Extract Tasks from OCR";
+"scan_preview.button.compress"         = "Compress & Export";
+"scan_preview.exporting"               = "Generating PDF…";
+"scan_preview.export_error"            = "Export Error";
+"scan_preview.ocr_error"               = "OCR Error";
+
+// MARK: - Compression Sheet
+"compression.header.title"          = "Compress PDF";
+"compression.header.subtitle"       = "Reduce file size before sharing";
+"compression.field.quality"         = "Quality";
+"compression.button.compress"       = "Compress & Share";
+"compression.button.cancel"         = "Cancel";
+"compression.progress"              = "Compressing %d page(s)…";
+"compression.error.title"           = "Compression Failed";
+
+// MARK: - PDF Compression Levels
+"pdf.quality.low.label"     = "Low Quality";
+"pdf.quality.low.detail"    = "Smallest file – text may appear softer";
+"pdf.quality.low.hint"      = "≈70–80% smaller";
+"pdf.quality.medium.label"  = "Medium Quality";
+"pdf.quality.medium.detail" = "Balanced size and readability";
+"pdf.quality.medium.hint"   = "≈45–60% smaller";
+"pdf.quality.high.label"    = "High Quality";
+"pdf.quality.high.detail"   = "Sharp text with moderate size reduction";
+"pdf.quality.high.hint"     = "≈20–35% smaller";
+
+// MARK: - Edit Scan
+"edit_scan.nav.title"           = "Edit Page";
+"edit_scan.button.cancel"       = "Cancel";
+"edit_scan.button.apply"        = "Apply";
+"edit_scan.control.filter"      = "Filter";
+"edit_scan.control.brightness"  = "Brightness";
+"edit_scan.control.contrast"    = "Contrast";
+"edit_scan.control.rotate"      = "Rotate";
+"edit_scan.control.rotate_left" = "Rotate Left";
+"edit_scan.control.rotate_right"= "Rotate Right";
+"edit_scan.button.reset"        = "Reset to Original";
+
+// MARK: - OCR
+"ocr.processing.title"              = "Recognizing text…";
+"ocr.processing.stage.reading"      = "Reading document…";
+"ocr.processing.stage.recognizing"  = "Recognizing characters…";
+"ocr.processing.stage.analyzing"    = "Analyzing tasks…";
+"ocr.processing.stage.finishing"    = "Almost done…";
+"ocr.processing.button.cancel"      = "Cancel";
+"ocr.review.nav.title"              = "Review Tasks";
+"ocr.review.toolbar.select_all"     = "Select All";
+"ocr.review.header.found"           = "Found %d potential tasks";
+"ocr.review.header.selected"        = "Selected %d to create";
+"ocr.review.row.placeholder"        = "Task name";
+"ocr.review.row.from"               = "From: %@";
+"ocr.review.deadline.nav.title"     = "Deadline";
+"ocr.review.deadline.remove"        = "Remove";
+"ocr.review.deadline.done"          = "Done";
+"ocr.review.action.cancel"          = "Cancel";
+"ocr.review.action.creating"        = "Creating…";
+"ocr.review.action.create"          = "Create %d task(s)";
+"ocr.review.empty"                  = "No tasks found";
+"ocr.cell.button.extract"           = "Extract";
+"ocr.confidence.low"                = "Possible";
+"ocr.confidence.medium"             = "Likely";
+"ocr.confidence.high"               = "Certain";
+"ocr.duration.format"               = "%d min";
+
+// MARK: - Analytics
+"analytics.nav.title"                   = "Analytics";
+"analytics.export_csv.accessibility"    = "Export CSV";
+"analytics.error.title"                 = "Error";
+"analytics.metric.streak"              = "Current Streak";
+"analytics.metric.streak.unit"         = "%d days";
+"analytics.metric.total_time"          = "Total Time";
+"analytics.metric.daily_avg"           = "Daily Average";
+"analytics.metric.daily_avg.value"     = "%dm";
+"analytics.metric.total_sessions"      = "Total Sessions";
+"analytics.best_day.label"             = "Best day";
+"analytics.best_day.hour"              = "• Best hour %dh";
+"analytics.chart.focus_minutes.title"  = "Focus Minutes";
+"analytics.chart.focus_minutes.subtitle" = "Last 7 days";
+"analytics.chart.sessions.title"       = "Completed Sessions";
+"analytics.chart.sessions.subtitle"    = "Last 30 days";
+"analytics.heatmap.title"              = "Heatmap";
+"analytics.heatmap.subtitle"           = "Focus minutes by hour of the week";
+"analytics.heatmap.legend.low"         = "Low";
+"analytics.heatmap.legend.high"        = "High (%dm)";
+"analytics.heatmap.weekday.0"          = "Sun";
+"analytics.heatmap.weekday.1"          = "Mon";
+"analytics.heatmap.weekday.2"          = "Tue";
+"analytics.heatmap.weekday.3"          = "Wed";
+"analytics.heatmap.weekday.4"          = "Thu";
+"analytics.heatmap.weekday.5"          = "Fri";
+"analytics.heatmap.weekday.6"          = "Sat";
+"analytics.healthkit.connect.title"    = "Connect Apple Health";
+"analytics.healthkit.connect.subtitle" = "Auto-save Mindful Minutes after each focus session";
+"analytics.healthkit.connect.button"   = "Connect";
+"analytics.healthkit.connected"        = "Apple Health connected";
+"analytics.healthkit.denied.label"     = "Apple Health not authorized";
+"analytics.healthkit.denied.settings"  = "Settings";
+"analytics.empty.title"                = "No data yet";
+"analytics.empty.subtitle"             = "Complete your first focus session to see heatmap, charts and stats.";
+"analytics.range.week"                 = "7 days";
+"analytics.range.month"                = "30 days";
+"analytics.range.three_months"         = "3 months";
+"analytics.range.year"                 = "1 year";
+"analytics.range.all_time"             = "All";
+"analytics.minutes.hours_minutes"      = "%dh %dm";
+"analytics.minutes.minutes_only"       = "%dm";
+
+// MARK: - Live Activity
+"live_activity.session.focus"       = "Focus";
+"live_activity.session.short_break" = "Short Break";
+"live_activity.session.long_break"  = "Long Break";
+"live_activity.transition.body"     = "%d minutes left";
+"live_activity.paused"              = "PAUSED";
+
+// MARK: - Sound & Focus Panel
+"sound.nav.title"                           = "Sound & Focus";
+"sound.section.ambient"                     = "Ambient Sounds";
+"sound.section.tracks"                      = "Choose Sound";
+"sound.playing"                             = "Playing";
+"sound.stopped"                             = "Off";
+"sound.focus_mode.section"                  = "Focus Mode";
+"sound.focus_mode.title"                    = "Focus Mode";
+"sound.focus_mode.subtitle.auto"            = "Auto-activates with timer";
+"sound.focus_mode.subtitle.manual"          = "Activate manually";
+"sound.focus_mode.auto_play"                = "Auto-play with timer";
+"sound.focus_mode.settings_button"          = "Focus Mode Settings";
+"sound.focus_mode.active_badge"             = "Focus Mode active";
+"sound.focus_settings.nav.title"            = "Focus Mode";
+"sound.focus_settings.section.automation"   = "Automation";
+"sound.focus_settings.toggle.auto_activate" = "Activate with timer";
+"sound.focus_settings.toggle.focus_filter"  = "Block external notifications";
+"sound.focus_settings.toggle.pause_music"   = "Pause music when ambient plays";
+"sound.focus_settings.section.interface"    = "Interface";
+"sound.focus_settings.dim_label"            = "Screen dimming";
+"sound.focus_settings.dim_description"      = "Dim the UI to reduce distractions during focus sessions.";
+"sound.focus_settings.section.system"       = "System Integration";
+"sound.focus_settings.filter_title"         = "Focus Filter (iOS 16+)";
+"sound.focus_settings.filter_description"   = "Go to Settings → Focus → select a Focus mode → Add Filter → PomodoroFocus to let the system notify the app when Focus is active.";
+"sound.focus_settings.open_settings"        = "Open Focus Settings";
+"sound.focus_settings.button.save"          = "Save";
+"sound.focus_settings.button.cancel"        = "Cancel";
+
+// MARK: - Sound Tracks
+"sound.track.rain"        = "Rain";
+"sound.track.cafe"        = "Coffee Shop";
+"sound.track.forest"      = "Forest";
+"sound.track.white_noise" = "White Noise";
+
+// MARK: - Misc (shared small labels)
+"home.task.from_scan"       = "From scan";
+"scanner.task_created"      = "Created 1 task";
+"scanner.tasks_created"     = "Created %d tasks";
