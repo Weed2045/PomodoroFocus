@@ -23,8 +23,6 @@ struct RootView: View {
                 .transition(.opacity)
             }
         }
-        // Always render in light mode regardless of device setting.
-        .preferredColorScheme(.light)
     }
 }
 

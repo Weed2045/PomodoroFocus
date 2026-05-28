@@ -53,7 +53,6 @@ struct AnalyticsView: View {
         .onAppear {
             viewModel.onAppear()
         }
-        .preferredColorScheme(.light)
     }
 
     private func analyticsContent(_ data: AnalyticsData) -> some View {

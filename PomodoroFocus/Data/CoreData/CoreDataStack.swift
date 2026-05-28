@@ -7,31 +7,41 @@ final class CoreDataStack {
 
     // MARK: Singleton
     static let shared = CoreDataStack()
-    private init() {}
 
-    // MARK: Container
-    lazy var persistentContainer: NSPersistentContainer = {
+    // MARK: Init — private for singleton, internal for tests
+    private convenience init() { self.init(inMemory: false) }
+
+    init(inMemory: Bool) {
         let container = NSPersistentContainer(
             name: "PomodoroFocus",
             managedObjectModel: CoreDataStack.makeModel()
         )
-        let desc = container.persistentStoreDescriptions.first
-        desc?.setOption(
-            FileProtectionType.completeUntilFirstUserAuthentication as NSObject,
-            forKey: NSPersistentStoreFileProtectionKey
-        )
+        if inMemory {
+            let desc = NSPersistentStoreDescription()
+            desc.url = URL(fileURLWithPath: "/dev/null")
+            desc.type = NSInMemoryStoreType
+            container.persistentStoreDescriptions = [desc]
+        } else {
+            let desc = container.persistentStoreDescriptions.first
+            desc?.setOption(
+                FileProtectionType.completeUntilFirstUserAuthentication as NSObject,
+                forKey: NSPersistentStoreFileProtectionKey
+            )
+        }
         container.loadPersistentStores { _, error in
             if let error {
-                // If the store is corrupt, wipe it and start fresh.
-                // Real production apps should handle this with a migration path.
-                assertionFailure("CoreData store load failed — wiping: \(error)")
+                assertionFailure("CoreData store load failed: \(error)")
             }
         }
         container.viewContext.automaticallyMergesChangesFromParent = true
         container.viewContext.mergePolicy = NSMergeByPropertyObjectTrumpMergePolicy
-        container.viewContext.name = "main-context"
-        return container
-    }()
+        container.viewContext.name = inMemory ? "test-context" : "main-context"
+        _persistentContainer = container
+    }
+
+    // MARK: Container
+    private let _persistentContainer: NSPersistentContainer
+    var persistentContainer: NSPersistentContainer { _persistentContainer }
 
     // MARK: Contexts
     var viewContext: NSManagedObjectContext { persistentContainer.viewContext }
