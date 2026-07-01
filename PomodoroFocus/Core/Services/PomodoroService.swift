@@ -187,10 +187,13 @@ final class PomodoroService: PomodoroServicing {
         nextState.lastUpdated = Date()
 
         if session.type == .focus {
-            nextState.completedSessionsToday += 1
-            nextState.completedFocusSessionsInCycle += 1
+            let completedAt = session.endTime
+            if Calendar.current.isDateInToday(completedAt) {
+                nextState.completedSessionsToday += 1
+                nextState.completedFocusSessionsInCycle += 1
+            }
             AppLogger.timer.info("🍅 focus complete — today=\(nextState.completedSessionsToday, privacy: .public) cycle=\(nextState.completedFocusSessionsInCycle, privacy: .public)")
-            statsManager.recordCompletedFocusSession(duration: session.totalDuration, completedAt: Date())
+            statsManager.recordCompletedFocusSession(duration: session.totalDuration, completedAt: completedAt)
             taskManager.recordFocusSession(taskID: session.taskID, duration: session.totalDuration)
             gamificationManager.refresh()
         } else if session.type == .longBreak {

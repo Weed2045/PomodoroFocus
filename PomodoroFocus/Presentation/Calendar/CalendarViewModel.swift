@@ -11,6 +11,7 @@ final class CalendarViewModel: ObservableObject {
     @Published var displayedMonth: Date = Calendar.current.startOfDay(for: Date())
     @Published private(set) var scheduledTasks: [ScheduledTask] = []
     @Published private(set) var calendarEvents: [EKEvent] = []
+    @Published private(set) var pendingTaskDayKeys: Set<String> = []
 
     // MARK: – Dependencies
 
@@ -40,16 +41,19 @@ final class CalendarViewModel: ObservableObject {
 
     func selectDate(_ date: Date) {
         selectedDate = Calendar.current.startOfDay(for: date)
+        displayedMonth = startOfMonth(containing: selectedDate)
         AppLogger.calendar.debug("📅 selectDate → \(self.selectedDate.formatted(.dateTime.year().month().day()), privacy: .public)")
         reload()
     }
 
     func navigateMonth(by offset: Int) {
-        guard let newMonth = Calendar.current.date(
-            byAdding: .month, value: offset, to: displayedMonth
-        ) else { return }
+        let cal = Calendar.current
+        let currentMonth = startOfMonth(containing: displayedMonth)
+        guard let newMonth = cal.date(byAdding: .month, value: offset, to: currentMonth) else { return }
         displayedMonth = newMonth
+        selectedDate = date(inMonth: newMonth, matchingDayFrom: selectedDate)
         AppLogger.calendar.debug("📅 navigateMonth offset=\(offset, privacy: .public) → \(self.monthYearString, privacy: .public)")
+        reload()
     }
 
     func goToToday() {
@@ -132,7 +136,7 @@ final class CalendarViewModel: ObservableObject {
     }
 
     func hasTasks(on date: Date) -> Bool {
-        repository.hasTasks(on: date)
+        pendingTaskDayKeys.contains(DailyStats.dayKey(for: date))
     }
 
     func isToday(_ date: Date) -> Bool {
@@ -171,6 +175,34 @@ final class CalendarViewModel: ObservableObject {
         } else {
             calendarEvents = []
         }
+        reloadPendingTaskDays()
         AppLogger.calendar.debug("📅 reload — tasks=\(self.scheduledTasks.count, privacy: .public) events=\(self.calendarEvents.count, privacy: .public) date=\(self.selectedDate.formatted(.dateTime.year().month().day()), privacy: .public)")
+    }
+
+    private func reloadPendingTaskDays() {
+        let (start, end) = displayedMonthRange()
+        pendingTaskDayKeys = repository.pendingTaskDayKeys(from: start, to: end)
+    }
+
+    private func displayedMonthRange() -> (start: Date, end: Date) {
+        let start = startOfMonth(containing: displayedMonth)
+        let end = Calendar.current.date(byAdding: .month, value: 1, to: start) ?? start
+        return (start, end)
+    }
+
+    private func startOfMonth(containing date: Date) -> Date {
+        let cal = Calendar.current
+        let comps = cal.dateComponents([.year, .month], from: date)
+        return cal.date(from: comps) ?? cal.startOfDay(for: date)
+    }
+
+    private func date(inMonth month: Date, matchingDayFrom date: Date) -> Date {
+        let cal = Calendar.current
+        let day = cal.component(.day, from: date)
+        let dayRange = cal.range(of: .day, in: .month, for: month) ?? 1..<2
+        let clampedDay = min(day, dayRange.count)
+        var comps = cal.dateComponents([.year, .month], from: month)
+        comps.day = clampedDay
+        return cal.startOfDay(for: cal.date(from: comps) ?? month)
     }
 }

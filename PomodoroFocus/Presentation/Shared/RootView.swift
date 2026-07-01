@@ -8,11 +8,15 @@ enum AppRoute: Hashable {
 struct RootView: View {
     let container: AppDIContainer
     @State private var hasFinishedSplash = false
+    @State private var focusNavigationRequest = 0
 
     var body: some View {
         Group {
             if hasFinishedSplash {
-                MainTabView(container: container)
+                MainTabView(
+                    container: container,
+                    focusNavigationRequest: focusNavigationRequest
+                )
                     .transition(.opacity)
             } else {
                 SplashView(viewModel: container.makeSplashViewModel()) {
@@ -23,25 +27,44 @@ struct RootView: View {
                 .transition(.opacity)
             }
         }
+        .onReceive(NotificationCenter.default.publisher(for: .navigateToFocus)) { _ in
+            focusNavigationRequest += 1
+            if !hasFinishedSplash {
+                withAnimation(.easeInOut(duration: 0.35)) {
+                    hasFinishedSplash = true
+                }
+            }
+        }
     }
 }
 
 // MARK: – Main Tab View ───────────────────────────────────────────────────────
 
+private enum MainTab: Hashable {
+    case focus
+    case calendar
+    case analytics
+    case scanner
+}
+
 struct MainTabView: View {
     let container: AppDIContainer
+    let focusNavigationRequest: Int
+    @State private var selectedTab: MainTab = .focus
     @State private var focusPath = NavigationPath()
+    @State private var handledFocusNavigationRequest = 0
     @StateObject private var documentListVM: DocumentListViewModel
     @StateObject private var soundVM: AmbientSoundViewModel
 
-    init(container: AppDIContainer) {
+    init(container: AppDIContainer, focusNavigationRequest: Int = 0) {
         self.container = container
+        self.focusNavigationRequest = focusNavigationRequest
         _documentListVM = StateObject(wrappedValue: container.makeDocumentListViewModel())
         _soundVM = StateObject(wrappedValue: container.makeAmbientSoundViewModel())
     }
 
     var body: some View {
-        TabView {
+        TabView(selection: $selectedTab) {
             // ── Focus tab ──────────────────────────────────────────────
             NavigationStack(path: $focusPath) {
                 HomeView(viewModel: container.makeHomeViewModel(), path: $focusPath)
@@ -63,6 +86,7 @@ struct MainTabView: View {
             .tabItem {
                 Label(L10n.Tab.focus, systemImage: "timer.circle.fill")
             }
+            .tag(MainTab.focus)
 
             // ── Calendar tab ───────────────────────────────────────────
             NavigationStack {
@@ -71,6 +95,7 @@ struct MainTabView: View {
             .tabItem {
                 Label(L10n.Tab.calendar, systemImage: "calendar")
             }
+            .tag(MainTab.calendar)
 
             // ── Analytics tab ─────────────────────────────────────────
             NavigationStack {
@@ -79,6 +104,7 @@ struct MainTabView: View {
             .tabItem {
                 Label(L10n.Tab.analytics, systemImage: "chart.xyaxis.line")
             }
+            .tag(MainTab.analytics)
 
             // ── Scanner tab ────────────────────────────────────────────
             NavigationStack {
@@ -87,8 +113,17 @@ struct MainTabView: View {
             .tabItem {
                 Label(L10n.Tab.scanner, systemImage: "doc.viewfinder.fill")
             }
+            .tag(MainTab.scanner)
         }
         .tint(AppTheme.blue)
         .modifier(FocusDimmingModifier(viewModel: soundVM))
+        .task(id: focusNavigationRequest) {
+            guard focusNavigationRequest > 0,
+                  handledFocusNavigationRequest != focusNavigationRequest else { return }
+            handledFocusNavigationRequest = focusNavigationRequest
+            selectedTab = .focus
+            focusPath = NavigationPath()
+            focusPath.append(AppRoute.timer)
+        }
     }
 }

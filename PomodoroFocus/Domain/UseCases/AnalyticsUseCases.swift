@@ -70,7 +70,7 @@ final class HealthKitSyncUseCase: HealthKitSyncUseCaseProtocol {
 
     func syncSession(_ session: FocusSession) async throws {
         guard session.sessionType == .focus, session.wasCompleted else { return }
-        try await healthKitService.saveMindfulSession(start: session.startDate, end: session.endDate)
+        guard try await healthKitService.saveMindfulSession(start: session.startDate, end: session.endDate) else { return }
         var synced = session
         synced.isSyncedToHealthKit = true
         try await repository.updateSession(synced)
@@ -79,13 +79,12 @@ final class HealthKitSyncUseCase: HealthKitSyncUseCaseProtocol {
     func syncPendingSessions() async throws {
         let sessions = try await repository.fetchAllSessions()
             .filter { $0.sessionType == .focus && $0.wasCompleted && !$0.isSyncedToHealthKit }
-        try await healthKitService.syncPending(sessions: sessions)
+        let syncedIDs = try await healthKitService.syncPending(sessions: sessions)
 
-        for session in sessions {
+        for session in sessions where syncedIDs.contains(session.id) {
             var synced = session
             synced.isSyncedToHealthKit = true
             try await repository.updateSession(synced)
         }
     }
 }
-

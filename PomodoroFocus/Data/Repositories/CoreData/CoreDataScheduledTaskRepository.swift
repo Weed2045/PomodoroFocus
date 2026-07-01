@@ -49,7 +49,28 @@ final class CoreDataScheduledTaskRepository: ScheduledTaskRepository {
             start as NSDate, end as NSDate
         )
         request.fetchLimit = 1
-        return (try? stack.viewContext.count(for: request) ?? 0) ?? 0 > 0
+        do {
+            return try stack.viewContext.count(for: request) > 0
+        } catch {
+            assertionFailure("hasTasks(on:) failed: \(error)")
+            return false
+        }
+    }
+
+    func pendingTaskDayKeys(from start: Date, to end: Date) -> Set<String> {
+        let request = NSFetchRequest<CDScheduledTask>(entityName: "CDScheduledTask")
+        request.predicate = NSPredicate(
+            format: "scheduledDate >= %@ AND scheduledDate < %@ AND isCompleted == NO",
+            start as NSDate, end as NSDate
+        )
+        request.propertiesToFetch = ["scheduledDate"]
+        do {
+            let tasks = try stack.viewContext.fetch(request)
+            return Set(tasks.map { DailyStats.dayKey(for: $0.scheduledDate) })
+        } catch {
+            assertionFailure("pendingTaskDayKeys(from:to:) failed: \(error)")
+            return []
+        }
     }
 
     // MARK: – Write
@@ -81,7 +102,10 @@ final class CoreDataScheduledTaskRepository: ScheduledTaskRepository {
         let request = NSFetchRequest<CDScheduledTask>(entityName: "CDScheduledTask")
         request.predicate = NSPredicate(format: "id == %@", id as CVarArg)
         request.fetchLimit = 1
-        return (try? ctx.fetch(request).first) ?? CDScheduledTask(context: ctx)
+        return (try? ctx.fetch(request).first) ?? NSEntityDescription.insertNewObject(
+            forEntityName: "CDScheduledTask",
+            into: ctx
+        ) as! CDScheduledTask
     }
 
     private func dayRange(for date: Date) -> (start: Date, end: Date) {

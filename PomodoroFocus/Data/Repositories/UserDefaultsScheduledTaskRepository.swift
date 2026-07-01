@@ -48,4 +48,14 @@ final class UserDefaultsScheduledTaskRepository: ScheduledTaskRepository {
             Calendar.current.isDate($0.scheduledDate, inSameDayAs: date) && !$0.isCompleted
         }
     }
+
+    func pendingTaskDayKeys(from start: Date, to end: Date) -> Set<String> {
+        Set(
+            loadAllTasks()
+                .filter { task in
+                    task.scheduledDate >= start && task.scheduledDate < end && !task.isCompleted
+                }
+                .map { DailyStats.dayKey(for: $0.scheduledDate) }
+        )
+    }
 }

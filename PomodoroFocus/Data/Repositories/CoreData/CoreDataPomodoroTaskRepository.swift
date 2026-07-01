@@ -44,7 +44,10 @@ final class CoreDataPomodoroTaskRepository: PomodoroTaskRepository {
 
             // Upsert
             for task in tasks {
-                let managed = byID[task.id] ?? CDPomodoroTask(context: ctx)
+                let managed = byID[task.id] ?? NSEntityDescription.insertNewObject(
+                    forEntityName: "CDPomodoroTask",
+                    into: ctx
+                ) as! CDPomodoroTask
                 managed.update(from: task)
                 byID[task.id] = managed
             }

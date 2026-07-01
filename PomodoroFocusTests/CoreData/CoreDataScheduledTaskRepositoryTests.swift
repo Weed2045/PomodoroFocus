@@ -99,4 +99,23 @@ final class CoreDataScheduledTaskRepositoryTests: XCTestCase {
         sut.save(task)
         XCTAssertFalse(sut.hasTasks(on: today()))
     }
+
+    // MARK: – pendingTaskDayKeys(from:to:)
+
+    func test_pendingTaskDayKeys_returnsOnlyPendingDaysInRange() {
+        let today = today()
+        let tomorrow = cal.date(byAdding: .day, value: 1, to: today)!
+        let nextMonth = cal.date(byAdding: .month, value: 1, to: today)!
+        var completed = makeTask(title: "Done", scheduledDate: tomorrow)
+        completed.isCompleted = true
+
+        sut.save(makeTask(title: "Today", scheduledDate: today))
+        sut.save(completed)
+        sut.save(makeTask(title: "Outside", scheduledDate: nextMonth))
+
+        let end = cal.date(byAdding: .day, value: 7, to: today)!
+        let keys = sut.pendingTaskDayKeys(from: today, to: end)
+
+        XCTAssertEqual(keys, [DailyStats.dayKey(for: today)])
+    }
 }

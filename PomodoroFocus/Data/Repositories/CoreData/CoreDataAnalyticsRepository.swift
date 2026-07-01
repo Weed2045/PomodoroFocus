@@ -62,7 +62,10 @@ final class CoreDataAnalyticsRepository: AnalyticsRepositoryProtocol {
         let request = NSFetchRequest<CDFocusSession>(entityName: "CDFocusSession")
         request.predicate = NSPredicate(format: "id == %@", id as CVarArg)
         request.fetchLimit = 1
-        return (try? ctx.fetch(request).first) ?? CDFocusSession(context: ctx)
+        return (try? ctx.fetch(request).first) ?? NSEntityDescription.insertNewObject(
+            forEntityName: "CDFocusSession",
+            into: ctx
+        ) as! CDFocusSession
     }
 
     // Generic helper — runs `work` on a fresh background context, returns T.

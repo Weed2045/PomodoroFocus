@@ -179,8 +179,8 @@ final class HealthKitService {
         return store.authorizationStatus(for: mindfulType) == .sharingAuthorized
     }
 
-    func saveMindfulSession(start: Date, end: Date) async throws {
-        guard isAvailable, let mindfulType, authorizationGranted, end > start else { return }
+    func saveMindfulSession(start: Date, end: Date) async throws -> Bool {
+        guard isAvailable, let mindfulType, authorizationGranted, end > start else { return false }
         let sample = HKCategorySample(
             type: mindfulType,
             value: HKCategoryValue.notApplicable.rawValue,
@@ -189,10 +189,11 @@ final class HealthKitService {
             metadata: [HKMetadataKeyWasUserEntered: false]
         )
         try await store.save(sample)
+        return true
     }
 
-    func syncPending(sessions: [FocusSession]) async throws {
-        guard isAvailable, let mindfulType, authorizationGranted, !sessions.isEmpty else { return }
+    func syncPending(sessions: [FocusSession]) async throws -> Set<UUID> {
+        guard isAvailable, let mindfulType, authorizationGranted, !sessions.isEmpty else { return [] }
         let sorted = sessions.sorted { $0.startDate < $1.startDate }
         let predicate = HKQuery.predicateForSamples(withStart: sorted.first?.startDate, end: sorted.last?.endDate)
         let existing: [HKCategorySample] = try await withCheckedThrowingContinuation { continuation in
@@ -212,15 +213,19 @@ final class HealthKitService {
         }
 
         let existingRanges = existing.map { ($0.startDate, $0.endDate) }
+        var syncedIDs = Set<UUID>()
         for session in sorted where session.sessionType == .focus && session.wasCompleted {
             let alreadySaved = existingRanges.contains {
                 abs($0.0.timeIntervalSince(session.startDate)) < 5 &&
                 abs($0.1.timeIntervalSince(session.endDate)) < 5
             }
-            if !alreadySaved {
-                try await saveMindfulSession(start: session.startDate, end: session.endDate)
+            if alreadySaved {
+                syncedIDs.insert(session.id)
+            } else if try await saveMindfulSession(start: session.startDate, end: session.endDate) {
+                syncedIDs.insert(session.id)
             }
         }
+        return syncedIDs
     }
 }
 
@@ -232,4 +237,3 @@ private extension String {
         return self
     }
 }
-

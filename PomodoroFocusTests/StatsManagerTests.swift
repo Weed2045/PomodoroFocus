@@ -97,3 +97,164 @@ final class InMemoryDailyStatsRepository: DailyStatsRepository {
         store.values.sorted { $0.dayKey > $1.dayKey }
     }
 }
+
+// MARK: – PomodoroService completion date regression
+
+final class PomodoroServiceStatsDateTests: XCTestCase {
+    func test_refreshCompletedPastSession_recordsStatsOnSessionEndDate() {
+        let cal = Calendar.current
+        let today = cal.startOfDay(for: Date())
+        let yesterday = cal.date(byAdding: .day, value: -1, to: today)!
+        let completedAt = cal.date(byAdding: .hour, value: 22, to: yesterday)!
+        let session = PomodoroSession(
+            type: .focus,
+            duration: 25 * 60,
+            startTime: completedAt.addingTimeInterval(-(25 * 60))
+        )
+        let initialState = AppState(
+            currentSession: session,
+            completedSessionsToday: 3,
+            completedFocusSessionsInCycle: 2,
+            status: .running,
+            pausedRemaining: nil,
+            progressDate: completedAt,
+            lastUpdated: completedAt,
+            lastKnownUptime: nil,
+            selectedTaskID: nil
+        )
+        let appStateRepo = PomodoroServiceAppStateRepositoryDouble(initialState)
+        let statsRepo = InMemoryDailyStatsRepository()
+
+        let service = PomodoroService(
+            appStateRepository: appStateRepo,
+            settingsManager: SettingsManager(repository: PomodoroServiceSettingsRepositoryDouble()),
+            statsManager: StatsManager(repository: statsRepo),
+            taskManager: TaskManager(repository: PomodoroServiceTaskRepositoryDouble()),
+            gamificationManager: GamificationManager(repository: statsRepo),
+            notificationService: PomodoroServiceNotificationDouble(),
+            analyticsRepository: PomodoroServiceAnalyticsRepositoryDouble(),
+            healthKitSyncUseCase: PomodoroServiceHealthKitDouble(),
+            liveActivityService: PomodoroServiceLiveActivityDouble()
+        )
+
+        XCTAssertEqual(statsRepo.store[DailyStats.dayKey(for: completedAt)]?.completedSessions, 1)
+        XCTAssertEqual(statsRepo.store[DailyStats.dayKey(for: today)]?.completedSessions ?? 0, 0)
+        XCTAssertEqual(service.currentState.completedSessionsToday, 0)
+    }
+}
+
+private final class PomodoroServiceAppStateRepositoryDouble: AppStateRepository {
+    private var state: AppState
+
+    init(_ state: AppState) {
+        self.state = state
+    }
+
+    func load() -> AppState {
+        state
+    }
+
+    func save(_ state: AppState) {
+        self.state = state
+    }
+}
+
+private final class PomodoroServiceSettingsRepositoryDouble: PomodoroSettingsRepository {
+    private var settings = PomodoroSettings.default
+
+    func load() -> PomodoroSettings {
+        settings
+    }
+
+    func save(_ settings: PomodoroSettings) {
+        self.settings = settings
+    }
+}
+
+private final class PomodoroServiceTaskRepositoryDouble: PomodoroTaskRepository {
+    private var tasks: [PomodoroTask] = []
+
+    func loadTasks() -> [PomodoroTask] {
+        tasks
+    }
+
+    func saveTasks(_ tasks: [PomodoroTask]) {
+        self.tasks = tasks
+    }
+}
+
+private final class PomodoroServiceNotificationDouble: NotificationScheduling {
+    func requestAuthorization() {}
+    func scheduleSessionEndNotification(for session: PomodoroSession, at date: Date) {}
+    func cancelSessionEndNotification() {}
+}
+
+private final class PomodoroServiceAnalyticsRepositoryDouble: AnalyticsRepositoryProtocol {
+    private var sessions: [FocusSession] = []
+
+    func fetchSessions(from: Date, to: Date) async throws -> [FocusSession] {
+        sessions.filter { $0.startDate >= from && $0.startDate <= to }
+    }
+
+    func fetchAllSessions() async throws -> [FocusSession] {
+        sessions
+    }
+
+    func saveSession(_ session: FocusSession) async throws {
+        sessions.append(session)
+    }
+
+    func updateSession(_ session: FocusSession) async throws {
+        if let index = sessions.firstIndex(where: { $0.id == session.id }) {
+            sessions[index] = session
+        } else {
+            sessions.append(session)
+        }
+    }
+
+    func deleteSession(id: UUID) async throws {
+        sessions.removeAll { $0.id == id }
+    }
+}
+
+private final class PomodoroServiceHealthKitDouble: HealthKitSyncUseCaseProtocol {
+    var isAvailable: Bool { false }
+    var authorizationGranted: Bool { false }
+
+    func requestAuthorization() async throws -> Bool { false }
+    func syncSession(_ session: FocusSession) async throws {}
+    func syncPendingSessions() async throws {}
+}
+
+private final class PomodoroServiceLiveActivityDouble: LiveActivityServiceProtocol {
+    var isSupported: Bool { false }
+    var isActive: Bool { false }
+
+    func start(
+        sessionID: UUID,
+        taskTitle: String?,
+        targetDuration: Int,
+        remainingSeconds: Int,
+        sessionType: PomodoroSessionType,
+        endDate: Date,
+        completedToday: Int
+    ) async throws {}
+
+    func update(
+        sessionID: UUID?,
+        remainingSeconds: Int,
+        isRunning: Bool,
+        endDate: Date?,
+        completedToday: Int
+    ) async {}
+
+    func transition(
+        to sessionType: PomodoroSessionType,
+        targetDuration: Int,
+        remainingSeconds: Int,
+        endDate: Date,
+        completedToday: Int
+    ) async {}
+
+    func end(dismissalPolicy: LiveActivityDismissalPolicy) async {}
+}

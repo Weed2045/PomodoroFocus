@@ -12,6 +12,7 @@ final class DocumentListViewModel: ObservableObject {
     @Published var pendingDocument: ScannedDocument? = nil   // triggers navigation to preview
     @Published var errorMessage: String? = nil
     @Published var selectedOCRDocumentID: UUID? = nil
+    @Published private var thumbnails: [UUID: UIImage] = [:]
 
     // MARK: – Dependencies
 
@@ -20,6 +21,7 @@ final class DocumentListViewModel: ObservableObject {
     private let linkRepository: DocumentTaskLinkRepositoryProtocol
     let pdfExportService: PDFExportService
     let ocrViewModel: OCRTaskViewModel
+    private var thumbnailTask: Task<Void, Never>?
 
     // MARK: – Init
 
@@ -42,6 +44,7 @@ final class DocumentListViewModel: ObservableObject {
 
     func reload() {
         documents = repository.loadAll()
+        loadThumbnails(for: documents)
         AppLogger.scanner.debug("🔄 reload — \(self.documents.count, privacy: .public) documents")
     }
 
@@ -69,17 +72,26 @@ final class DocumentListViewModel: ObservableObject {
             return
         }
 
-        var doc = ScannedDocument(title: defaultTitle())
-        for (i, img) in images.enumerated() {
-            let pid      = UUID()
-            let fileName = repository.savePageImage(img, pageID: pid)
-            doc.pages.append(ScannedPage(id: pid, imageFileName: fileName, pageIndex: i))
-            AppLogger.scanner.debug("📄 saved page \(i + 1, privacy: .public)/\(images.count, privacy: .public) → \(fileName, privacy: .public)")
+        let repository = repository
+        let title = defaultTitle()
+        Task { [weak self] in
+            let doc = await Task.detached(priority: .userInitiated) {
+                var doc = ScannedDocument(title: title)
+                for (i, img) in images.enumerated() {
+                    let pid = UUID()
+                    let fileName = repository.savePageImage(img, pageID: pid)
+                    doc.pages.append(ScannedPage(id: pid, imageFileName: fileName, pageIndex: i))
+                    AppLogger.scanner.debug("📄 saved page \(i + 1, privacy: .public)/\(images.count, privacy: .public) → \(fileName, privacy: .public)")
+                }
+                repository.save(doc)
+                return doc
+            }.value
+
+            guard let self else { return }
+            self.reload()
+            AppLogger.scanner.info("✅ scan saved — title='\(doc.title, privacy: .public)' pages=\(doc.pageCount, privacy: .public)")
+            self.pendingDocument = doc   // triggers navigation
         }
-        repository.save(doc)
-        reload()
-        AppLogger.scanner.info("✅ scan saved — title='\(doc.title, privacy: .public)' pages=\(doc.pageCount, privacy: .public)")
-        pendingDocument = doc   // triggers navigation
     }
 
     func delete(_ document: ScannedDocument) {
@@ -93,8 +105,7 @@ final class DocumentListViewModel: ObservableObject {
     }
 
     func thumbnail(for document: ScannedDocument) -> UIImage? {
-        guard let first = document.firstPage else { return nil }
-        return repository.loadPageImage(fileName: first.imageFileName)
+        thumbnails[document.id]
     }
 
     // MARK: – Factory
@@ -115,13 +126,20 @@ final class DocumentListViewModel: ObservableObject {
     }
 
     func extractTasks(from document: ScannedDocument) {
-        let images = renderedImages(for: document)
-        guard !images.isEmpty else {
-            errorMessage = "Document has no readable pages."
-            return
-        }
         selectedOCRDocumentID = document.id
-        ocrViewModel.startExtraction(documentID: document.id, source: .images(images))
+        let repository = repository
+        Task { [weak self] in
+            let images = await Task.detached(priority: .userInitiated) {
+                Self.renderedImages(for: document, repository: repository)
+            }.value
+
+            guard let self else { return }
+            guard !images.isEmpty else {
+                self.errorMessage = "Document has no readable pages."
+                return
+            }
+            self.ocrViewModel.startExtraction(documentID: document.id, source: .images(images))
+        }
     }
 
     // MARK: – Private
@@ -130,7 +148,31 @@ final class DocumentListViewModel: ObservableObject {
         "Scan – " + Date().formatted(.dateTime.month(.abbreviated).day().hour().minute())
     }
 
-    private func renderedImages(for document: ScannedDocument) -> [UIImage] {
+    private func loadThumbnails(for documents: [ScannedDocument]) {
+        thumbnailTask?.cancel()
+        let repository = repository
+        let pageRefs = documents.compactMap { document -> (UUID, String)? in
+            guard let first = document.firstPage else { return nil }
+            return (document.id, first.imageFileName)
+        }
+
+        thumbnailTask = Task.detached(priority: .utility) { [weak self] in
+            var loaded: [UUID: UIImage] = [:]
+            for (documentID, fileName) in pageRefs {
+                guard !Task.isCancelled else { return }
+                loaded[documentID] = repository.loadPageImage(fileName: fileName)
+            }
+            let loadedThumbnails = loaded
+            await MainActor.run { [weak self] in
+                self?.thumbnails = loadedThumbnails
+            }
+        }
+    }
+
+    nonisolated private static func renderedImages(
+        for document: ScannedDocument,
+        repository: ScannedDocumentRepository
+    ) -> [UIImage] {
         document.pages.compactMap { page in
             guard let base = repository.loadPageImage(fileName: page.imageFileName) else { return nil }
             return ImageProcessingService.apply(

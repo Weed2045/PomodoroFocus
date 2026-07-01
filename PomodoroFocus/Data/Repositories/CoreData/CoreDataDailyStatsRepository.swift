@@ -63,7 +63,10 @@ final class CoreDataDailyStatsRepository: DailyStatsRepository {
         request.predicate = NSPredicate(format: "dayKey == %@", dayKey)
         request.fetchLimit = 1
         if let existing = try? ctx.fetch(request).first { return existing }
-        let obj = CDDailyStats(context: ctx)
+        let obj = NSEntityDescription.insertNewObject(
+            forEntityName: "CDDailyStats",
+            into: ctx
+        ) as! CDDailyStats
         obj.dayKey = dayKey
         return obj
     }
