@@ -7,6 +7,9 @@ import Foundation
 final class LegacyMigrationService {
     private let defaults: UserDefaults
     private static let completedKey = "coredata_migration_v1_completed"
+    private struct SendableDefaults: @unchecked Sendable {
+        let value: UserDefaults
+    }
 
     init(defaults: UserDefaults = .standard) {
         self.defaults = defaults
@@ -29,9 +32,10 @@ final class LegacyMigrationService {
         migrateTasks(to: taskRepo)
         migrateScheduledTasks(to: scheduledTaskRepo)
         migrateDailyStats(to: dailyStatsRepo)
-        migrateAnalyticsSessions(to: analyticsRepo)  // async, fire-and-forget
 
-        defaults.set(true, forKey: Self.completedKey)
+        if !migrateAnalyticsSessions(to: analyticsRepo) {
+            markMigrationCompleted()
+        }
     }
 
     // MARK: – Individual migrations
@@ -58,7 +62,10 @@ final class LegacyMigrationService {
     }
 
     /// Analytics sessions may be large (up to 10 000) — migrate off the main thread.
-    private func migrateAnalyticsSessions(to repo: AnalyticsRepositoryProtocol) {
+    /// Returns true when an async migration was started. The migration flag and
+    /// legacy cleanup happen only after every session has been saved.
+    @discardableResult
+    private func migrateAnalyticsSessions(to repo: AnalyticsRepositoryProtocol) -> Bool {
         let decoder = JSONDecoder()
         decoder.dateDecodingStrategy = .iso8601
 
@@ -77,18 +84,27 @@ final class LegacyMigrationService {
             }
         }
 
-        guard !sessions.isEmpty, let key = usedKey else { return }
+        guard !sessions.isEmpty, let key = usedKey else { return false }
 
-        Task.detached(priority: .utility) { [weak self, sessions] in
-            for session in sessions {
-                try? await repo.saveSession(session)
-            }
-            // Clean up both keys after successful migration
-            await MainActor.run {
-                self?.defaults.removeObject(forKey: key)
-                self?.defaults.removeObject(forKey: "pomodoro_sessions")
+        let defaults = SendableDefaults(value: defaults)
+
+        Task.detached(priority: .utility) { [defaults, sessions] in
+            do {
+                for session in sessions {
+                    try await repo.saveSession(session)
+                }
+
+                await MainActor.run {
+                    defaults.value.removeObject(forKey: key)
+                    defaults.value.removeObject(forKey: "pomodoro_sessions_v2")
+                    defaults.value.removeObject(forKey: "pomodoro_sessions")
+                    defaults.value.set(true, forKey: Self.completedKey)
+                }
+            } catch {
+                AppLogger.storage.error("❌ analytics migration failed: \(error.localizedDescription, privacy: .public)")
             }
         }
+        return true
     }
 
     // MARK: – Helpers
@@ -96,5 +112,9 @@ final class LegacyMigrationService {
     private func loadJSON<T: Decodable>(_ type: T.Type, key: String) -> T? {
         guard let data = defaults.data(forKey: key) else { return nil }
         return try? JSONDecoder().decode(type, from: data)
+    }
+
+    private func markMigrationCompleted() {
+        defaults.set(true, forKey: Self.completedKey)
     }
 }

@@ -122,11 +122,7 @@ final class AmbientAudioEngine {
         {
             buffer = loaded
         } else {
-            #if DEBUG
-            buffer = Self.makeDebugBuffer(for: sound)
-            #else
-            buffer = nil
-            #endif
+            buffer = Self.makeProceduralBuffer(for: sound)
         }
 
         guard let buffer else {
@@ -249,8 +245,7 @@ final class AmbientAudioEngine {
         min(max(value, 0), 1)
     }
 
-    #if DEBUG
-    private static func makeDebugBuffer(for sound: AmbientSound) -> AVAudioPCMBuffer? {
+    private static func makeProceduralBuffer(for sound: AmbientSound) -> AVAudioPCMBuffer? {
         let sampleRate = 44_100.0
         let duration = 3.0
         let frameCount = AVAudioFrameCount(sampleRate * duration)
@@ -286,5 +281,4 @@ final class AmbientAudioEngine {
         let normalized = Float(seed) / Float(UInt32.max)
         return (normalized * 2 - 1) * scale
     }
-    #endif
 }

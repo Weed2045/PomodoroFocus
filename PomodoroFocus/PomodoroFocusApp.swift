@@ -33,8 +33,21 @@ struct PomodoroFocusApp: App {
         case "focus":
             NotificationCenter.default.post(name: .navigateToFocus, object: nil)
         case "toggle":
-            NotificationCenter.default.post(name: .pomodoroLiveActivityToggleRequested, object: nil)
+            toggleTimerFromLiveActivityLink()
         default:
+            break
+        }
+    }
+
+    private func toggleTimerFromLiveActivityLink() {
+        container.pomodoroService.refreshTimerState()
+
+        switch container.pomodoroService.currentState.status {
+        case .running:
+            container.pomodoroService.pause()
+        case .paused:
+            container.pomodoroService.resume()
+        case .idle, .completed:
             break
         }
     }

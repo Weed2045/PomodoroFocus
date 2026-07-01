@@ -338,6 +338,7 @@
 			children = (
 				D00000000000000000000002 /* PomodoroFocus */,
 				D00000000000000000000004 /* PomodoroActivityExtension */,
+				TE000000000000000000010 /* PomodoroFocusTests */,
 				D00000000000000000000003 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -354,7 +355,6 @@
 				G00000000000000000000014 /* Shared */,
 				955F76502FC3842F00FAEC03 /* Resources */,
 				B0000000000000000000004A /* PomodoroFocus.entitlements */,
-				TE000000000000000000010 /* PomodoroFocusTests */,
 			);
 			path = PomodoroFocus;
 			sourceTree = "<group>";
@@ -1234,7 +1234,7 @@
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
 				GENERATE_INFOPLIST_FILE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 16.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				MARKETING_VERSION = 1.0;
 				CURRENT_PROJECT_VERSION = 1;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.codex.PomodoroFocusTests";
@@ -1252,7 +1252,7 @@
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
 				GENERATE_INFOPLIST_FILE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 16.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				MARKETING_VERSION = 1.0;
 				CURRENT_PROJECT_VERSION = 1;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.codex.PomodoroFocusTests";
