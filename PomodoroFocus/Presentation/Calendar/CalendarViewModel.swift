@@ -161,7 +161,9 @@ final class CalendarViewModel: ObservableObject {
 
     var selectedDayString: String {
         if Calendar.current.isDateInToday(selectedDate) {
-            return "Today · " + selectedDate.formatted(.dateTime.weekday(.wide).day().month(.abbreviated))
+            return L10n.Calendar.selectedToday(
+                selectedDate.formatted(.dateTime.weekday(.wide).day().month(.abbreviated))
+            )
         }
         return selectedDate.formatted(.dateTime.weekday(.wide).day().month(.wide).year())
     }

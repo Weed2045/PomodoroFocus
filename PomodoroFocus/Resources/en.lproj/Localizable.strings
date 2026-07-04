@@ -3,6 +3,10 @@
    ========================================================= */
 
 // MARK: - Common
+"common.app_name"                = "Pomodoro Focus";
+"common.app_name.stacked"        = "Pomodoro\nFocus";
+"common.app_name.first"          = "Pomodoro";
+"common.app_name.second"         = "Focus";
 "common.ok"                     = "OK";
 "common.cancel"                 = "Cancel";
 "common.delete"                 = "Delete";
@@ -14,6 +18,8 @@
 "common.settings"               = "Settings";
 "common.today"                  = "Today";
 "common.notes.placeholder"      = "Optional notes, links, context…";
+"common.minutes.short"          = "%dm";
+"common.hours_minutes.short"    = "%dh %dm";
 
 // MARK: - Tabs
 "tab.focus"                     = "Focus";
@@ -22,6 +28,7 @@
 "tab.scanner"                   = "Scanner";
 
 // MARK: - Splash
+"splash.app_name"                = "Pomodoro Focus";
 "splash.tagline"                = "Calm focus, every day.";
 
 // MARK: - Home
@@ -103,11 +110,13 @@
 "settings.nav.title"            = "Settings";
 "settings.section.durations"    = "Durations";
 "settings.section.cycle"        = "Cycle";
+"settings.section.focus"        = "Focus";
 "settings.focus"                = "Focus";
 "settings.short_break"          = "Short Break";
 "settings.long_break"           = "Long Break";
 "settings.long_break_after"     = "Long Break After";
 "settings.sessions_count"       = "%d sessions";
+"settings.sound_focus"          = "Sound & Focus";
 "settings.restore_defaults"     = "Restore Defaults";
 "settings.button.save"          = "Save";
 
@@ -115,11 +124,21 @@
 "calendar.nav.title"                        = "Calendar";
 "calendar.add_task_accessibility"           = "Add scheduled task";
 "calendar.button.today"                     = "Today";
+"calendar.selected.today"                   = "Today · %@";
+"calendar.weekday.short.0"                  = "Mo";
+"calendar.weekday.short.1"                  = "Tu";
+"calendar.weekday.short.2"                  = "We";
+"calendar.weekday.short.3"                  = "Th";
+"calendar.weekday.short.4"                  = "Fr";
+"calendar.weekday.short.5"                  = "Sa";
+"calendar.weekday.short.6"                  = "Su";
 "calendar.events.empty"                     = "No calendar events on this day.";
 "calendar.section.iphone_calendar"          = "iPhone Calendar";
 "calendar.section.planned_tasks"            = "Planned Tasks";
 "calendar.tasks.empty"                      = "No tasks planned for this day.\nTap New to add one.";
 "calendar.event.all_day"                    = "All day";
+"calendar.event.untitled"                   = "Untitled event";
+"calendar.task.duration.focus"              = "%dm focus";
 "calendar.permission.denied.title"          = "Calendar Access Denied";
 "calendar.permission.needed.title"          = "Calendar Access Needed";
 "calendar.permission.denied.message"        = "Open Settings and allow calendar access for this app to see your events.";
@@ -133,6 +152,7 @@
 "calendar.schedule.field.duration"          = "Focus Duration";
 "calendar.schedule.field.start_time"        = "Start Time";
 "calendar.schedule.field.start_time.toggle" = "Set specific time";
+"calendar.schedule.start_date_picker"       = "Start";
 "calendar.schedule.field.notes"             = "Notes";
 "calendar.schedule.field.notes.placeholder" = "Optional notes…";
 "calendar.schedule.button.add"              = "Add Task";
@@ -149,6 +169,9 @@
 "scanner.delete.button.confirm"     = "Delete";
 "scanner.delete.button.cancel"      = "Cancel";
 "scanner.error.title"               = "Error";
+"scanner.error.scan_unsupported"    = "Document scanning is not supported on this device.";
+"scanner.error.no_readable_pages"   = "Document has no readable pages.";
+"scanner.default_title"             = "Scan – %@";
 "scanner.page.count"                = "%d page(s)";
 
 // MARK: - Scan Preview
@@ -172,6 +195,10 @@
 "compression.button.cancel"         = "Cancel";
 "compression.progress"              = "Compressing %d page(s)…";
 "compression.error.title"           = "Compression Failed";
+"compression.error.source_not_found"= "Source PDF file not found.";
+"compression.error.load_failed"     = "Could not open the PDF. The file may be corrupted.";
+"compression.error.no_pages"        = "The PDF contains no pages.";
+"compression.error.write_failed"    = "Could not write the compressed file. Check available storage.";
 
 // MARK: - PDF Compression Levels
 "pdf.quality.low.label"     = "Low Quality";
@@ -212,6 +239,9 @@
 "ocr.review.deadline.nav.title"     = "Deadline";
 "ocr.review.deadline.remove"        = "Remove";
 "ocr.review.deadline.done"          = "Done";
+"ocr.error.no_tasks_found_in_document" = "No tasks found in this document.";
+"ocr.error.invalid_image"           = "Invalid scanned image.";
+"ocr.error.processing_failed"       = "OCR failed: %@";
 "ocr.review.action.cancel"          = "Cancel";
 "ocr.review.action.creating"        = "Creating…";
 "ocr.review.action.create"          = "Create %d task(s)";
@@ -224,7 +254,9 @@
 
 // MARK: - Analytics
 "analytics.nav.title"                   = "Analytics";
+"analytics.range.picker"                = "Range";
 "analytics.export_csv.accessibility"    = "Export CSV";
+"analytics.export_csv.error"            = "Could not export file: %@";
 "analytics.error.title"                 = "Error";
 "analytics.metric.streak"              = "Current Streak";
 "analytics.metric.streak.unit"         = "%d days";
@@ -238,6 +270,11 @@
 "analytics.chart.focus_minutes.subtitle" = "Last 7 days";
 "analytics.chart.sessions.title"       = "Completed Sessions";
 "analytics.chart.sessions.subtitle"    = "Last 30 days";
+"analytics.chart.axis.day"             = "Day";
+"analytics.chart.axis.minutes"         = "Minutes";
+"analytics.chart.axis.sessions"        = "Sessions";
+"analytics.chart.axis.average"         = "Average";
+"analytics.chart.rule.today"           = "Today";
 "analytics.heatmap.title"              = "Heatmap";
 "analytics.heatmap.subtitle"           = "Focus minutes by hour of the week";
 "analytics.heatmap.legend.low"         = "Low";
@@ -271,6 +308,11 @@
 "live_activity.session.long_break"  = "Long Break";
 "live_activity.transition.body"     = "%d minutes left";
 "live_activity.paused"              = "PAUSED";
+"live_activity.paused.inline"       = "· PAUSED";
+"live_activity.completed_today"     = "%d ✓";
+
+// MARK: - Widget
+"widget.description"                = "Quick glance at your focus session.";
 
 // MARK: - Sound & Focus Panel
 "sound.nav.title"                           = "Sound & Focus";

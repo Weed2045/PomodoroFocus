@@ -72,7 +72,7 @@ struct TimerView: View {
                         .font(.system(size: 22))
                         .foregroundStyle(soundViewModel.isPlaying ? AppTheme.blue : .secondary)
                 }
-                .accessibilityLabel("Âm thanh & Focus")
+                .accessibilityLabel(L10n.Settings.soundFocus)
             }
         }
         .sheet(isPresented: $showSoundPanel) {

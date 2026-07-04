@@ -73,10 +73,16 @@ final class ExtractTasksUseCase: ExtractTasksUseCaseProtocol {
 final class CreateTasksFromOCRUseCase: CreateTasksFromOCRUseCaseProtocol {
     private let taskManager: TaskManaging
     private let linkRepository: DocumentTaskLinkRepositoryProtocol
+    private let scheduledTaskRepository: ScheduledTaskRepository
 
-    init(taskManager: TaskManaging, linkRepository: DocumentTaskLinkRepositoryProtocol) {
+    init(
+        taskManager: TaskManaging,
+        linkRepository: DocumentTaskLinkRepositoryProtocol,
+        scheduledTaskRepository: ScheduledTaskRepository
+    ) {
         self.taskManager = taskManager
         self.linkRepository = linkRepository
+        self.scheduledTaskRepository = scheduledTaskRepository
     }
 
     func execute(items: [ExtractedTaskItem], documentID: UUID) async throws -> [PomodoroTask] {
@@ -105,6 +111,17 @@ final class CreateTasksFromOCRUseCase: CreateTasksFromOCRUseCaseProtocol {
                 sourceRange: item.sourceRange
             )
             try await linkRepository.saveLink(link)
+            if let deadline = item.deadline {
+                scheduledTaskRepository.save(
+                    ScheduledTask(
+                        title: task.title,
+                        notes: notes,
+                        targetDuration: task.targetDuration,
+                        scheduledDate: deadline,
+                        startTime: deadline
+                    )
+                )
+            }
             created.append(task)
         }
 

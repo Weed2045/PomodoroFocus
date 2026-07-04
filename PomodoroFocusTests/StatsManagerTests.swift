@@ -219,9 +219,9 @@ private final class PomodoroServiceAnalyticsRepositoryDouble: AnalyticsRepositor
 
 private final class PomodoroServiceHealthKitDouble: HealthKitSyncUseCaseProtocol {
     var isAvailable: Bool { false }
-    var authorizationGranted: Bool { false }
+    var authorizationState: HealthKitAuthorizationState { .unavailable }
 
-    func requestAuthorization() async throws -> Bool { false }
+    func requestAuthorization() async throws -> HealthKitAuthorizationState { .unavailable }
     func syncSession(_ session: FocusSession) async throws {}
     func syncPendingSessions() async throws {}
 }

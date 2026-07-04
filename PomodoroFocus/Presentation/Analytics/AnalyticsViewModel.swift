@@ -13,11 +13,24 @@ final class AnalyticsViewModel: ObservableObject {
 
     @Published var healthKitStatus: HealthKitStatus = .unknown
 
-    enum HealthKitStatus {
+    enum HealthKitStatus: Equatable {
         case unknown
         case authorized
         case denied
         case unavailable
+
+        init(authorizationState: HealthKitAuthorizationState) {
+            switch authorizationState {
+            case .unavailable:
+                self = .unavailable
+            case .sharingAuthorized:
+                self = .authorized
+            case .sharingDenied:
+                self = .denied
+            case .notDetermined, .unknown:
+                self = .unknown
+            }
+        }
     }
 
     private let fetchAnalyticsUseCase: FetchAnalyticsUseCaseProtocol
@@ -71,22 +84,26 @@ final class AnalyticsViewModel: ObservableObject {
                 exportURL = try await exportCSVUseCase.execute()
                 showShareSheet = true
             } catch {
-                errorMessage = "Không thể xuất file: \(error.localizedDescription)"
+                errorMessage = L10n.Analytics.exportError(error.localizedDescription)
             }
         }
     }
 
     func requestHealthKitAccess() {
         Task {
-            do {
-                let granted = try await healthKitSyncUseCase.requestAuthorization()
-                healthKitStatus = granted ? .authorized : .denied
-                if granted {
-                    try await healthKitSyncUseCase.syncPendingSessions()
-                }
-            } catch {
-                healthKitStatus = .denied
+            await requestHealthKitAccessAsync()
+        }
+    }
+
+    func requestHealthKitAccessAsync() async {
+        do {
+            let state = try await healthKitSyncUseCase.requestAuthorization()
+            healthKitStatus = HealthKitStatus(authorizationState: state)
+            if state.isAuthorized {
+                try await healthKitSyncUseCase.syncPendingSessions()
             }
+        } catch {
+            healthKitStatus = .denied
         }
     }
 
@@ -96,7 +113,6 @@ final class AnalyticsViewModel: ObservableObject {
             return
         }
 
-        healthKitStatus = healthKitSyncUseCase.authorizationGranted ? .authorized : .unknown
+        healthKitStatus = HealthKitStatus(authorizationState: healthKitSyncUseCase.authorizationState)
     }
 }
-

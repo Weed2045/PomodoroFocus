@@ -98,7 +98,7 @@ struct AnalyticsRangePicker: View {
     @Binding var selected: AnalyticsRange
 
     var body: some View {
-        Picker("Range", selection: $selected) {
+        Picker(L10n.Analytics.rangePicker, selection: $selected) {
             ForEach(AnalyticsRange.allCases) { range in
                 Text(range.displayName).tag(range)
             }
@@ -195,8 +195,8 @@ struct FocusBarChartView: View {
         ChartCard(title: title, subtitle: subtitle) {
             Chart(data) { item in
                 BarMark(
-                    x: .value("Ngày", item.date, unit: .day),
-                    y: .value("Phút", item.value)
+                    x: .value(L10n.Analytics.chartAxisDay, item.date, unit: .day),
+                    y: .value(L10n.Analytics.chartAxisMinutes, item.value)
                 )
                 .foregroundStyle(barColor(for: item.value))
                 .cornerRadius(6)
@@ -219,7 +219,7 @@ struct FocusBarChartView: View {
                 AxisMarks(position: .leading, values: .automatic(desiredCount: 4)) { value in
                     AxisValueLabel {
                         if let v = value.as(Double.self) {
-                            Text("\(Int(v))m")
+                            Text(L10n.Common.minutesShort(Int(v)))
                                 .font(.system(size: 10))
                                 .foregroundStyle(.secondary)
                         }
@@ -265,8 +265,8 @@ struct SessionsLineChartView: View {
             Chart {
                 ForEach(data) { item in
                     AreaMark(
-                        x: .value("Ngày", item.date, unit: .day),
-                        y: .value("Phiên", item.value)
+                        x: .value(L10n.Analytics.chartAxisDay, item.date, unit: .day),
+                        y: .value(L10n.Analytics.chartAxisSessions, item.value)
                     )
                     .foregroundStyle(.linearGradient(colors: [.orange.opacity(0.25), .clear], startPoint: .top, endPoint: .bottom))
                     .interpolationMethod(.catmullRom)
@@ -274,8 +274,8 @@ struct SessionsLineChartView: View {
 
                 ForEach(data) { item in
                     LineMark(
-                        x: .value("Ngày", item.date, unit: .day),
-                        y: .value("Phiên", item.value)
+                        x: .value(L10n.Analytics.chartAxisDay, item.date, unit: .day),
+                        y: .value(L10n.Analytics.chartAxisSessions, item.value)
                     )
                     .foregroundStyle(.orange)
                     .lineStyle(StrokeStyle(lineWidth: 2))
@@ -284,15 +284,15 @@ struct SessionsLineChartView: View {
 
                 ForEach(smoothedData) { item in
                     LineMark(
-                        x: .value("Ngày", item.date, unit: .day),
-                        y: .value("TB", item.value)
+                        x: .value(L10n.Analytics.chartAxisDay, item.date, unit: .day),
+                        y: .value(L10n.Analytics.chartAxisAverage, item.value)
                     )
                     .foregroundStyle(.secondary.opacity(0.55))
                     .lineStyle(StrokeStyle(lineWidth: 1, dash: [4, 3]))
                     .interpolationMethod(.catmullRom)
                 }
 
-                RuleMark(x: .value("Today", Date(), unit: .day))
+                RuleMark(x: .value(L10n.Analytics.chartRuleToday, Date(), unit: .day))
                     .foregroundStyle(.orange.opacity(0.35))
                     .lineStyle(StrokeStyle(lineWidth: 1, dash: [3]))
             }

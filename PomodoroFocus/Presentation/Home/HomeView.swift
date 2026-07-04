@@ -633,7 +633,7 @@ private struct TaskFormSheet: View {
                                 targetMinutes = preset
                             }
                         } label: {
-                            Text("\(preset)m")
+                            Text(L10n.Common.minutesShort(preset))
                                 .font(.caption.weight(.semibold))
                                 .foregroundStyle(isActive ? .white : AppTheme.blue)
                                 .padding(.horizontal, 12)

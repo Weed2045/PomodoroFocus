@@ -79,9 +79,9 @@ enum OCRError: LocalizedError {
     var errorDescription: String? {
         switch self {
         case .invalidImage:
-            return "Anh scan khong hop le."
+            return L10n.OCR.invalidImageError
         case .processingFailed(let message):
-            return "Loi OCR: \(message)"
+            return L10n.OCR.processingFailedError(message)
         }
     }
 }

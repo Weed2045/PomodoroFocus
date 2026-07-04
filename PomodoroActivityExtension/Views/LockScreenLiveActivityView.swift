@@ -38,7 +38,7 @@ struct LockScreenLiveActivityView: View {
                         .foregroundStyle(accentColor)
 
                     if !context.state.isRunning {
-                        Text("· \(L10n.LiveActivity.paused)")
+                        Text(L10n.LiveActivity.pausedInline)
                             .font(.system(size: 10, weight: .medium))
                             .foregroundStyle(.secondary)
                     }
@@ -92,7 +92,7 @@ struct LockScreenLiveActivityView: View {
                         }
                     }
 
-                    Text("\(context.state.completedToday) ✓")
+                    Text(L10n.LiveActivity.completedToday(context.state.completedToday))
                         .font(.system(size: 11, weight: .medium))
                         .foregroundStyle(.secondary)
                 }
@@ -115,4 +115,3 @@ struct CountdownText: View {
         }
     }
 }
-

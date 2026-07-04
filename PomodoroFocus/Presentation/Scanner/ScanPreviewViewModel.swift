@@ -170,7 +170,7 @@ final class ScanPreviewViewModel: ObservableObject {
         }
 
         guard !images.isEmpty else {
-            errorMessage = "Document has no readable pages."
+            errorMessage = L10n.Scanner.documentNoReadablePages
             return
         }
 

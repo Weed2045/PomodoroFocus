@@ -136,8 +136,8 @@ struct CalendarView: View {
 
             // Weekday header
             HStack(spacing: 0) {
-                ForEach(["Mo", "Tu", "We", "Th", "Fr", "Sa", "Su"], id: \.self) { d in
-                    Text(d)
+                ForEach(0..<7, id: \.self) { index in
+                    Text(L10n.Calendar.weekdayShort(index))
                         .font(.caption.weight(.semibold))
                         .foregroundStyle(.secondary)
                         .frame(maxWidth: .infinity)
@@ -392,7 +392,7 @@ private struct CalendarEventCard: View {
                 .frame(maxHeight: .infinity)
 
             VStack(alignment: .leading, spacing: 4) {
-                Text(event.title ?? "Untitled event")
+                Text(event.title ?? L10n.Calendar.eventUntitled)
                     .font(.subheadline.weight(.semibold))
                     .foregroundStyle(AppTheme.navy)
                     .lineLimit(1)
@@ -464,7 +464,7 @@ private struct ScheduledTaskCard: View {
                             .font(.caption)
                             .foregroundStyle(.secondary)
                     }
-                    Label("\(Int(task.targetDuration / 60))m focus", systemImage: "timer")
+                    Label(L10n.Calendar.taskDurationFocus(Int(task.targetDuration / 60)), systemImage: "timer")
                         .font(.caption)
                         .foregroundStyle(.secondary)
                 }
@@ -525,7 +525,7 @@ struct ScheduleTaskSheet: View {
     }
 
     private var dateLabel: String {
-        if Calendar.current.isDateInToday(selectedDate) { return "Today" }
+        if Calendar.current.isDateInToday(selectedDate) { return L10n.Common.today }
         return selectedDate.formatted(.dateTime.weekday(.abbreviated).day().month(.abbreviated))
     }
 
@@ -595,7 +595,7 @@ struct ScheduleTaskSheet: View {
                             if hasStartTime {
                                 Divider().padding(.horizontal, 14)
                                 DatePicker(
-                                    "Start",
+                                    L10n.Calendar.scheduleStartDatePicker,
                                     selection: $startTime,
                                     displayedComponents: .hourAndMinute
                                 )
@@ -709,7 +709,7 @@ struct ScheduleTaskSheet: View {
                         Button {
                             withAnimation(.spring(response: 0.25)) { targetMinutes = p }
                         } label: {
-                            Text("\(p)m")
+                            Text(L10n.Common.minutesShort(p))
                                 .font(.caption.weight(.semibold))
                                 .foregroundStyle(active ? .white : AppTheme.blue)
                                 .padding(.horizontal, 12).padding(.vertical, 6)

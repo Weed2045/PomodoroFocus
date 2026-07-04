@@ -51,7 +51,7 @@ final class DocumentListViewModel: ObservableObject {
     func startScan() {
         guard VNDocumentCameraViewController.isSupported else {
             AppLogger.scanner.error("❌ startScan — VNDocumentCameraViewController not supported on this device")
-            errorMessage = "Document scanning is not supported on this device."
+            errorMessage = L10n.Scanner.scanUnsupported
             return
         }
         AppLogger.scanner.info("📷 startScan — opening camera")
@@ -135,7 +135,7 @@ final class DocumentListViewModel: ObservableObject {
 
             guard let self else { return }
             guard !images.isEmpty else {
-                self.errorMessage = "Document has no readable pages."
+                self.errorMessage = L10n.Scanner.documentNoReadablePages
                 return
             }
             self.ocrViewModel.startExtraction(documentID: document.id, source: .images(images))
@@ -145,7 +145,7 @@ final class DocumentListViewModel: ObservableObject {
     // MARK: – Private
 
     private func defaultTitle() -> String {
-        "Scan – " + Date().formatted(.dateTime.month(.abbreviated).day().hour().minute())
+        L10n.Scanner.defaultTitle(Date().formatted(.dateTime.month(.abbreviated).day().hour().minute()))
     }
 
     private func loadThumbnails(for documents: [ScannedDocument]) {

@@ -72,7 +72,7 @@ struct SplashView: View {
 
                 // Title + tagline
                 VStack(spacing: 10) {
-                    Text("Pomodoro Focus")
+                    Text(L10n.Splash.appName)
                         .font(.system(.title, design: .rounded, weight: .bold))
                         .foregroundStyle(.white)
                         .tracking(0.4)

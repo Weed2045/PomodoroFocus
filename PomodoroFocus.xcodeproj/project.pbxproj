@@ -135,6 +135,8 @@
 		TE000000000000000000033 /* CoreDataPomodoroTaskRepositoryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = TE000000000000000000023 /* CoreDataPomodoroTaskRepositoryTests.swift */; };
 		TE000000000000000000034 /* CoreDataScheduledTaskRepositoryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = TE000000000000000000024 /* CoreDataScheduledTaskRepositoryTests.swift */; };
 		TE000000000000000000035 /* CoreDataDailyStatsRepositoryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = TE000000000000000000025 /* CoreDataDailyStatsRepositoryTests.swift */; };
+		TE000000000000000000036 /* AnalyticsViewModelHealthKitTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = TE000000000000000000026 /* AnalyticsViewModelHealthKitTests.swift */; };
+		TE000000000000000000037 /* OCRTaskPipelineTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = TE000000000000000000027 /* OCRTaskPipelineTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -297,6 +299,8 @@
 		TE000000000000000000023 /* CoreDataPomodoroTaskRepositoryTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataPomodoroTaskRepositoryTests.swift; sourceTree = "<group>"; };
 		TE000000000000000000024 /* CoreDataScheduledTaskRepositoryTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataScheduledTaskRepositoryTests.swift; sourceTree = "<group>"; };
 		TE000000000000000000025 /* CoreDataDailyStatsRepositoryTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataDailyStatsRepositoryTests.swift; sourceTree = "<group>"; };
+		TE000000000000000000026 /* AnalyticsViewModelHealthKitTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalyticsViewModelHealthKitTests.swift; sourceTree = "<group>"; };
+		TE000000000000000000027 /* OCRTaskPipelineTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OCRTaskPipelineTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -692,6 +696,8 @@
 				TE000000000000000000020 /* DomainEntityTests.swift */,
 				TE000000000000000000021 /* TaskManagerTests.swift */,
 				TE000000000000000000022 /* StatsManagerTests.swift */,
+				TE000000000000000000026 /* AnalyticsViewModelHealthKitTests.swift */,
+				TE000000000000000000027 /* OCRTaskPipelineTests.swift */,
 				TE000000000000000000011 /* CoreData */,
 			);
 			path = PomodoroFocusTests;
@@ -972,6 +978,8 @@
 				TE000000000000000000033 /* CoreDataPomodoroTaskRepositoryTests.swift in Sources */,
 				TE000000000000000000034 /* CoreDataScheduledTaskRepositoryTests.swift in Sources */,
 				TE000000000000000000035 /* CoreDataDailyStatsRepositoryTests.swift in Sources */,
+				TE000000000000000000036 /* AnalyticsViewModelHealthKitTests.swift in Sources */,
+				TE000000000000000000037 /* OCRTaskPipelineTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

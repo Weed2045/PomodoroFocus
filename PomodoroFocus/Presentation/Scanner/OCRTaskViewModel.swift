@@ -117,7 +117,7 @@ final class OCRTaskViewModel: ObservableObject {
             state = .processing(progress: 1)
 
             if items.isEmpty {
-                state = .error("Khong tim thay task nao trong tai lieu nay.")
+                state = .error(L10n.OCR.noTasksFoundInDocument)
             } else {
                 state = .reviewing
                 showReviewSheet = true
@@ -129,4 +129,3 @@ final class OCRTaskViewModel: ObservableObject {
         }
     }
 }
-

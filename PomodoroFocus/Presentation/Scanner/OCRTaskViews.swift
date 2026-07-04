@@ -242,7 +242,7 @@ private struct DeadlineControl: View {
         .buttonStyle(.plain)
         .sheet(isPresented: $showPicker) {
             NavigationStack {
-                DatePicker("Deadline", selection: $draftDate, displayedComponents: [.date, .hourAndMinute])
+                DatePicker(L10n.OCR.deadlineNavTitle, selection: $draftDate, displayedComponents: [.date, .hourAndMinute])
                     .datePickerStyle(.graphical)
                     .padding()
                     .navigationTitle(L10n.OCR.deadlineNavTitle)
@@ -267,7 +267,7 @@ private struct DeadlineControl: View {
     }
 
     private var label: String {
-        date?.formatted(.dateTime.day().month(.abbreviated)) ?? "Deadline"
+        date?.formatted(.dateTime.day().month(.abbreviated)) ?? L10n.OCR.deadlineNavTitle
     }
 }
 
@@ -285,7 +285,7 @@ private struct DurationControl: View {
         } label: {
             HStack(spacing: 4) {
                 Image(systemName: "timer")
-                Text("\(minutes)m")
+                Text(L10n.Common.minutesShort(minutes))
             }
             .font(.system(size: 11, weight: .medium))
             .foregroundStyle(.secondary)

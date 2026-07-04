@@ -90,7 +90,8 @@ final class AppDIContainer {
         self.extractTasksUseCase = ExtractTasksUseCase(nlpService: nlpTaskExtractionService)
         self.createTasksFromOCRUseCase = CreateTasksFromOCRUseCase(
             taskManager: taskManager,
-            linkRepository: documentTaskLinkRepository
+            linkRepository: documentTaskLinkRepository,
+            scheduledTaskRepository: scheduledTaskRepository
         )
         self.pomodoroService            = PomodoroService(
             appStateRepository: appStateRepository,

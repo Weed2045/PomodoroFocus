@@ -19,6 +19,10 @@ enum L10n {
 
     // MARK: - Common
     enum Common {
+        static var appName: String        { tr("common.app_name") }
+        static var appNameStacked: String { tr("common.app_name.stacked") }
+        static var appNameFirst: String   { tr("common.app_name.first") }
+        static var appNameSecond: String  { tr("common.app_name.second") }
         static var ok: String             { tr("common.ok") }
         static var cancel: String         { tr("common.cancel") }
         static var delete: String         { tr("common.delete") }
@@ -30,6 +34,10 @@ enum L10n {
         static var settings: String       { tr("common.settings") }
         static var today: String          { tr("common.today") }
         static var notesPlaceholder: String { tr("common.notes.placeholder") }
+        static func minutesShort(_ n: Int) -> String { tr("common.minutes.short", n) }
+        static func hoursMinutesShort(hours: Int, minutes: Int) -> String {
+            tr("common.hours_minutes.short", hours, minutes)
+        }
     }
 
     // MARK: - Tabs
@@ -42,6 +50,7 @@ enum L10n {
 
     // MARK: - Splash
     enum Splash {
+        static var appName: String { tr("splash.app_name") }
         static var tagline: String { tr("splash.tagline") }
     }
 
@@ -137,11 +146,13 @@ enum L10n {
         static var navTitle: String          { tr("settings.nav.title") }
         static var sectionDurations: String  { tr("settings.section.durations") }
         static var sectionCycle: String      { tr("settings.section.cycle") }
+        static var sectionFocus: String      { tr("settings.section.focus") }
         static var focus: String             { tr("settings.focus") }
         static var shortBreak: String        { tr("settings.short_break") }
         static var longBreak: String         { tr("settings.long_break") }
         static var longBreakAfter: String    { tr("settings.long_break_after") }
         static func sessionsCount(_ n: Int) -> String { tr("settings.sessions_count", n) }
+        static var soundFocus: String        { tr("settings.sound_focus") }
         static var restoreDefaults: String   { tr("settings.restore_defaults") }
         static var buttonSave: String        { tr("settings.button.save") }
     }
@@ -151,11 +162,15 @@ enum L10n {
         static var navTitle: String          { tr("calendar.nav.title") }
         static var addTaskAccessibility: String { tr("calendar.add_task_accessibility") }
         static var buttonToday: String       { tr("calendar.button.today") }
+        static func selectedToday(_ date: String) -> String { tr("calendar.selected.today", date) }
+        static func weekdayShort(_ index: Int) -> String { tr("calendar.weekday.short.\(index)") }
         static var eventsEmpty: String       { tr("calendar.events.empty") }
         static var sectionIphoneCalendar: String { tr("calendar.section.iphone_calendar") }
         static var sectionPlannedTasks: String { tr("calendar.section.planned_tasks") }
         static var tasksEmpty: String        { tr("calendar.tasks.empty") }
         static var eventAllDay: String       { tr("calendar.event.all_day") }
+        static var eventUntitled: String     { tr("calendar.event.untitled") }
+        static func taskDurationFocus(_ n: Int) -> String { tr("calendar.task.duration.focus", n) }
         static var permissionDeniedTitle: String   { tr("calendar.permission.denied.title") }
         static var permissionNeededTitle: String   { tr("calendar.permission.needed.title") }
         static var permissionDeniedMessage: String { tr("calendar.permission.denied.message") }
@@ -169,6 +184,7 @@ enum L10n {
         static var scheduleFieldDuration: String    { tr("calendar.schedule.field.duration") }
         static var scheduleFieldStartTime: String   { tr("calendar.schedule.field.start_time") }
         static var scheduleFieldStartTimeToggle: String { tr("calendar.schedule.field.start_time.toggle") }
+        static var scheduleStartDatePicker: String { tr("calendar.schedule.start_date_picker") }
         static var scheduleFieldNotes: String       { tr("calendar.schedule.field.notes") }
         static var scheduleFieldNotesPlaceholder: String { tr("calendar.schedule.field.notes.placeholder") }
         static var scheduleButtonAdd: String        { tr("calendar.schedule.button.add") }
@@ -187,6 +203,9 @@ enum L10n {
         static var deleteButtonConfirm: String { tr("scanner.delete.button.confirm") }
         static var deleteButtonCancel: String  { tr("scanner.delete.button.cancel") }
         static var errorTitle: String        { tr("scanner.error.title") }
+        static var scanUnsupported: String   { tr("scanner.error.scan_unsupported") }
+        static var documentNoReadablePages: String { tr("scanner.error.no_readable_pages") }
+        static func defaultTitle(_ date: String) -> String { tr("scanner.default_title", date) }
         static func pageCount(_ n: Int) -> String { tr("scanner.page.count", n) }
         static func tasksCreated(_ n: Int) -> String {
             n == 1 ? tr("scanner.task_created") : tr("scanner.tasks_created", n)
@@ -217,6 +236,10 @@ enum L10n {
         static var buttonCancel: String   { tr("compression.button.cancel") }
         static func progress(_ n: Int) -> String { tr("compression.progress", n) }
         static var errorTitle: String     { tr("compression.error.title") }
+        static var errorSourceNotFound: String { tr("compression.error.source_not_found") }
+        static var errorLoadFailed: String     { tr("compression.error.load_failed") }
+        static var errorNoPages: String        { tr("compression.error.no_pages") }
+        static var errorWriteFailed: String    { tr("compression.error.write_failed") }
     }
 
     // MARK: - PDF Quality
@@ -269,6 +292,9 @@ enum L10n {
         static var deadlineNavTitle: String   { tr("ocr.review.deadline.nav.title") }
         static var deadlineRemove: String     { tr("ocr.review.deadline.remove") }
         static var deadlineDone: String       { tr("ocr.review.deadline.done") }
+        static var noTasksFoundInDocument: String { tr("ocr.error.no_tasks_found_in_document") }
+        static var invalidImageError: String  { tr("ocr.error.invalid_image") }
+        static func processingFailedError(_ message: String) -> String { tr("ocr.error.processing_failed", message) }
         static var actionCancel: String       { tr("ocr.review.action.cancel") }
         static var actionCreating: String     { tr("ocr.review.action.creating") }
         static func actionCreate(_ n: Int) -> String { tr("ocr.review.action.create", n) }
@@ -292,7 +318,9 @@ enum L10n {
     // MARK: - Analytics
     enum Analytics {
         static var navTitle: String               { tr("analytics.nav.title") }
+        static var rangePicker: String            { tr("analytics.range.picker") }
         static var exportCSVAccessibility: String { tr("analytics.export_csv.accessibility") }
+        static func exportError(_ message: String) -> String { tr("analytics.export_csv.error", message) }
         static var errorTitle: String             { tr("analytics.error.title") }
         static var metricStreak: String           { tr("analytics.metric.streak") }
         static func metricStreakUnit(_ n: Int) -> String { tr("analytics.metric.streak.unit", n) }
@@ -306,6 +334,11 @@ enum L10n {
         static var chartFocusMinutesSubtitle: String { tr("analytics.chart.focus_minutes.subtitle") }
         static var chartSessionsTitle: String        { tr("analytics.chart.sessions.title") }
         static var chartSessionsSubtitle: String     { tr("analytics.chart.sessions.subtitle") }
+        static var chartAxisDay: String           { tr("analytics.chart.axis.day") }
+        static var chartAxisMinutes: String       { tr("analytics.chart.axis.minutes") }
+        static var chartAxisSessions: String      { tr("analytics.chart.axis.sessions") }
+        static var chartAxisAverage: String       { tr("analytics.chart.axis.average") }
+        static var chartRuleToday: String         { tr("analytics.chart.rule.today") }
         static var heatmapTitle: String           { tr("analytics.heatmap.title") }
         static var heatmapSubtitle: String        { tr("analytics.heatmap.subtitle") }
         static var heatmapLegendLow: String       { tr("analytics.heatmap.legend.low") }
@@ -339,6 +372,13 @@ enum L10n {
         static var sessionLongBreak: String  { tr("live_activity.session.long_break") }
         static func transitionBody(_ minutes: Int) -> String { tr("live_activity.transition.body", minutes) }
         static var paused: String { tr("live_activity.paused") }
+        static var pausedInline: String { tr("live_activity.paused.inline") }
+        static func completedToday(_ n: Int) -> String { tr("live_activity.completed_today", n) }
+    }
+
+    // MARK: - Widget
+    enum Widget {
+        static var description: String { tr("widget.description") }
     }
 
     // MARK: - Sound & Focus Panel

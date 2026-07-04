@@ -10,10 +10,29 @@ protocol ExportCSVUseCaseProtocol {
 
 protocol HealthKitSyncUseCaseProtocol {
     var isAvailable: Bool { get }
+    var authorizationState: HealthKitAuthorizationState { get }
     var authorizationGranted: Bool { get }
-    func requestAuthorization() async throws -> Bool
+    func requestAuthorization() async throws -> HealthKitAuthorizationState
     func syncSession(_ session: FocusSession) async throws
     func syncPendingSessions() async throws
+}
+
+enum HealthKitAuthorizationState: Equatable {
+    case unavailable
+    case notDetermined
+    case sharingDenied
+    case sharingAuthorized
+    case unknown
+
+    var isAuthorized: Bool {
+        self == .sharingAuthorized
+    }
+}
+
+extension HealthKitSyncUseCaseProtocol {
+    var authorizationGranted: Bool {
+        authorizationState.isAuthorized
+    }
 }
 
 final class FetchAnalyticsUseCase: FetchAnalyticsUseCaseProtocol {
@@ -55,8 +74,8 @@ final class HealthKitSyncUseCase: HealthKitSyncUseCaseProtocol {
         healthKitService.isAvailable
     }
 
-    var authorizationGranted: Bool {
-        healthKitService.authorizationGranted
+    var authorizationState: HealthKitAuthorizationState {
+        healthKitService.authorizationState
     }
 
     init(repository: AnalyticsRepositoryProtocol, healthKitService: HealthKitService) {
@@ -64,7 +83,7 @@ final class HealthKitSyncUseCase: HealthKitSyncUseCaseProtocol {
         self.healthKitService = healthKitService
     }
 
-    func requestAuthorization() async throws -> Bool {
+    func requestAuthorization() async throws -> HealthKitAuthorizationState {
         try await healthKitService.requestAuthorization()
     }
 

@@ -9,7 +9,7 @@ extension TimeInterval {
     }
 
     var minutesText: String {
-        "\(Int(self / 60))m"
+        L10n.Common.minutesShort(Int(self / 60))
     }
 
     var focusTimeText: String {
@@ -18,9 +18,9 @@ extension TimeInterval {
         let minutes = totalMinutes % 60
 
         if hours > 0 {
-            return "\(hours)h \(minutes)m"
+            return L10n.Common.hoursMinutesShort(hours: hours, minutes: minutes)
         }
 
-        return "\(minutes)m"
+        return L10n.Common.minutesShort(minutes)
     }
 }

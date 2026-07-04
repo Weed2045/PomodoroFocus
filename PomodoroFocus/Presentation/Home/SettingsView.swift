@@ -17,17 +17,17 @@ struct SettingsView: View {
             Section(L10n.Settings.sectionDurations) {
                 Stepper(value: $viewModel.focusMinutes, in: 1...180) {
                     settingRow(title: L10n.Settings.focus,
-                               value: "\(viewModel.focusMinutes)m",
+                               value: L10n.Common.minutesShort(viewModel.focusMinutes),
                                tint: AppTheme.blue)
                 }
                 Stepper(value: $viewModel.shortBreakMinutes, in: 1...60) {
                     settingRow(title: L10n.Settings.shortBreak,
-                               value: "\(viewModel.shortBreakMinutes)m",
+                               value: L10n.Common.minutesShort(viewModel.shortBreakMinutes),
                                tint: AppTheme.sky)
                 }
                 Stepper(value: $viewModel.longBreakMinutes, in: 1...120) {
                     settingRow(title: L10n.Settings.longBreak,
-                               value: "\(viewModel.longBreakMinutes)m",
+                               value: L10n.Common.minutesShort(viewModel.longBreakMinutes),
                                tint: AppTheme.teal)
                 }
             }
@@ -42,12 +42,12 @@ struct SettingsView: View {
                 }
             }
 
-            Section("Focus") {
+            Section(L10n.Settings.sectionFocus) {
                 Button {
                     showSoundPanel = true
                 } label: {
                     HStack {
-                        Label("Âm thanh & Focus", systemImage: "waveform.circle.fill")
+                        Label(L10n.Settings.soundFocus, systemImage: "waveform.circle.fill")
                         Spacer()
                         Image(systemName: "chevron.right")
                             .font(.system(size: 12))

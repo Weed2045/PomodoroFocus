@@ -20,10 +20,10 @@ enum PDFCompressionService {
 
         var errorDescription: String? {
             switch self {
-            case .sourceNotFound: "Source PDF file not found."
-            case .loadFailed:     "Could not open the PDF. The file may be corrupted."
-            case .noPages:        "The PDF contains no pages."
-            case .writeFailed:    "Could not write the compressed file. Check available storage."
+            case .sourceNotFound: L10n.Compression.errorSourceNotFound
+            case .loadFailed:     L10n.Compression.errorLoadFailed
+            case .noPages:        L10n.Compression.errorNoPages
+            case .writeFailed:    L10n.Compression.errorWriteFailed
             }
         }
     }

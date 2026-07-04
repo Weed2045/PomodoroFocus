@@ -168,15 +168,28 @@ final class HealthKitService {
         HKHealthStore.isHealthDataAvailable() && mindfulType != nil
     }
 
-    var authorizationGranted: Bool {
-        guard let mindfulType else { return false }
-        return store.authorizationStatus(for: mindfulType) == .sharingAuthorized
+    var authorizationState: HealthKitAuthorizationState {
+        guard isAvailable, let mindfulType else { return .unavailable }
+        switch store.authorizationStatus(for: mindfulType) {
+        case .notDetermined:
+            return .notDetermined
+        case .sharingDenied:
+            return .sharingDenied
+        case .sharingAuthorized:
+            return .sharingAuthorized
+        @unknown default:
+            return .unknown
+        }
     }
 
-    func requestAuthorization() async throws -> Bool {
-        guard isAvailable, let mindfulType else { return false }
+    var authorizationGranted: Bool {
+        authorizationState.isAuthorized
+    }
+
+    func requestAuthorization() async throws -> HealthKitAuthorizationState {
+        guard isAvailable, let mindfulType else { return .unavailable }
         try await store.requestAuthorization(toShare: [mindfulType], read: [])
-        return store.authorizationStatus(for: mindfulType) == .sharingAuthorized
+        return authorizationState
     }
 
     func saveMindfulSession(start: Date, end: Date) async throws -> Bool {

@@ -45,8 +45,8 @@ struct PomodoroFocusWidget: Widget {
         StaticConfiguration(kind: kind, provider: PomodoroFocusWidgetProvider()) { entry in
             PomodoroFocusWidgetView(entry: entry)
         }
-        .configurationDisplayName("PomodoroFocus")
-        .description("Quick glance at your focus session.")
+        .configurationDisplayName(L10n.Common.appName)
+        .description(L10n.Widget.description)
         .supportedFamilies([.systemSmall, .systemMedium])
     }
 }
@@ -89,7 +89,7 @@ private struct SmallWidgetView: View {
                 Spacer()
 
                 // App name
-                Text("Pomodoro\nFocus")
+                Text(L10n.Common.appNameStacked)
                     .font(.system(size: 15, weight: .bold, design: .rounded))
                     .foregroundStyle(.white)
                     .lineSpacing(1)
@@ -143,10 +143,10 @@ private struct MediumWidgetView: View {
                     Spacer()
 
                     VStack(alignment: .leading, spacing: 2) {
-                        Text("Pomodoro")
+                        Text(L10n.Common.appNameFirst)
                             .font(.system(size: 13, weight: .bold, design: .rounded))
                             .foregroundStyle(.white)
-                        Text("Focus")
+                        Text(L10n.Common.appNameSecond)
                             .font(.system(size: 13, weight: .bold, design: .rounded))
                             .foregroundStyle(.white.opacity(0.75))
                     }
@@ -199,7 +199,7 @@ private struct SessionRow: View {
 
             Spacer()
 
-            Text("\(minutes)m")
+            Text(L10n.Common.minutesShort(minutes))
                 .font(.system(size: 11, weight: .bold, design: .monospaced))
                 .foregroundStyle(accent)
                 .padding(.horizontal, 7)
