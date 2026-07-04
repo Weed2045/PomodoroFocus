@@ -10,6 +10,8 @@ final class HomeViewModel: ObservableObject {
     @Published private(set) var tasks: [PomodoroTask] = []
     @Published private(set) var selectedTaskID: UUID?
     @Published private(set) var gamificationSummary: GamificationSummary = .empty
+    @Published private(set) var scanSourceLinks: [UUID: DocumentTaskLink] = [:]
+    @Published private(set) var sourceDocumentError: String?
 
     private let getSettingsUseCase: GetPomodoroSettingsUseCase
     private let getAppStateUseCase: GetAppStateUseCase
@@ -18,8 +20,11 @@ final class HomeViewModel: ObservableObject {
     private let statsManager: StatsManaging
     private let taskManager: TaskManaging
     private let scheduledTaskRepository: ScheduledTaskRepository
+    private let scannedDocumentRepository: ScannedDocumentRepository
+    private let linkRepository: DocumentTaskLinkRepositoryProtocol
     private let gamificationManager: GamificationManaging
     private var cancellables = Set<AnyCancellable>()
+    private var linkLoadTask: Task<Void, Never>?
 
     init(
         getSettingsUseCase: GetPomodoroSettingsUseCase,
@@ -29,6 +34,8 @@ final class HomeViewModel: ObservableObject {
         statsManager: StatsManaging,
         taskManager: TaskManaging,
         scheduledTaskRepository: ScheduledTaskRepository,
+        scannedDocumentRepository: ScannedDocumentRepository,
+        linkRepository: DocumentTaskLinkRepositoryProtocol,
         gamificationManager: GamificationManaging
     ) {
         self.getSettingsUseCase = getSettingsUseCase
@@ -38,6 +45,8 @@ final class HomeViewModel: ObservableObject {
         self.statsManager = statsManager
         self.taskManager = taskManager
         self.scheduledTaskRepository = scheduledTaskRepository
+        self.scannedDocumentRepository = scannedDocumentRepository
+        self.linkRepository = linkRepository
         self.gamificationManager = gamificationManager
         self.settings = getSettingsUseCase.execute()
         let state = getAppStateUseCase.execute()
@@ -47,6 +56,7 @@ final class HomeViewModel: ObservableObject {
         self.selectedTaskID = state.selectedTaskID
         self.tasks = taskManager.activeTasks
         self.gamificationSummary = gamificationManager.currentSummary
+        loadScanSourceLinks(for: self.tasks)
 
         settingsManager.settingsPublisher
             .receive(on: DispatchQueue.main)
@@ -63,7 +73,10 @@ final class HomeViewModel: ObservableObject {
         taskManager.tasksPublisher
             .receive(on: DispatchQueue.main)
             .sink { [weak self] tasks in
-                self?.tasks = tasks.filter { !$0.isArchived }
+                guard let self else { return }
+                let activeTasks = tasks.filter { !$0.isArchived }
+                self.tasks = activeTasks
+                self.loadScanSourceLinks(for: activeTasks)
             }
             .store(in: &cancellables)
 
@@ -90,6 +103,7 @@ final class HomeViewModel: ObservableObject {
         totalFocusTimeToday = statsManager.todayStats.totalFocusTime
         activeSessionTitle = state.status == .idle ? nil : state.currentSession?.type.title
         selectedTaskID = state.selectedTaskID
+        loadScanSourceLinks(for: tasks)
     }
 
     func createTask(title: String, targetDuration: TimeInterval, notes: String) {
@@ -135,5 +149,47 @@ final class HomeViewModel: ObservableObject {
 
     func selectTask(id: UUID?) {
         pomodoroService.selectTask(id: id)
+    }
+
+    func hasScanSource(for taskID: UUID) -> Bool {
+        scanSourceLinks[taskID] != nil
+    }
+
+    func openSourceDocument(for taskID: UUID) {
+        guard let documentID = scanSourceLinks[taskID]?.documentID,
+              scannedDocumentRepository.load(id: documentID) != nil else {
+            sourceDocumentError = L10n.Home.sourceDocumentMissingMessage
+            return
+        }
+
+        NotificationCenter.default.post(
+            name: .openScannedDocument,
+            object: nil,
+            userInfo: [AppNavigationUserInfoKey.documentID: documentID]
+        )
+    }
+
+    func clearSourceDocumentError() {
+        sourceDocumentError = nil
+    }
+
+    private func loadScanSourceLinks(for tasks: [PomodoroTask]) {
+        linkLoadTask?.cancel()
+        let taskIDs = tasks.map(\.id)
+        let linkRepository = linkRepository
+
+        linkLoadTask = Task { [weak self] in
+            var linksByTaskID: [UUID: DocumentTaskLink] = [:]
+            for taskID in taskIDs {
+                guard !Task.isCancelled else { return }
+                let links = (try? await linkRepository.fetchLinks(taskID: taskID)) ?? []
+                if let newest = links.sorted(by: { $0.createdAt > $1.createdAt }).first {
+                    linksByTaskID[taskID] = newest
+                }
+            }
+
+            guard !Task.isCancelled else { return }
+            self?.scanSourceLinks = linksByTaskID
+        }
     }
 }

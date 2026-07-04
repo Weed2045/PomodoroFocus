@@ -8,6 +8,7 @@ struct ExtractedTaskItem: Identifiable, Codable, Equatable {
     var estimatedMinutes: Int
     var confidence: Confidence
     var isSelected: Bool
+    var sourcePageIndex: Int? = nil
     var sourceRange: NSRange?
     var rawLine: String
 
@@ -65,6 +66,10 @@ struct DocumentTaskLink: Codable, Identifiable, Equatable {
     let createdAt: Date
     let pageIndex: Int?
     let sourceRange: NSRange?
+    let sourceText: String?
+    let taskTitle: String?
+    let deadline: Date?
+    let estimatedMinutes: Int?
 
     init(
         id: UUID = UUID(),
@@ -72,7 +77,11 @@ struct DocumentTaskLink: Codable, Identifiable, Equatable {
         taskID: UUID,
         createdAt: Date = Date(),
         pageIndex: Int? = nil,
-        sourceRange: NSRange? = nil
+        sourceRange: NSRange? = nil,
+        sourceText: String? = nil,
+        taskTitle: String? = nil,
+        deadline: Date? = nil,
+        estimatedMinutes: Int? = nil
     ) {
         self.id = id
         self.documentID = documentID
@@ -80,6 +89,15 @@ struct DocumentTaskLink: Codable, Identifiable, Equatable {
         self.createdAt = createdAt
         self.pageIndex = pageIndex
         self.sourceRange = sourceRange
+        self.sourceText = sourceText
+        self.taskTitle = taskTitle
+        self.deadline = deadline
+        self.estimatedMinutes = estimatedMinutes
     }
 }
 
+struct OCRSearchMatch: Identifiable, Equatable {
+    var id: UUID { documentID }
+    let documentID: UUID
+    let snippet: String
+}

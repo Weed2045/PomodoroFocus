@@ -12,7 +12,11 @@ final class DocumentListViewModel: ObservableObject {
     @Published var pendingDocument: ScannedDocument? = nil   // triggers navigation to preview
     @Published var errorMessage: String? = nil
     @Published var selectedOCRDocumentID: UUID? = nil
+    @Published var searchText = "" {
+        didSet { refreshOCRSearchMatches() }
+    }
     @Published private var thumbnails: [UUID: UIImage] = [:]
+    @Published private(set) var ocrSearchMatches: [UUID: OCRSearchMatch] = [:]
 
     // MARK: – Dependencies
 
@@ -22,6 +26,7 @@ final class DocumentListViewModel: ObservableObject {
     let pdfExportService: PDFExportService
     let ocrViewModel: OCRTaskViewModel
     private var thumbnailTask: Task<Void, Never>?
+    private var searchTask: Task<Void, Never>?
 
     // MARK: – Init
 
@@ -45,7 +50,18 @@ final class DocumentListViewModel: ObservableObject {
     func reload() {
         documents = repository.loadAll()
         loadThumbnails(for: documents)
+        refreshOCRSearchMatches()
         AppLogger.scanner.debug("🔄 reload — \(self.documents.count, privacy: .public) documents")
+    }
+
+    var displayedDocuments: [ScannedDocument] {
+        let query = normalizedSearchText
+        guard !query.isEmpty else { return documents }
+
+        return documents.filter { document in
+            document.title.range(of: query, options: [.caseInsensitive, .diacriticInsensitive]) != nil ||
+            ocrSearchMatches[document.id] != nil
+        }
     }
 
     func startScan() {
@@ -116,6 +132,18 @@ final class DocumentListViewModel: ObservableObject {
         pendingDocument = nil
     }
 
+    func openDocument(id: UUID) {
+        guard let document = repository.load(id: id) else {
+            errorMessage = L10n.Home.sourceDocumentMissingMessage
+            return
+        }
+        pendingDocument = document
+    }
+
+    func ocrMatch(for documentID: UUID) -> OCRSearchMatch? {
+        ocrSearchMatches[documentID]
+    }
+
     func makePreviewViewModel(for document: ScannedDocument) -> ScanPreviewViewModel {
         ScanPreviewViewModel(
             document: document,
@@ -166,6 +194,26 @@ final class DocumentListViewModel: ObservableObject {
             await MainActor.run { [weak self] in
                 self?.thumbnails = loadedThumbnails
             }
+        }
+    }
+
+    private var normalizedSearchText: String {
+        searchText.trimmingCharacters(in: .whitespacesAndNewlines)
+    }
+
+    private func refreshOCRSearchMatches() {
+        searchTask?.cancel()
+        let query = normalizedSearchText
+        guard !query.isEmpty else {
+            ocrSearchMatches = [:]
+            return
+        }
+
+        let ocrRepository = ocrRepository
+        searchTask = Task { [weak self] in
+            let matches = (try? await ocrRepository.searchOCRResults(matching: query)) ?? []
+            guard !Task.isCancelled else { return }
+            self?.ocrSearchMatches = Dictionary(uniqueKeysWithValues: matches.map { ($0.documentID, $0) })
         }
     }
 

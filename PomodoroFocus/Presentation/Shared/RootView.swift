@@ -125,5 +125,12 @@ struct MainTabView: View {
             focusPath = NavigationPath()
             focusPath.append(AppRoute.timer)
         }
+        .onReceive(NotificationCenter.default.publisher(for: .openScannedDocument)) { notification in
+            guard let documentID = notification.userInfo?[AppNavigationUserInfoKey.documentID] as? UUID else {
+                return
+            }
+            selectedTab = .scanner
+            documentListVM.openDocument(id: documentID)
+        }
     }
 }

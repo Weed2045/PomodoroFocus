@@ -35,12 +35,48 @@ final class OCRRepositoryImpl: OCRRepositoryProtocol {
         defaults.set(Array(index), forKey: cacheKey)
     }
 
+    func searchOCRResults(matching query: String) async throws -> [OCRSearchMatch] {
+        let trimmed = query.trimmingCharacters(in: .whitespacesAndNewlines)
+        guard !trimmed.isEmpty else { return [] }
+
+        var matches: [OCRSearchMatch] = []
+        for idString in loadIndex() {
+            guard let documentID = UUID(uuidString: idString),
+                  let result = try await fetchOCRResult(documentID: documentID),
+                  let range = result.rawText.range(
+                    of: trimmed,
+                    options: [.caseInsensitive, .diacriticInsensitive]
+                  ) else {
+                continue
+            }
+
+            matches.append(
+                OCRSearchMatch(
+                    documentID: documentID,
+                    snippet: snippet(in: result.rawText, around: range)
+                )
+            )
+        }
+        return matches
+    }
+
     private func cacheURL(for id: UUID) -> URL {
         cacheDirectory.appendingPathComponent("ocr_\(id.uuidString).json")
     }
 
     private func loadIndex() -> Set<String> {
         Set(defaults.stringArray(forKey: cacheKey) ?? [])
+    }
+
+    private func snippet(in text: String, around range: Range<String.Index>) -> String {
+        let prefix = text[..<range.lowerBound].suffix(52)
+        let match = text[range]
+        let suffix = text[range.upperBound...].prefix(72)
+        return ([String(prefix), String(match), String(suffix)]
+            .joined()
+            .replacingOccurrences(of: "\n", with: " ")
+            .replacingOccurrences(of: "  ", with: " ")
+            .trimmingCharacters(in: .whitespacesAndNewlines))
     }
 }
 
@@ -87,4 +123,3 @@ final class DocumentTaskLinkRepositoryImpl: DocumentTaskLinkRepositoryProtocol {
         defaults.set(try JSONEncoder().encode(links), forKey: key)
     }
 }
-

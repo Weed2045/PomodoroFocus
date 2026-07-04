@@ -30,6 +30,9 @@ struct DocumentListView: View {
         }
         .navigationTitle(L10n.Scanner.navTitle)
         .navigationBarTitleDisplayMode(.large)
+        .onAppear {
+            navigatePendingDocumentIfNeeded()
+        }
         // Camera — presented fullscreen so VisionKit owns the screen
         .fullScreenCover(isPresented: $viewModel.isShowingCamera) {
             DocumentCameraView(
@@ -43,10 +46,7 @@ struct DocumentListView: View {
             ScanPreviewView(viewModel: viewModel.makePreviewViewModel(for: doc))
         }
         .onChange(of: viewModel.pendingDocument) { _, new in
-            if let new {
-                documentForPreview = new
-                viewModel.consumePendingDocument()   // reset so repeated scans re-trigger nav
-            }
+            if new != nil { navigatePendingDocumentIfNeeded() }
         }
         // Error — use a proper @State binding so the alert can dismiss itself
         .alert(L10n.Scanner.errorTitle, isPresented: $showError) {
@@ -96,7 +96,7 @@ struct DocumentListView: View {
         if viewModel.documents.isEmpty {
             emptyState
         } else {
-            documentGrid
+            documentLibrary
         }
     }
 
@@ -123,25 +123,34 @@ struct DocumentListView: View {
 
     // MARK: – Document grid
 
-    private var documentGrid: some View {
+    private var documentLibrary: some View {
         ScrollView {
-            LazyVGrid(
-                columns: [GridItem(.flexible()), GridItem(.flexible())],
-                spacing: 16
-            ) {
-                ForEach(viewModel.documents) { doc in
-                    DocumentCard(
-                        document: doc,
-                        thumbnail: viewModel.thumbnail(for: doc),
-                        onExtract: { viewModel.extractTasks(from: doc) }
-                    )
-                    .onTapGesture { documentForPreview = doc }
-                    .contextMenu {
-                        Button(role: .destructive) {
-                            documentToDelete = doc
-                            showDeleteAlert = true
-                        } label: {
-                            Label(L10n.Scanner.actionDelete, systemImage: "trash")
+            VStack(spacing: 16) {
+                searchField
+
+                if viewModel.displayedDocuments.isEmpty {
+                    noSearchResults
+                } else {
+                    LazyVGrid(
+                        columns: [GridItem(.flexible()), GridItem(.flexible())],
+                        spacing: 16
+                    ) {
+                        ForEach(viewModel.displayedDocuments) { doc in
+                            DocumentCard(
+                                document: doc,
+                                thumbnail: viewModel.thumbnail(for: doc),
+                                ocrMatch: viewModel.ocrMatch(for: doc.id),
+                                onExtract: { viewModel.extractTasks(from: doc) }
+                            )
+                            .onTapGesture { documentForPreview = doc }
+                            .contextMenu {
+                                Button(role: .destructive) {
+                                    documentToDelete = doc
+                                    showDeleteAlert = true
+                                } label: {
+                                    Label(L10n.Scanner.actionDelete, systemImage: "trash")
+                                }
+                            }
                         }
                     }
                 }
@@ -150,6 +159,42 @@ struct DocumentListView: View {
             .padding(.top, 8)
             .padding(.bottom, 110)   // FAB clearance
         }
+    }
+
+    private var searchField: some View {
+        HStack(spacing: 8) {
+            Image(systemName: "magnifyingglass")
+                .foregroundStyle(.secondary)
+            TextField(L10n.Scanner.searchPlaceholder, text: $viewModel.searchText)
+                .textInputAutocapitalization(.never)
+                .autocorrectionDisabled()
+            if !viewModel.searchText.isEmpty {
+                Button {
+                    viewModel.searchText = ""
+                } label: {
+                    Image(systemName: "xmark.circle.fill")
+                        .foregroundStyle(.secondary)
+                }
+                .buttonStyle(.plain)
+            }
+        }
+        .padding(.horizontal, 12)
+        .padding(.vertical, 10)
+        .background(Color.white, in: RoundedRectangle(cornerRadius: 12))
+        .shadow(color: .black.opacity(0.04), radius: 6, y: 3)
+    }
+
+    private var noSearchResults: some View {
+        VStack(spacing: 10) {
+            Image(systemName: "doc.text.magnifyingglass")
+                .font(.system(size: 34))
+                .foregroundStyle(AppTheme.blue.opacity(0.35))
+            Text(L10n.Scanner.searchNoResults)
+                .font(.subheadline.weight(.medium))
+                .foregroundStyle(.secondary)
+        }
+        .frame(maxWidth: .infinity)
+        .padding(.vertical, 52)
     }
 
     // MARK: – FAB
@@ -191,6 +236,13 @@ struct DocumentListView: View {
             set: { viewModel.ocrViewModel.showReviewSheet = $0 }
         )
     }
+
+    private func navigatePendingDocumentIfNeeded() {
+        if let pending = viewModel.pendingDocument {
+            documentForPreview = pending
+            viewModel.consumePendingDocument()
+        }
+    }
 }
 
 // MARK: – DocumentCard
@@ -198,6 +250,7 @@ struct DocumentListView: View {
 private struct DocumentCard: View {
     let document: ScannedDocument
     let thumbnail: UIImage?
+    let ocrMatch: OCRSearchMatch?
     let onExtract: () -> Void
 
     var body: some View {
@@ -248,6 +301,16 @@ private struct DocumentCard: View {
                         .font(.caption2)
                 }
                 .foregroundStyle(.secondary)
+
+                if let ocrMatch {
+                    Label(L10n.Scanner.searchOCRMatch, systemImage: "text.viewfinder")
+                        .font(.caption2.weight(.semibold))
+                        .foregroundStyle(AppTheme.blue)
+                    Text(ocrMatch.snippet)
+                        .font(.caption2)
+                        .foregroundStyle(.secondary)
+                        .lineLimit(2)
+                }
             }
             .padding(.horizontal, 10)
             .padding(.vertical, 8)

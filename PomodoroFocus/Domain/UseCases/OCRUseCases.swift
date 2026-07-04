@@ -74,15 +74,18 @@ final class CreateTasksFromOCRUseCase: CreateTasksFromOCRUseCaseProtocol {
     private let taskManager: TaskManaging
     private let linkRepository: DocumentTaskLinkRepositoryProtocol
     private let scheduledTaskRepository: ScheduledTaskRepository
+    private let notificationService: NotificationScheduling
 
     init(
         taskManager: TaskManaging,
         linkRepository: DocumentTaskLinkRepositoryProtocol,
-        scheduledTaskRepository: ScheduledTaskRepository
+        scheduledTaskRepository: ScheduledTaskRepository,
+        notificationService: NotificationScheduling
     ) {
         self.taskManager = taskManager
         self.linkRepository = linkRepository
         self.scheduledTaskRepository = scheduledTaskRepository
+        self.notificationService = notificationService
     }
 
     func execute(items: [ExtractedTaskItem], documentID: UUID) async throws -> [PomodoroTask] {
@@ -90,9 +93,9 @@ final class CreateTasksFromOCRUseCase: CreateTasksFromOCRUseCaseProtocol {
         var created: [PomodoroTask] = []
 
         for item in selectedItems {
-            var noteLines = ["Source document: \(documentID.uuidString)"]
+            var noteLines = [L10n.OCR.taskNoteSource(documentID.uuidString)]
             if let deadline = item.deadline {
-                noteLines.append("Deadline: \(deadline.formatted(date: .abbreviated, time: .shortened))")
+                noteLines.append(L10n.OCR.taskNoteDeadline(deadline.formatted(date: .abbreviated, time: .shortened)))
             }
             let notes = noteLines.joined(separator: "\n")
             guard let task = await MainActor.run(body: {
@@ -108,20 +111,25 @@ final class CreateTasksFromOCRUseCase: CreateTasksFromOCRUseCaseProtocol {
             let link = DocumentTaskLink(
                 documentID: documentID,
                 taskID: task.id,
-                sourceRange: item.sourceRange
+                pageIndex: item.sourcePageIndex,
+                sourceRange: item.sourceRange,
+                sourceText: item.rawLine,
+                taskTitle: item.title,
+                deadline: item.deadline,
+                estimatedMinutes: item.estimatedMinutes
             )
             try await linkRepository.saveLink(link)
             if let deadline = item.deadline {
-                scheduledTaskRepository.save(
-                    ScheduledTask(
-                        title: task.title,
-                        notes: notes,
-                        targetDuration: task.targetDuration,
-                        scheduledDate: deadline,
-                        startTime: deadline,
-                        pomodoroTaskID: task.id
-                    )
+                let scheduledTask = ScheduledTask(
+                    title: task.title,
+                    notes: notes,
+                    targetDuration: task.targetDuration,
+                    scheduledDate: deadline,
+                    startTime: deadline,
+                    pomodoroTaskID: task.id
                 )
+                scheduledTaskRepository.save(scheduledTask)
+                notificationService.scheduleScheduledTaskReminder(for: scheduledTask)
             }
             created.append(task)
         }

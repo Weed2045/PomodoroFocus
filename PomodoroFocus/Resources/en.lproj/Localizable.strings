@@ -49,6 +49,8 @@
 "home.task.empty.title"         = "No tasks yet";
 "home.task.empty.subtitle"      = "Tap **New** to add your first task.";
 "home.task.status.done"         = "Done";
+"home.task.from_scan"           = "From scan";
+"home.task.action.open_source"  = "Open Source";
 "home.task.progress"            = "%dm / %dm · %d session";
 "home.task.progress.plural"     = "%dm / %dm · %d sessions";
 "home.gamification.streak"      = "Streak";
@@ -59,6 +61,8 @@
 "home.plan_today.title"         = "Today planned";
 "home.plan_today.added"         = "Added %d task(s) to Calendar.";
 "home.plan_today.already_planned" = "All active tasks are already planned for today.";
+"home.source_document.missing.title" = "Source Document Missing";
+"home.source_document.missing.message" = "The scanned document linked to this task could not be found.";
 
 // MARK: - Task Form (Add / Edit)
 "task.form.add.title"               = "New Task";
@@ -180,6 +184,9 @@
 "scanner.error.title"               = "Error";
 "scanner.error.scan_unsupported"    = "Document scanning is not supported on this device.";
 "scanner.error.no_readable_pages"   = "Document has no readable pages.";
+"scanner.search.placeholder"        = "Search title or OCR text";
+"scanner.search.no_results"         = "No matching documents";
+"scanner.search.ocr_match"          = "OCR match";
 "scanner.default_title"             = "Scan – %@";
 "scanner.page.count"                = "%d page(s)";
 
@@ -251,6 +258,8 @@
 "ocr.error.no_tasks_found_in_document" = "No tasks found in this document.";
 "ocr.error.invalid_image"           = "Invalid scanned image.";
 "ocr.error.processing_failed"       = "OCR failed: %@";
+"ocr.task_note.source"              = "Source document: %@";
+"ocr.task_note.deadline"            = "Deadline: %@";
 "ocr.review.action.cancel"          = "Cancel";
 "ocr.review.action.creating"        = "Creating…";
 "ocr.review.action.create"          = "Create %d task(s)";
@@ -358,6 +367,5 @@
 "sound.track.white_noise" = "White Noise";
 
 // MARK: - Misc (shared small labels)
-"home.task.from_scan"       = "From scan";
 "scanner.task_created"      = "Created 1 task";
 "scanner.tasks_created"     = "Created %d tasks";

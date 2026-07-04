@@ -91,7 +91,8 @@ final class AppDIContainer {
         self.createTasksFromOCRUseCase = CreateTasksFromOCRUseCase(
             taskManager: taskManager,
             linkRepository: documentTaskLinkRepository,
-            scheduledTaskRepository: scheduledTaskRepository
+            scheduledTaskRepository: scheduledTaskRepository,
+            notificationService: notificationService
         )
         self.pomodoroService            = PomodoroService(
             appStateRepository: appStateRepository,
@@ -131,6 +132,8 @@ final class AppDIContainer {
             statsManager: statsManager,
             taskManager: taskManager,
             scheduledTaskRepository: scheduledTaskRepository,
+            scannedDocumentRepository: scannedDocumentRepository,
+            linkRepository: documentTaskLinkRepository,
             gamificationManager: gamificationManager
         )
     }

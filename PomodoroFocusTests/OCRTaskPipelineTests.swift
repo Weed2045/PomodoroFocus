@@ -28,10 +28,12 @@ final class OCRTaskPipelineTests: XCTestCase {
         let taskManager = TaskManager(repository: taskRepository)
         let linkRepository = DocumentTaskLinkRepositoryDouble()
         let scheduledRepository = ScheduledTaskRepositoryDouble()
+        let notificationService = OCRNotificationSchedulingDouble()
         let sut = CreateTasksFromOCRUseCase(
             taskManager: taskManager,
             linkRepository: linkRepository,
-            scheduledTaskRepository: scheduledRepository
+            scheduledTaskRepository: scheduledRepository,
+            notificationService: notificationService
         )
         let documentID = UUID()
         let calendar = Calendar(identifier: .gregorian)
@@ -53,11 +55,40 @@ final class OCRTaskPipelineTests: XCTestCase {
         XCTAssertEqual(taskRepository.savedTasks.first?.title, "Write final report")
         XCTAssertEqual(linkRepository.links.first?.documentID, documentID)
         XCTAssertEqual(linkRepository.links.first?.taskID, created.first?.id)
+        XCTAssertEqual(linkRepository.links.first?.sourceText, item.rawLine)
+        XCTAssertEqual(linkRepository.links.first?.taskTitle, item.title)
+        XCTAssertEqual(linkRepository.links.first?.deadline, deadline)
+        XCTAssertEqual(linkRepository.links.first?.estimatedMinutes, 50)
         XCTAssertEqual(scheduledRepository.savedTasks.count, 1)
         XCTAssertEqual(scheduledRepository.savedTasks.first?.title, "Write final report")
         XCTAssertEqual(scheduledRepository.savedTasks.first?.pomodoroTaskID, created.first?.id)
         XCTAssertEqual(scheduledRepository.savedTasks.first?.scheduledDate, Calendar.current.startOfDay(for: deadline))
         XCTAssertEqual(scheduledRepository.savedTasks.first?.startTime, deadline)
+        XCTAssertEqual(notificationService.scheduledTaskIDs, scheduledRepository.savedTasks.map(\.id))
+    }
+
+    func test_searchOCRResults_matchesCachedRawText() async throws {
+        let suiteName = "OCRRepositorySearchTests.\(UUID().uuidString)"
+        let defaults = UserDefaults(suiteName: suiteName)!
+        defer { defaults.removePersistentDomain(forName: suiteName) }
+
+        let sut = OCRRepositoryImpl(defaults: defaults)
+        let documentID = UUID()
+        try await sut.saveOCRResult(
+            OCRResult(
+                documentID: documentID,
+                rawText: "Meeting notes\nTODO: prepare contract summary before Friday",
+                pages: [],
+                extractedItems: [],
+                processingDuration: 0.1
+            )
+        )
+
+        let matches = try await sut.searchOCRResults(matching: "contract")
+
+        XCTAssertEqual(matches.map(\.documentID), [documentID])
+        XCTAssertTrue(matches.first?.snippet.localizedCaseInsensitiveContains("contract") == true)
+        try await sut.deleteOCRResult(documentID: documentID)
     }
 }
 
@@ -127,5 +158,22 @@ private final class ScheduledTaskRepositoryDouble: ScheduledTaskRepository {
                 .filter { !$0.isCompleted && $0.scheduledDate >= start && $0.scheduledDate < end }
                 .map { DailyStats.dayKey(for: $0.scheduledDate) }
         )
+    }
+}
+
+private final class OCRNotificationSchedulingDouble: NotificationScheduling {
+    private(set) var scheduledTaskIDs: [UUID] = []
+    private(set) var cancelledTaskIDs: [UUID] = []
+
+    func requestAuthorization() {}
+    func scheduleSessionEndNotification(for session: PomodoroSession, at date: Date) {}
+    func cancelSessionEndNotification() {}
+
+    func scheduleScheduledTaskReminder(for task: ScheduledTask) {
+        scheduledTaskIDs.append(task.id)
+    }
+
+    func cancelScheduledTaskReminder(taskID: UUID) {
+        cancelledTaskIDs.append(taskID)
     }
 }

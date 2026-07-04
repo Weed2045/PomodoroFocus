@@ -48,6 +48,14 @@ struct HomeView: View {
         } message: {
             Text(planTodayMessage ?? "")
         }
+        .alert(L10n.Home.sourceDocumentMissingTitle, isPresented: Binding(
+            get: { viewModel.sourceDocumentError != nil },
+            set: { if !$0 { viewModel.clearSourceDocumentError() } }
+        )) {
+            Button(L10n.Common.ok) { viewModel.clearSourceDocumentError() }
+        } message: {
+            Text(viewModel.sourceDocumentError ?? "")
+        }
         // Add task popup
         .sheet(isPresented: $showingAddTask) {
             AddTaskSheet { title, duration, notes in
@@ -314,7 +322,7 @@ struct HomeView: View {
                             .background(AppTheme.teal.opacity(0.14), in: Capsule())
                     }
 
-                    if task.notes.contains("Source document:") {
+                    if viewModel.hasScanSource(for: task.id) {
                         Text(L10n.Home.taskFromScan)
                             .font(.system(size: 10, weight: .bold))
                             .foregroundStyle(AppTheme.blue)
@@ -349,6 +357,13 @@ struct HomeView: View {
 
             // ── Menu ──────────────────────────────────────────────────────
             Menu {
+                if viewModel.hasScanSource(for: task.id) {
+                    Button {
+                        viewModel.openSourceDocument(for: task.id)
+                    } label: {
+                        Label(L10n.Home.taskActionOpenSource, systemImage: "doc.viewfinder")
+                    }
+                }
                 Button {
                     editingTask = task
                 } label: {

@@ -49,6 +49,8 @@
 "home.task.empty.title"         = "Chưa có nhiệm vụ";
 "home.task.empty.subtitle"      = "Nhấn **Mới** để thêm nhiệm vụ đầu tiên.";
 "home.task.status.done"         = "Xong";
+"home.task.from_scan"           = "Từ tài liệu";
+"home.task.action.open_source"  = "Mở tài liệu gốc";
 "home.task.progress"            = "%dm / %dm · %d phiên";
 "home.task.progress.plural"     = "%dm / %dm · %d phiên";
 "home.gamification.streak"      = "Chuỗi";
@@ -59,6 +61,8 @@
 "home.plan_today.title"         = "Đã lên lịch hôm nay";
 "home.plan_today.added"         = "Đã thêm %d nhiệm vụ vào Lịch.";
 "home.plan_today.already_planned" = "Tất cả nhiệm vụ đang làm đã có trong lịch hôm nay.";
+"home.source_document.missing.title" = "Không tìm thấy tài liệu gốc";
+"home.source_document.missing.message" = "Tài liệu scan liên kết với nhiệm vụ này không còn tồn tại.";
 
 // MARK: - Task Form (Add / Edit)
 "task.form.add.title"               = "Nhiệm vụ mới";
@@ -180,6 +184,9 @@
 "scanner.error.title"               = "Lỗi";
 "scanner.error.scan_unsupported"    = "Thiết bị này không hỗ trợ quét tài liệu.";
 "scanner.error.no_readable_pages"   = "Tài liệu không có trang đọc được.";
+"scanner.search.placeholder"        = "Tìm tiêu đề hoặc chữ OCR";
+"scanner.search.no_results"         = "Không có tài liệu phù hợp";
+"scanner.search.ocr_match"          = "Khớp OCR";
 "scanner.default_title"             = "Bản quét – %@";
 "scanner.page.count"                = "%d trang";
 
@@ -251,6 +258,8 @@
 "ocr.error.no_tasks_found_in_document" = "Không tìm thấy nhiệm vụ nào trong tài liệu này.";
 "ocr.error.invalid_image"           = "Ảnh scan không hợp lệ.";
 "ocr.error.processing_failed"       = "Lỗi OCR: %@";
+"ocr.task_note.source"              = "Tài liệu gốc: %@";
+"ocr.task_note.deadline"            = "Hạn chót: %@";
 "ocr.review.action.cancel"          = "Hủy";
 "ocr.review.action.creating"        = "Đang tạo…";
 "ocr.review.action.create"          = "Tạo %d nhiệm vụ";
@@ -358,6 +367,5 @@
 "sound.track.white_noise" = "White Noise";
 
 // MARK: - Misc (shared small labels)
-"home.task.from_scan"       = "Từ tài liệu";
 "scanner.task_created"      = "Đã tạo 1 nhiệm vụ";
 "scanner.tasks_created"     = "Đã tạo %d nhiệm vụ";

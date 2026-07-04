@@ -74,6 +74,7 @@ enum L10n {
         static var taskEmptySubtitle: String { tr("home.task.empty.subtitle") }
         static var taskStatusDone: String    { tr("home.task.status.done") }
         static var taskFromScan: String      { tr("home.task.from_scan") }
+        static var taskActionOpenSource: String { tr("home.task.action.open_source") }
         static func taskProgress(done: Int, target: Int, sessions: Int) -> String {
             let key = sessions == 1 ? "home.task.progress" : "home.task.progress.plural"
             return tr(key, done, target, sessions)
@@ -86,6 +87,8 @@ enum L10n {
         static var planTodayTitle: String    { tr("home.plan_today.title") }
         static func planTodayAdded(_ n: Int) -> String { tr("home.plan_today.added", n) }
         static var planTodayAlreadyPlanned: String { tr("home.plan_today.already_planned") }
+        static var sourceDocumentMissingTitle: String { tr("home.source_document.missing.title") }
+        static var sourceDocumentMissingMessage: String { tr("home.source_document.missing.message") }
     }
 
     // MARK: - Task Form
@@ -214,6 +217,9 @@ enum L10n {
         static var errorTitle: String        { tr("scanner.error.title") }
         static var scanUnsupported: String   { tr("scanner.error.scan_unsupported") }
         static var documentNoReadablePages: String { tr("scanner.error.no_readable_pages") }
+        static var searchPlaceholder: String { tr("scanner.search.placeholder") }
+        static var searchNoResults: String   { tr("scanner.search.no_results") }
+        static var searchOCRMatch: String    { tr("scanner.search.ocr_match") }
         static func defaultTitle(_ date: String) -> String { tr("scanner.default_title", date) }
         static func pageCount(_ n: Int) -> String { tr("scanner.page.count", n) }
         static func tasksCreated(_ n: Int) -> String {
@@ -304,6 +310,8 @@ enum L10n {
         static var noTasksFoundInDocument: String { tr("ocr.error.no_tasks_found_in_document") }
         static var invalidImageError: String  { tr("ocr.error.invalid_image") }
         static func processingFailedError(_ message: String) -> String { tr("ocr.error.processing_failed", message) }
+        static func taskNoteSource(_ documentID: String) -> String { tr("ocr.task_note.source", documentID) }
+        static func taskNoteDeadline(_ date: String) -> String { tr("ocr.task_note.deadline", date) }
         static var actionCancel: String       { tr("ocr.review.action.cancel") }
         static var actionCreating: String     { tr("ocr.review.action.creating") }
         static func actionCreate(_ n: Int) -> String { tr("ocr.review.action.create", n) }

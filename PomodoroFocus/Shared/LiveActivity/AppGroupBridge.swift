@@ -51,5 +51,9 @@ final class AppGroupBridge {
 extension Notification.Name {
     static let pomodoroLiveActivityToggleRequested = Notification.Name("com.codex.PomodoroFocus.toggleRequested")
     static let navigateToFocus = Notification.Name("com.codex.PomodoroFocus.navigateToFocus")
+    static let openScannedDocument = Notification.Name("com.codex.PomodoroFocus.openScannedDocument")
 }
 
+enum AppNavigationUserInfoKey {
+    static let documentID = "documentID"
+}
