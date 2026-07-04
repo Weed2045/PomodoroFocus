@@ -17,6 +17,7 @@ final class HomeViewModel: ObservableObject {
     private let settingsManager: SettingsManaging
     private let statsManager: StatsManaging
     private let taskManager: TaskManaging
+    private let scheduledTaskRepository: ScheduledTaskRepository
     private let gamificationManager: GamificationManaging
     private var cancellables = Set<AnyCancellable>()
 
@@ -27,6 +28,7 @@ final class HomeViewModel: ObservableObject {
         settingsManager: SettingsManaging,
         statsManager: StatsManaging,
         taskManager: TaskManaging,
+        scheduledTaskRepository: ScheduledTaskRepository,
         gamificationManager: GamificationManaging
     ) {
         self.getSettingsUseCase = getSettingsUseCase
@@ -35,6 +37,7 @@ final class HomeViewModel: ObservableObject {
         self.settingsManager = settingsManager
         self.statsManager = statsManager
         self.taskManager = taskManager
+        self.scheduledTaskRepository = scheduledTaskRepository
         self.gamificationManager = gamificationManager
         self.settings = getSettingsUseCase.execute()
         let state = getAppStateUseCase.execute()
@@ -91,6 +94,32 @@ final class HomeViewModel: ObservableObject {
 
     func createTask(title: String, targetDuration: TimeInterval, notes: String) {
         taskManager.createTask(title: title, targetDuration: targetDuration, notes: notes)
+    }
+
+    func planToday() -> Int {
+        let today = Calendar.current.startOfDay(for: Date())
+        let plannedTaskIDs = Set(
+            scheduledTaskRepository
+                .loadTasks(for: today)
+                .compactMap(\.pomodoroTaskID)
+        )
+        let candidates = taskManager.activeTasks
+            .filter { !$0.isCompleted && !plannedTaskIDs.contains($0.id) }
+            .prefix(5)
+
+        for task in candidates {
+            scheduledTaskRepository.save(
+                ScheduledTask(
+                    title: task.title,
+                    notes: task.notes,
+                    targetDuration: task.targetDuration,
+                    scheduledDate: today,
+                    pomodoroTaskID: task.id
+                )
+            )
+        }
+
+        return candidates.count
     }
 
     func updateTask(id: UUID, title: String, targetDuration: TimeInterval, notes: String) {

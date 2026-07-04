@@ -11,6 +11,7 @@ final class CDScheduledTask: NSManagedObject {
     @NSManaged var startTime: Date?
     @NSManaged var isCompleted: Bool
     @NSManaged var linkedCalendarEventID: String?
+    @NSManaged var pomodoroTaskID: UUID?
     @NSManaged var createdAt: Date
     @NSManaged var updatedAt: Date
 }
@@ -26,6 +27,7 @@ extension CDScheduledTask {
             startTime: startTime,
             isCompleted: isCompleted,
             linkedCalendarEventID: linkedCalendarEventID,
+            pomodoroTaskID: pomodoroTaskID,
             createdAt: createdAt,
             updatedAt: updatedAt
         )
@@ -40,6 +42,7 @@ extension CDScheduledTask {
         startTime             = task.startTime
         isCompleted           = task.isCompleted
         linkedCalendarEventID = task.linkedCalendarEventID
+        pomodoroTaskID        = task.pomodoroTaskID
         createdAt             = task.createdAt
         updatedAt             = task.updatedAt
     }

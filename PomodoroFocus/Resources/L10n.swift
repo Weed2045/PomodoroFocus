@@ -81,7 +81,11 @@ enum L10n {
         static var gamificationStreak: String { tr("home.gamification.streak") }
         static var gamificationBadges: String { tr("home.gamification.badges") }
         static var actionStartPomodoro: String { tr("home.action.start_pomodoro") }
+        static var actionPlanToday: String   { tr("home.action.plan_today") }
         static var actionSettings: String    { tr("home.action.settings") }
+        static var planTodayTitle: String    { tr("home.plan_today.title") }
+        static func planTodayAdded(_ n: Int) -> String { tr("home.plan_today.added", n) }
+        static var planTodayAlreadyPlanned: String { tr("home.plan_today.already_planned") }
     }
 
     // MARK: - Task Form
@@ -189,6 +193,11 @@ enum L10n {
         static var scheduleFieldNotesPlaceholder: String { tr("calendar.schedule.field.notes.placeholder") }
         static var scheduleButtonAdd: String        { tr("calendar.schedule.button.add") }
         static var scheduleButtonCancel: String     { tr("calendar.schedule.button.cancel") }
+        static var actionStartFocus: String         { tr("calendar.action.start_focus") }
+        static var actionPlanEvent: String          { tr("calendar.action.plan_event") }
+        static var eventPlanned: String             { tr("calendar.event.planned") }
+        static var reminderTitle: String            { tr("calendar.reminder.title") }
+        static func reminderBody(_ title: String) -> String { tr("calendar.reminder.body", title) }
     }
 
     // MARK: - Scanner

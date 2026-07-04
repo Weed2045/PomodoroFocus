@@ -27,6 +27,8 @@ final class CoreDataStack {
                 FileProtectionType.completeUntilFirstUserAuthentication as NSObject,
                 forKey: NSPersistentStoreFileProtectionKey
             )
+            desc?.setOption(true as NSNumber, forKey: NSMigratePersistentStoresAutomaticallyOption)
+            desc?.setOption(true as NSNumber, forKey: NSInferMappingModelAutomaticallyOption)
         }
         container.loadPersistentStores { _, error in
             if let error {
@@ -114,6 +116,7 @@ extension CoreDataStack {
             attr("startTime",             type: .dateAttributeType,   optional: true),
             attr("isCompleted",           type: .booleanAttributeType),
             attr("linkedCalendarEventID", type: .stringAttributeType, optional: true),
+            attr("pomodoroTaskID",        type: .UUIDAttributeType,   optional: true),
             attr("createdAt",             type: .dateAttributeType),
             attr("updatedAt",             type: .dateAttributeType)
         ]

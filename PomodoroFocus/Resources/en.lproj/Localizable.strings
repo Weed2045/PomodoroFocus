@@ -54,7 +54,11 @@
 "home.gamification.streak"      = "Streak";
 "home.gamification.badges"      = "Badges";
 "home.action.start_pomodoro"    = "Start Pomodoro";
+"home.action.plan_today"        = "Plan Today";
 "home.action.settings"          = "Settings";
+"home.plan_today.title"         = "Today planned";
+"home.plan_today.added"         = "Added %d task(s) to Calendar.";
+"home.plan_today.already_planned" = "All active tasks are already planned for today.";
 
 // MARK: - Task Form (Add / Edit)
 "task.form.add.title"               = "New Task";
@@ -157,6 +161,11 @@
 "calendar.schedule.field.notes.placeholder" = "Optional notes…";
 "calendar.schedule.button.add"              = "Add Task";
 "calendar.schedule.button.cancel"           = "Cancel";
+"calendar.action.start_focus"               = "Start Focus";
+"calendar.action.plan_event"                = "Plan";
+"calendar.event.planned"                    = "Planned";
+"calendar.reminder.title"                   = "Focus time";
+"calendar.reminder.body"                    = "%@ starts now.";
 
 // MARK: - Scanner / Documents
 "scanner.nav.title"                 = "Documents";

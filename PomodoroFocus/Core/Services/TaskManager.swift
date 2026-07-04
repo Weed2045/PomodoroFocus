@@ -4,7 +4,8 @@ import Foundation
 protocol TaskManaging {
     var tasksPublisher: AnyPublisher<[PomodoroTask], Never> { get }
     var activeTasks: [PomodoroTask] { get }
-    func createTask(title: String, targetDuration: TimeInterval, notes: String)
+    @discardableResult
+    func createTask(title: String, targetDuration: TimeInterval, notes: String) -> PomodoroTask?
     func createTaskFromOCR(title: String, targetDuration: TimeInterval, notes: String) -> PomodoroTask?
     func updateTask(id: UUID, title: String, targetDuration: TimeInterval, notes: String)
     func deleteTask(id: UUID)
@@ -29,8 +30,9 @@ final class TaskManager: TaskManaging {
         self.tasksSubject = CurrentValueSubject(repository.loadTasks())
     }
 
-    func createTask(title: String, targetDuration: TimeInterval, notes: String) {
-        _ = createTaskFromOCR(title: title, targetDuration: targetDuration, notes: notes)
+    @discardableResult
+    func createTask(title: String, targetDuration: TimeInterval, notes: String) -> PomodoroTask? {
+        createTaskFromOCR(title: title, targetDuration: targetDuration, notes: notes)
     }
 
     func createTaskFromOCR(title: String, targetDuration: TimeInterval, notes: String) -> PomodoroTask? {

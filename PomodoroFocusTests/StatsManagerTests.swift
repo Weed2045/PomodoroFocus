@@ -187,6 +187,8 @@ private final class PomodoroServiceNotificationDouble: NotificationScheduling {
     func requestAuthorization() {}
     func scheduleSessionEndNotification(for session: PomodoroSession, at date: Date) {}
     func cancelSessionEndNotification() {}
+    func scheduleScheduledTaskReminder(for task: ScheduledTask) {}
+    func cancelScheduledTaskReminder(taskID: UUID) {}
 }
 
 private final class PomodoroServiceAnalyticsRepositoryDouble: AnalyticsRepositoryProtocol {

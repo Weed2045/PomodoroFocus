@@ -11,6 +11,8 @@ protocol NotificationScheduling {
     func requestAuthorization()
     func scheduleSessionEndNotification(for session: PomodoroSession, at date: Date)
     func cancelSessionEndNotification()
+    func scheduleScheduledTaskReminder(for task: ScheduledTask)
+    func cancelScheduledTaskReminder(taskID: UUID)
 }
 
 protocol NotificationActionPublishing {
@@ -21,6 +23,7 @@ final class NotificationManager: NSObject, NotificationScheduling, NotificationA
     static let shared = NotificationManager()
 
     private let notificationIdentifier = "pomodoro.session.end"
+    private let scheduledTaskReminderPrefix = "pomodoro.scheduled_task."
     private let categoryIdentifier = "pomodoro.session.category"
     private let startBreakActionIdentifier = "pomodoro.action.startBreak"
     private let skipActionIdentifier = "pomodoro.action.skip"
@@ -89,6 +92,58 @@ final class NotificationManager: NSObject, NotificationScheduling, NotificationA
         AppLogger.notify.debug("🗑 pending notification cancelled")
     }
 
+    func scheduleScheduledTaskReminder(for task: ScheduledTask) {
+        guard let startTime = task.startTime, startTime > Date(), !task.isCompleted else {
+            cancelScheduledTaskReminder(taskID: task.id)
+            return
+        }
+
+        requestAuthorization()
+        UNUserNotificationCenter.current().getNotificationSettings { [weak self] settings in
+            guard let self else { return }
+            let status = settings.authorizationStatus
+            AppLogger.notify.info("🔔 scheduleTaskReminder — authStatus=\(status.rawValue, privacy: .public) title=\(task.title, privacy: .public)")
+
+            guard status == .authorized || status == .provisional else {
+                AppLogger.notify.warning("🔔 task reminder skipped — not authorized (status=\(status.rawValue, privacy: .public))")
+                return
+            }
+
+            let content = UNMutableNotificationContent()
+            content.title = L10n.Calendar.reminderTitle
+            content.body = L10n.Calendar.reminderBody(task.title)
+            content.sound = .default
+            content.userInfo = [
+                "scheduledTaskID": task.id.uuidString,
+                "pomodoroTaskID": task.pomodoroTaskID?.uuidString ?? ""
+            ]
+
+            let trigger = UNCalendarNotificationTrigger(
+                dateMatching: Calendar.current.dateComponents([.year, .month, .day, .hour, .minute], from: startTime),
+                repeats: false
+            )
+            let request = UNNotificationRequest(
+                identifier: self.scheduledTaskReminderIdentifier(taskID: task.id),
+                content: content,
+                trigger: trigger
+            )
+            UNUserNotificationCenter.current().add(request) { error in
+                if let error {
+                    AppLogger.notify.error("❌ add task reminder failed: \(error.localizedDescription, privacy: .public)")
+                } else {
+                    AppLogger.notify.info("✅ task reminder scheduled for \(startTime, privacy: .public)")
+                }
+            }
+        }
+    }
+
+    func cancelScheduledTaskReminder(taskID: UUID) {
+        UNUserNotificationCenter.current().removePendingNotificationRequests(
+            withIdentifiers: [scheduledTaskReminderIdentifier(taskID: taskID)]
+        )
+        AppLogger.notify.debug("🗑 scheduled task reminder cancelled")
+    }
+
     func userNotificationCenter(
         _ center: UNUserNotificationCenter,
         willPresent notification: UNNotification
@@ -144,6 +199,10 @@ final class NotificationManager: NSObject, NotificationScheduling, NotificationA
         let center = UNUserNotificationCenter.current()
         center.setNotificationCategories([category])
         center.delegate = self
+    }
+
+    private func scheduledTaskReminderIdentifier(taskID: UUID) -> String {
+        scheduledTaskReminderPrefix + taskID.uuidString
     }
 
     private func observeFocusMode() {

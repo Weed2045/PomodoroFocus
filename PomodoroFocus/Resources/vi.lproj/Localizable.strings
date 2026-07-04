@@ -54,7 +54,11 @@
 "home.gamification.streak"      = "Chuỗi";
 "home.gamification.badges"      = "Huy hiệu";
 "home.action.start_pomodoro"    = "Bắt đầu Pomodoro";
+"home.action.plan_today"        = "Lên kế hoạch hôm nay";
 "home.action.settings"          = "Cài đặt";
+"home.plan_today.title"         = "Đã lên lịch hôm nay";
+"home.plan_today.added"         = "Đã thêm %d nhiệm vụ vào Lịch.";
+"home.plan_today.already_planned" = "Tất cả nhiệm vụ đang làm đã có trong lịch hôm nay.";
 
 // MARK: - Task Form (Add / Edit)
 "task.form.add.title"               = "Nhiệm vụ mới";
@@ -157,6 +161,11 @@
 "calendar.schedule.field.notes.placeholder" = "Ghi chú tuỳ chọn…";
 "calendar.schedule.button.add"              = "Thêm nhiệm vụ";
 "calendar.schedule.button.cancel"           = "Hủy";
+"calendar.action.start_focus"               = "Bắt đầu tập trung";
+"calendar.action.plan_event"                = "Lên kế hoạch";
+"calendar.event.planned"                    = "Đã lên lịch";
+"calendar.reminder.title"                   = "Đến giờ tập trung";
+"calendar.reminder.body"                    = "%@ bắt đầu ngay bây giờ.";
 
 // MARK: - Scanner / Documents
 "scanner.nav.title"                 = "Tài liệu";

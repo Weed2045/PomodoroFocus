@@ -15,6 +15,8 @@ struct ScheduledTask: Identifiable, Codable, Equatable {
     var isCompleted: Bool
     /// EKEvent.eventIdentifier of a linked iPhone Calendar event, if any.
     var linkedCalendarEventID: String?
+    /// PomodoroTask.id for the focus task this calendar plan should start.
+    var pomodoroTaskID: UUID?
     let createdAt: Date
     var updatedAt: Date
 
@@ -27,6 +29,7 @@ struct ScheduledTask: Identifiable, Codable, Equatable {
         startTime: Date? = nil,
         isCompleted: Bool = false,
         linkedCalendarEventID: String? = nil,
+        pomodoroTaskID: UUID? = nil,
         createdAt: Date = Date(),
         updatedAt: Date = Date()
     ) {
@@ -39,6 +42,7 @@ struct ScheduledTask: Identifiable, Codable, Equatable {
         self.startTime = startTime
         self.isCompleted = isCompleted
         self.linkedCalendarEventID = linkedCalendarEventID
+        self.pomodoroTaskID = pomodoroTaskID
         self.createdAt = createdAt
         self.updatedAt = updatedAt
     }

@@ -118,7 +118,8 @@ final class CreateTasksFromOCRUseCase: CreateTasksFromOCRUseCaseProtocol {
                         notes: notes,
                         targetDuration: task.targetDuration,
                         scheduledDate: deadline,
-                        startTime: deadline
+                        startTime: deadline,
+                        pomodoroTaskID: task.id
                     )
                 )
             }

@@ -58,6 +58,17 @@ final class CoreDataScheduledTaskRepositoryTests: XCTestCase {
         XCTAssertEqual(loaded[0].title, "Updated")
     }
 
+    func test_saveAndLoad_preservesPomodoroTaskID() {
+        var task = makeTask(title: "Linked")
+        let pomodoroTaskID = UUID()
+        task.pomodoroTaskID = pomodoroTaskID
+
+        sut.save(task)
+
+        let loaded = sut.loadTasks(for: today())
+        XCTAssertEqual(loaded.first?.pomodoroTaskID, pomodoroTaskID)
+    }
+
     // MARK: – loadAllTasks
 
     func test_loadAllTasks_returnsAllDays() {

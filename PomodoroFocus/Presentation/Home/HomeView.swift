@@ -6,6 +6,7 @@ struct HomeView: View {
 
     @State private var showingAddTask = false
     @State private var editingTask: PomodoroTask?
+    @State private var planTodayMessage: String?
 
     init(viewModel: HomeViewModel, path: Binding<NavigationPath>) {
         _viewModel = StateObject(wrappedValue: viewModel)
@@ -39,6 +40,14 @@ struct HomeView: View {
             }
         }
         .onAppear { viewModel.refresh() }
+        .alert(L10n.Home.planTodayTitle, isPresented: Binding(
+            get: { planTodayMessage != nil },
+            set: { if !$0 { planTodayMessage = nil } }
+        )) {
+            Button(L10n.Common.ok) { planTodayMessage = nil }
+        } message: {
+            Text(planTodayMessage ?? "")
+        }
         // Add task popup
         .sheet(isPresented: $showingAddTask) {
             AddTaskSheet { title, duration, notes in
@@ -246,6 +255,16 @@ struct HomeView: View {
                 Label(L10n.Home.actionStartPomodoro, systemImage: "play.fill")
             }
             .buttonStyle(PrimaryButtonStyle(tint: AppTheme.blue))
+
+            Button {
+                let added = viewModel.planToday()
+                planTodayMessage = added > 0
+                    ? L10n.Home.planTodayAdded(added)
+                    : L10n.Home.planTodayAlreadyPlanned
+            } label: {
+                Label(L10n.Home.actionPlanToday, systemImage: "calendar.badge.plus")
+            }
+            .buttonStyle(SecondaryButtonStyle())
 
             Button { path.append(AppRoute.settings) } label: {
                 Label(L10n.Home.actionSettings, systemImage: "slider.horizontal.3")

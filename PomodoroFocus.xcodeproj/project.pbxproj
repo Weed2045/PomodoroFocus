@@ -137,6 +137,7 @@
 		TE000000000000000000035 /* CoreDataDailyStatsRepositoryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = TE000000000000000000025 /* CoreDataDailyStatsRepositoryTests.swift */; };
 		TE000000000000000000036 /* AnalyticsViewModelHealthKitTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = TE000000000000000000026 /* AnalyticsViewModelHealthKitTests.swift */; };
 		TE000000000000000000037 /* OCRTaskPipelineTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = TE000000000000000000027 /* OCRTaskPipelineTests.swift */; };
+		TE000000000000000000038 /* CalendarFocusFlowTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = TE000000000000000000028 /* CalendarFocusFlowTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -301,6 +302,7 @@
 		TE000000000000000000025 /* CoreDataDailyStatsRepositoryTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataDailyStatsRepositoryTests.swift; sourceTree = "<group>"; };
 		TE000000000000000000026 /* AnalyticsViewModelHealthKitTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalyticsViewModelHealthKitTests.swift; sourceTree = "<group>"; };
 		TE000000000000000000027 /* OCRTaskPipelineTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OCRTaskPipelineTests.swift; sourceTree = "<group>"; };
+		TE000000000000000000028 /* CalendarFocusFlowTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarFocusFlowTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -698,6 +700,7 @@
 				TE000000000000000000022 /* StatsManagerTests.swift */,
 				TE000000000000000000026 /* AnalyticsViewModelHealthKitTests.swift */,
 				TE000000000000000000027 /* OCRTaskPipelineTests.swift */,
+				TE000000000000000000028 /* CalendarFocusFlowTests.swift */,
 				TE000000000000000000011 /* CoreData */,
 			);
 			path = PomodoroFocusTests;
@@ -980,6 +983,7 @@
 				TE000000000000000000035 /* CoreDataDailyStatsRepositoryTests.swift in Sources */,
 				TE000000000000000000036 /* AnalyticsViewModelHealthKitTests.swift in Sources */,
 				TE000000000000000000037 /* OCRTaskPipelineTests.swift in Sources */,
+				TE000000000000000000038 /* CalendarFocusFlowTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

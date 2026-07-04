@@ -55,6 +55,7 @@ final class OCRTaskPipelineTests: XCTestCase {
         XCTAssertEqual(linkRepository.links.first?.taskID, created.first?.id)
         XCTAssertEqual(scheduledRepository.savedTasks.count, 1)
         XCTAssertEqual(scheduledRepository.savedTasks.first?.title, "Write final report")
+        XCTAssertEqual(scheduledRepository.savedTasks.first?.pomodoroTaskID, created.first?.id)
         XCTAssertEqual(scheduledRepository.savedTasks.first?.scheduledDate, Calendar.current.startOfDay(for: deadline))
         XCTAssertEqual(scheduledRepository.savedTasks.first?.startTime, deadline)
     }

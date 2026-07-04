@@ -197,7 +197,11 @@ struct CalendarView: View {
                     VStack(spacing: 8) {
                         // eventIdentifier is implicitly-unwrapped String — use index to avoid nil crash
                         ForEach(Array(viewModel.calendarEvents.enumerated()), id: \.offset) { _, event in
-                            CalendarEventCard(event: event)
+                            CalendarEventCard(
+                                event: event,
+                                isPlanned: viewModel.isEventImported(event),
+                                onPlan: { viewModel.importEventAsTask(event) }
+                            )
                         }
                     }
                 }
@@ -236,6 +240,7 @@ struct CalendarView: View {
                     ForEach(viewModel.scheduledTasks) { task in
                         ScheduledTaskCard(
                             task: task,
+                            onStartFocus: { viewModel.startFocus(task: task) },
                             onToggleComplete: { viewModel.toggleComplete(task: task) },
                             onDelete: { viewModel.deleteTask(id: task.id) }
                         )
@@ -369,6 +374,8 @@ private struct DayCell: View {
 
 private struct CalendarEventCard: View {
     let event: EKEvent
+    let isPlanned: Bool
+    let onPlan: () -> Void
 
     private var timeLabel: String {
         guard let start = event.startDate else { return "" }
@@ -412,6 +419,21 @@ private struct CalendarEventCard: View {
             }
 
             Spacer()
+
+            if isPlanned {
+                Label(L10n.Calendar.eventPlanned, systemImage: "checkmark.circle.fill")
+                    .font(.caption.weight(.semibold))
+                    .foregroundStyle(AppTheme.teal)
+                    .labelStyle(.iconOnly)
+                    .accessibilityLabel(L10n.Calendar.eventPlanned)
+            } else {
+                Button(action: onPlan) {
+                    Label(L10n.Calendar.actionPlanEvent, systemImage: "calendar.badge.plus")
+                        .font(.caption.weight(.semibold))
+                }
+                .buttonStyle(.bordered)
+                .tint(AppTheme.blue)
+            }
         }
         .padding(.vertical, 12)
         .padding(.horizontal, 14)
@@ -424,6 +446,7 @@ private struct CalendarEventCard: View {
 
 private struct ScheduledTaskCard: View {
     let task: ScheduledTask
+    let onStartFocus: () -> Void
     let onToggleComplete: () -> Void
     let onDelete: () -> Void
 
@@ -478,6 +501,15 @@ private struct ScheduledTaskCard: View {
             }
 
             Spacer()
+
+            if !task.isCompleted {
+                Button(action: onStartFocus) {
+                    Label(L10n.Calendar.actionStartFocus, systemImage: "play.fill")
+                        .font(.caption.weight(.semibold))
+                }
+                .buttonStyle(.borderedProminent)
+                .tint(AppTheme.blue)
+            }
 
             Menu {
                 Button(L10n.Common.delete, role: .destructive) { onDelete() }

@@ -16,6 +16,9 @@ final class CalendarViewModel: ObservableObject {
     // MARK: – Dependencies
 
     private let repository: ScheduledTaskRepository
+    private let taskManager: TaskManaging
+    private let pomodoroService: PomodoroServicing
+    private let notificationService: NotificationScheduling
     let eventKitService: EventKitService
 
     // MARK: – Combine
@@ -24,8 +27,17 @@ final class CalendarViewModel: ObservableObject {
 
     // MARK: – Init
 
-    init(repository: ScheduledTaskRepository, eventKitService: EventKitService) {
+    init(
+        repository: ScheduledTaskRepository,
+        taskManager: TaskManaging,
+        pomodoroService: PomodoroServicing,
+        notificationService: NotificationScheduling,
+        eventKitService: EventKitService
+    ) {
         self.repository = repository
+        self.taskManager = taskManager
+        self.pomodoroService = pomodoroService
+        self.notificationService = notificationService
         self.eventKitService = eventKitService
 
         // Forward EventKitService changes (e.g. authorizationStatus) so CalendarView re-renders.
@@ -84,19 +96,27 @@ final class CalendarViewModel: ObservableObject {
 
     func addTask(title: String, targetDuration: TimeInterval, notes: String, startTime: Date?) {
         AppLogger.calendar.info("📅 addTask '\(title, privacy: .public)' duration=\(targetDuration, privacy: .public)s date=\(self.selectedDate.formatted(.dateTime.year().month().day()), privacy: .public)")
+        let linkedTask = taskManager.createTask(
+            title: title,
+            targetDuration: targetDuration,
+            notes: notes
+        )
         let task = ScheduledTask(
             title: title,
             notes: notes,
             targetDuration: max(targetDuration, 60),
             scheduledDate: selectedDate,
-            startTime: startTime
+            startTime: startTime,
+            pomodoroTaskID: linkedTask?.id
         )
         repository.save(task)
+        notificationService.scheduleScheduledTaskReminder(for: task)
         reload()
     }
 
     func deleteTask(id: UUID) {
         AppLogger.calendar.info("📅 deleteTask id=\(id.uuidString, privacy: .public)")
+        notificationService.cancelScheduledTaskReminder(taskID: id)
         repository.delete(id: id)
         reload()
     }
@@ -107,7 +127,59 @@ final class CalendarViewModel: ObservableObject {
         updated.isCompleted.toggle()
         updated.updatedAt = Date()
         repository.save(updated)
+        if updated.isCompleted {
+            notificationService.cancelScheduledTaskReminder(taskID: updated.id)
+        } else {
+            notificationService.scheduleScheduledTaskReminder(for: updated)
+        }
         reload()
+    }
+
+    func startFocus(task: ScheduledTask) {
+        AppLogger.calendar.info("📅 startFocus '\(task.title, privacy: .public)'")
+        var task = task
+        guard let pomodoroTaskID = linkedPomodoroTaskID(for: &task) else { return }
+        pomodoroService.selectTask(id: pomodoroTaskID)
+        switch pomodoroService.currentState.status {
+        case .idle, .completed:
+            pomodoroService.startFocus()
+        case .running, .paused:
+            break
+        }
+        NotificationCenter.default.post(name: .navigateToFocus, object: nil)
+        reload()
+    }
+
+    func importEventAsTask(_ event: EKEvent) {
+        let title = (event.title ?? L10n.Calendar.eventUntitled)
+            .trimmingCharacters(in: .whitespacesAndNewlines)
+        let startDate = event.startDate ?? selectedDate
+        let targetDuration = event.isAllDay
+            ? PomodoroSettings.default.focusDuration
+            : clampedEventDuration(start: event.startDate, end: event.endDate)
+        let notes = event.notes ?? ""
+        let linkedTask = taskManager.createTask(
+            title: title,
+            targetDuration: targetDuration,
+            notes: notes
+        )
+        let task = ScheduledTask(
+            title: title.isEmpty ? L10n.Calendar.eventUntitled : title,
+            notes: notes,
+            targetDuration: targetDuration,
+            scheduledDate: startDate,
+            startTime: event.isAllDay ? nil : startDate,
+            linkedCalendarEventID: event.eventIdentifier,
+            pomodoroTaskID: linkedTask?.id
+        )
+        repository.save(task)
+        notificationService.scheduleScheduledTaskReminder(for: task)
+        reload()
+    }
+
+    func isEventImported(_ event: EKEvent) -> Bool {
+        guard let eventID = event.eventIdentifier else { return false }
+        return scheduledTasks.contains { $0.linkedCalendarEventID == eventID }
     }
 
     // MARK: – Calendar grid helpers
@@ -171,6 +243,7 @@ final class CalendarViewModel: ObservableObject {
     // MARK: – Private
 
     private func reload() {
+        syncCompletionFromLinkedTasks()
         scheduledTasks = repository.loadTasks(for: selectedDate)
         if eventKitService.isAuthorized {
             calendarEvents = eventKitService.fetchEvents(for: selectedDate)
@@ -179,6 +252,47 @@ final class CalendarViewModel: ObservableObject {
         }
         reloadPendingTaskDays()
         AppLogger.calendar.debug("📅 reload — tasks=\(self.scheduledTasks.count, privacy: .public) events=\(self.calendarEvents.count, privacy: .public) date=\(self.selectedDate.formatted(.dateTime.year().month().day()), privacy: .public)")
+    }
+
+    private func linkedPomodoroTaskID(for task: inout ScheduledTask) -> UUID? {
+        if let id = task.pomodoroTaskID, taskManager.task(id: id) != nil {
+            return id
+        }
+
+        guard let linkedTask = taskManager.createTask(
+            title: task.title,
+            targetDuration: task.targetDuration,
+            notes: task.notes
+        ) else {
+            return nil
+        }
+        task.pomodoroTaskID = linkedTask.id
+        task.updatedAt = Date()
+        repository.save(task)
+        return linkedTask.id
+    }
+
+    private func syncCompletionFromLinkedTasks() {
+        let tasks = repository.loadTasks(for: selectedDate)
+        for task in tasks where !task.isCompleted {
+            guard let pomodoroTaskID = task.pomodoroTaskID,
+                  taskManager.task(id: pomodoroTaskID)?.isCompleted == true else {
+                continue
+            }
+            var updated = task
+            updated.isCompleted = true
+            updated.updatedAt = Date()
+            repository.save(updated)
+            notificationService.cancelScheduledTaskReminder(taskID: updated.id)
+        }
+    }
+
+    private func clampedEventDuration(start: Date?, end: Date?) -> TimeInterval {
+        guard let start, let end, end > start else {
+            return PomodoroSettings.default.focusDuration
+        }
+        let minutes = min(max(Int(end.timeIntervalSince(start) / 60), 5), 180)
+        return TimeInterval(minutes * 60)
     }
 
     private func reloadPendingTaskDays() {

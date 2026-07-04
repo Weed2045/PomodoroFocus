@@ -130,6 +130,7 @@ final class AppDIContainer {
             settingsManager: settingsManager,
             statsManager: statsManager,
             taskManager: taskManager,
+            scheduledTaskRepository: scheduledTaskRepository,
             gamificationManager: gamificationManager
         )
     }
@@ -149,6 +150,9 @@ final class AppDIContainer {
     func makeCalendarViewModel() -> CalendarViewModel {
         CalendarViewModel(
             repository: scheduledTaskRepository,
+            taskManager: taskManager,
+            pomodoroService: pomodoroService,
+            notificationService: notificationService,
             eventKitService: eventKitService
         )
     }
